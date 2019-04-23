@@ -5,4 +5,4 @@ This is a group assignment.
 
 Group name: A2JKKT
 
-THis is a change in the Linked List Branch
+This is a change in the Linked List Branch
