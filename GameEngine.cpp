@@ -6,10 +6,10 @@ GameEngine::GameEngine(){
 }
 
 GameEngine::~GameEngine(){
-  for (int i = 0; i < playerCount; i++){
-    delete playerList[i];
-  }
-  this->playerCount = 0;
+  // for (int i = 0; i < playerCount; i++){
+  //   delete playerList[i];
+  // }
+  // this->playerCount = 0;
 }
 
 void GameEngine::getState(Player* p){
@@ -40,6 +40,6 @@ Player* GameEngine::getPlayer(int id){
 
 void GameEngine::printScore(){
   for (int i = 0; i < this->playerCount; i++){
-    std::cout << "Score for " << playerList[i]->getPlayerName() << ": " << playerList[i]->getPlayerScore();
+    std::cout << "Score for " << playerList[i]->getPlayerName() << ": " << playerList[i]->getPlayerScore() << std::endl;
   }
 }
