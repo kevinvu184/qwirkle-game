@@ -8,17 +8,20 @@
 
 class Player {
 public:
-    Player(std::string name);
+    Player(int id, std::string name);
     ~Player();
 
+    int getPlayerId();
     std::string getPlayerName();
     int getPlayerScore();
 
+    void setPlayerId(int id);
     void setPlayerName(std::string name);
     void setPlayerScore(int score);
 
     void displayTileInHand();
 
+    int id;
     std::string name;
     int score;
     LinkedList* hand;

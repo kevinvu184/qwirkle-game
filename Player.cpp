@@ -1,7 +1,8 @@
 
 #include "Player.h"
 
-Player::Player(std::string name){
+Player::Player(int id, std::string name){
+  this->id = id;
   this->name = name;
   this->score = 0;
 }
@@ -27,5 +28,13 @@ void Player::setPlayerScore(int score){
 }
 
 void Player::displayTileInHand(){
-  hand->displayList();
+  std::cout << hand->displayList() << std::endl;
+}
+
+void Player::setPlayerId(int id){
+  this->id = id;
+}
+
+int Player::getPlayerId(){
+  return this->id;
 }

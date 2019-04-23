@@ -4,15 +4,17 @@
 
 #include "Player.h"
 #include <string>
+#include <iostream>
 
 class GameEngine{
 public:
   GameEngine();
   ~GameEngine();
-  std::string getState(Player* p);
+  void getState(Player* p);
   void addPlayer(Player* p);
   void play();
-  int getPlayerCount();
+  Player* getPlayer(int id);
+  void printScore();
 
   Player* playerList[2];
   int playerCount;
