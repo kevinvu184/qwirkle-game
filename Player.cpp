@@ -5,11 +5,11 @@ Player::Player(int id, std::string name){
   this->id = id;
   this->name = name;
   this->score = 0;
-  this->hand = nullptr;
+  this->hand = new LinkedList();
 }
 
 Player::~Player(){
-  // delete hand;
+  delete hand;
 }
 
 std::string Player::getPlayerName(){

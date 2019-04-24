@@ -25,7 +25,7 @@ void GameEngine::getState(Player* p){
   BoardDisplay::placeTile(g,b);
   BoardDisplay::printGrid(g,b);
   std::cout << "\nYour hand is: " << std::endl;
-  // p->displayTileInHand(); //Seg fault
+  p->displayTileInHand(); //Seg fault
   std::cout << "\n> ";
   std::cin >> input;
   std::cout << input << std::endl;
