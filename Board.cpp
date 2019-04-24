@@ -15,11 +15,12 @@ Board::Board() {
   }
 }
 
-Tile Board::getTileAt(Coordinate& coordinate) {
+Tile Board::getTileAt(Coordinate &coordinate) {
   return m_tile[coordinate.getX()][coordinate.getY()];
 }
 
-void Board::addTile(Tile& tile, Coordinate& coordinate) {
+void Board::addTile(Tile &tile, Coordinate &coordinate) {
+  m_coordinate[m_numOfTile] = coordinate;
   m_tile[coordinate.getX()][coordinate.getY()] = tile;
   m_numOfTile++;
 }
@@ -42,7 +43,7 @@ int Board::getColsCharLength() {
   return m_cols * 3 + 3;
 }
 
-bool Board::containAt(Coordinate& coordinate) {
+bool Board::containAt(Coordinate &coordinate) {
   return m_tile[coordinate.getX()][coordinate.getY()].isExist();
 }
 
@@ -60,4 +61,11 @@ int Board::getRows() {
 
 int Board::getCols() {
   return m_cols;
+}
+
+std::string Board::toString() {
+  std::string temp;
+  for (int i = 0; i < getnumOfTile(); i++)
+    temp += "place " + getTileAt(m_coordinate[i]).toString() + " at " + m_coordinate[i].toString() + "\n";
+  return temp;
 }

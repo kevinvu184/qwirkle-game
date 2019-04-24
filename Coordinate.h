@@ -18,6 +18,9 @@ class Coordinate {
 
     int getX();
     int getY();
+  
+    //Override '=' operator
+    Coordinate &operator=(const Coordinate &coordinate);
 
     std::string toString();
 };

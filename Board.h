@@ -4,6 +4,7 @@
 
 #include "Coordinate.h"
 #include "Tile.h"
+#include <string>
 
 //Fixed board 26x26
 #define INITIAL_COLS 26
@@ -36,6 +37,7 @@ class Board {
 
     void addTile(Tile& tile, Coordinate& coordinate);
     bool containAt(Coordinate& coordinate);
+    std::string toString();
 };
 
 #endif //ASSIGN2_BOARD_H

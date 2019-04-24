@@ -25,6 +25,13 @@ int Coordinate::getY() {
   return m_y;
 }
 
+//Override assign operator
+Coordinate &Coordinate::operator=(const Coordinate &coordinate) {
+  m_x = coordinate.m_x;
+  m_y = coordinate.m_y;
+  return *this;
+}
+
 std::string Coordinate::toString() {
   return static_cast<char>(m_y + 65) + std::to_string(m_x);
 }
