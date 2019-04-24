@@ -18,14 +18,15 @@ void GameEngine::getState(Player* p){
   std::string input = "";
   std::cout << p->getPlayerName() << ", it's your turn" << std::endl;
   printScore();
-  //I need the Board function here
-  Grid grid = g.makeGrid(b);
-  g.buildGrid(grid, b);
-  g.placeTile(grid, b);
-  g.printGrid(grid,b);
+  std::cout << std::endl;
+  //the printBoard function
+  g = BoardDisplay::makeGrid(b);
+  BoardDisplay::buildGrid(g,b);
+  BoardDisplay::placeTile(g,b);
+  BoardDisplay::printGrid(g,b);
   std::cout << "\nYour hand is: " << std::endl;
   // p->displayTileInHand(); //Seg fault
-  std::cout << "\n>";
+  std::cout << "\n> ";
   std::cin >> input;
   std::cout << input << std::endl;
 }
