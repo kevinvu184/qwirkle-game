@@ -17,6 +17,8 @@ public:
   void play();
   Player* getPlayer(int id);
   void printScore();
+  void scorePoint(Player* p);
+  void scoreQwirkle(Player* p);
 
   Grid g;
   Board b;

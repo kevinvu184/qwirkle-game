@@ -8,9 +8,6 @@ GameEngine::GameEngine(){
 }
 
 GameEngine::~GameEngine(){
-  // for (int i = 0; i < playerCount; i++){
-  //   delete playerList[i];
-  // }
   this->playerCount = 0;
 }
 
@@ -53,4 +50,12 @@ void GameEngine::printScore(){
   for (int i = 0; i < this->playerCount; i++){
     std::cout << "Score for " << playerList[i]->getPlayerName() << ": " << playerList[i]->getPlayerScore() << std::endl;
   }
+}
+
+void GameEngine::scorePoint(Player* p){
+  p->setPlayerScore(p->getPlayerScore() + 1);
+}
+
+void GameEngine::scoreQwirkle(Player* p){
+  p->setPlayerScore(p->getPlayerScore() + 6);
 }
