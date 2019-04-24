@@ -2,6 +2,8 @@
 #ifndef ASSIGN2_TILE_H
 #define ASSIGN2_TILE_H
 
+#include <string>
+
 // Define a Colour type
 typedef char Colour;
 
@@ -13,7 +15,9 @@ public:
    Colour colour;
    Shape  shape;
 
+// Construcotrs
    Tile(Colour c, Shape s);
+   Tile();
 
 // Getters
    Colour getColour();
@@ -25,6 +29,11 @@ public:
 
 // compare 2 tiles
    bool compareTile(Tile* t);
+
+// toString and isExist
+   std::string toString();
+   bool isExist();
+
 };
 
 #endif // ASSIGN2_TILE_H

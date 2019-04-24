@@ -6,6 +6,11 @@ Tile::Tile(Colour c, Shape s){
   this->shape = s;
 }
 
+Tile::Tile() {
+  shape = 0;
+  colour = ' ';
+}
+
 Shape Tile::getShape(){
   return shape;
 }
@@ -28,4 +33,12 @@ bool Tile::compareTile(Tile* t){
   } else {
     return false;
   }
+}
+
+std::string Tile::toString() {
+  return colour + ((shape == 0) ? " " : std::to_string(shape));
+}
+
+bool Tile::isExist() {
+  return (shape != 0 || colour != ' ');
 }

@@ -5,6 +5,8 @@
 #include "Player.h"
 #include <string>
 #include <iostream>
+#include "Board.h" //Need Board Object
+#include "Grids.h" //Need makeGrid() and Grid Object
 
 class GameEngine{
 public:
@@ -16,6 +18,8 @@ public:
   Player* getPlayer(int id);
   void printScore();
 
+  Grids g;
+  Board b;
   Player* playerList[2];
   int playerCount;
 };
