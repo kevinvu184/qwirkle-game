@@ -1,0 +1,10 @@
+place Y3 at B2 
+place B3 at B3 
+place B3 at C2 
+place B1 at C3 
+replace P5     
+place B4 at C4 
+place B2 at C5 
+place R4 at D4 
+^D
+
