@@ -1,90 +1,95 @@
 
 #include "LinkedList.h"
 
-#include <iostream>
-
-LinkedList::LinkedList() {
+LinkedList::LinkedList()
+{
    head = nullptr;
+   tail = nullptr;
    size = 0;
 }
 
-LinkedList::~LinkedList() {
-  Node* n = head;
-  Node* temp = nullptr;
-  while (n != nullptr){
-    temp = n->next;
-    delete n;
-    n = temp;
-  }
-  size = 0;
+LinkedList::~LinkedList()
+{
+   clear();
 }
 
-void LinkedList::addBack(Tile*t){
-  Node* n = new Node(t,nullptr);
-  if(head == nullptr){
-    head = n;
-  } else {
-    Node *tail = head;
-    while (tail->next != nullptr){
-      tail = tail->next;
-    }
-    tail->next = n;
-  }
-  size++;
+void LinkedList::deleteFront()
+{
+   if(head != nullptr)
+   {
+      Node* toDelete = head;
+      head = toDelete->next;
+      delete toDelete;
+      size--;
+   }
 }
 
-Tile* LinkedList::get(int index){
-  Node *indexPtr = head;
-  for(int i = 0; i <= index; i++){
-    indexPtr = indexPtr->next;
-  }
-  return indexPtr->tile;
+void LinkedList::addBack(Tile* tile)
+{
+      Node* node = new Node(tile, nullptr);
+
+      if(tail != nullptr)
+      {
+         tail->next = node;
+         size++;
+      }
+      else
+      {
+         head = node;
+         tail = node;
+         size++;
+      }
 }
 
-bool LinkedList::contains(Tile* t){
-  bool found = false;
-  Node *node = head;
+Tile* LinkedList::getFront()
+{
+   return head->tile;
 
-  while(node != nullptr && found == false){
-    if(node->tile->compareTile(t)){
-      found = true;
-    }
-    node = node->next;
-  }
-  return found;
 }
 
-void LinkedList::removeFirst(){
-  if(head == nullptr){
-    std::cout << "Empty List" << std::endl;
-  } else {
-    Node* n = head;
-    head = head->next;
-    delete n;
-  }
-  size--;
+int LinkedList::getSize()
+{
+   return size;
 }
 
-std::string LinkedList::displayList() {
-   std::string result = "";
+void LinkedList::clear()
+{
+   Node* current = head;
+   Node* copyNode = nullptr;
+   while(current != nullptr)
+   {
+      copyNode = current->next;
+      delete current;
+      current = copyNode;
+   }
+   size = 0;
+}
+
+bool LinkedList::contains(Tile* tile)
+{
+   bool found = false;
    Node* current = head;
 
-   while(current != nullptr) {
-      if(current->next != nullptr) {
-         result = result + current->tile->getColour() + std::to_string(current->tile->getShape()) +",";
+   while(current != nullptr && found == false)
+   {
+      if(current->tile->getColour() == tile->getColour() && current->tile->getShape() == tile->getShape())
+      {
+         found = true;
       }
-      else {
-         result = result + current->tile->getColour() + std::to_string(current->tile->getShape());
-      }
+      current = current->next;
    }
 
-   return result;
+   return found;
+
 }
 
-void LinkedList::remove(Tile* tile) {
-   if(head != nullptr) {
+
+void LinkedList::remove(Tile* tile)
+{
+   if(head != nullptr)
+   {
       Node* toDelete = head;
-      while(toDelete->tile->getColour() != tile->getColour() && toDelete->tile->getShape() != tile->getShape() && toDelete != nullptr)
+      while((toDelete->tile->getColour() != tile->getColour() || toDelete->tile->getShape() != tile->getShape()) && toDelete != nullptr)
       {
          toDelete = toDelete->next;
       }
@@ -92,8 +97,48 @@ void LinkedList::remove(Tile* tile) {
       delete toDelete;
       size--;
    }
+
 }
 
-int LinkedList::getSize(){
-  return size;
+int LinkedList::tileExist(Tile* tile)
+{
+   int count = 0;
+
+   if(head != nullptr)
+   {
+      Node* current = head;
+
+      while(current != nullptr)
+      {
+       if(current->tile->getColour() == tile->getColour() && current->tile->getShape() == tile->getShape())
+       {
+          count++;
+       }
+
+       current = current->next;
+      }
+   }
+
+   return count;
+
+}
+
+std::string LinkedList::displayList()
+{
+   std::string result = "";
+   Node* current = head;
+
+   while(current != nullptr)
+   {
+      if(current->next != nullptr)
+      {
+         result = result + current->tile->getColour() + std::to_string(current->tile->getShape()) +",";
+      }
+      else
+      {
+         result = result + current->tile->getColour() + std::to_string(current->tile->getShape());
+      }
+   }
+
+   return result;
 }

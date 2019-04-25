@@ -17,6 +17,7 @@ int main(void) {
    GameEngine* game = new GameEngine();
    Player* a = new Player(1,"Khoi");
    game->addPlayer(a);
+   game->scoreQwirkle(a);
    game->getState(a);
    delete a;
    delete game;

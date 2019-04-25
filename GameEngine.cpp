@@ -5,10 +5,13 @@
 
 GameEngine::GameEngine(){
   this->playerCount = 0;
+  g = BoardDisplay::makeGrid(b);
+  BoardDisplay::buildGrid(g,b);
 }
 
 GameEngine::~GameEngine(){
   this->playerCount = 0;
+  BoardDisplay::deleteGrid(g,b);
 }
 
 void GameEngine::getState(Player* p){
@@ -16,9 +19,8 @@ void GameEngine::getState(Player* p){
   std::cout << p->getPlayerName() << ", it's your turn" << std::endl;
   printScore();
   std::cout << std::endl;
+
   //the printBoard function
-  g = BoardDisplay::makeGrid(b);
-  BoardDisplay::buildGrid(g,b);
   BoardDisplay::placeTile(g,b);
   BoardDisplay::printGrid(g,b);
   std::cout << "\nYour hand is: " << std::endl;
