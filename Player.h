@@ -19,8 +19,9 @@ public:
     void setPlayerName(std::string name);
     void setPlayerScore(int score);
 
-    void displayTileInHand();
+    std::string displayTileInHand();
 
+private:
     int id;
     std::string name;
     int score;

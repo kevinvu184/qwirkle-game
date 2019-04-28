@@ -4,26 +4,34 @@
 
 #include "Player.h"
 #include <string>
+#include <array>
+#include <fstream>
 #include <iostream>
-#include "Board.h" //Need Board Object
-#include "BoardDisplay.h" //Need makeGrid()
+#include "Board.h"
+#include "BoardDisplay.h"
 
 class GameEngine{
 public:
   GameEngine();
   ~GameEngine();
-  void getState(Player* p);
+  void printState(Player* p);
+  // std::string getInput(); ??
+  // bool verify(std::string input);
+  // bool validateFormat(std::string input);
+  void saveGame(std::string filename);
   void addPlayer(Player* p);
   void play();
   Player* getPlayer(int id);
   void printScore();
-  void scorePoint(Player* p);
-  void scoreQwirkle(Player* p);
+  void scorePoint(Player* p,int point);
 
+private:
   Grid g;
-  Board b;
-  Player* playerList[2];
+  Board* b;
+  Player* playerList[2]; // std::array
+  // std::array<Player*,2> playerList;
   int playerCount;
+  LinkedList* tileBag;
 };
 
 #endif //ASSIGN2_ENGINE_H

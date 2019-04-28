@@ -11,14 +11,11 @@ int main(void) {
    LinkedList* list = new LinkedList();
    delete list;
 
-   std::cout << "Welcome to Qwirkle!" << std::endl;
-   std::cout << "-------------------" << std::endl;
-
    GameEngine* game = new GameEngine();
    Player* a = new Player(1,"Khoi");
    game->addPlayer(a);
-   game->scoreQwirkle(a);
-   game->getState(a);
+   game->printState(a);
+   game->saveGame("a.txt");
    delete a;
    delete game;
    return EXIT_SUCCESS;

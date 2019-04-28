@@ -28,8 +28,8 @@ void Player::setPlayerScore(int score){
   this->score = score;
 }
 
-void Player::displayTileInHand(){
-  std::cout << hand->displayList() << std::endl;
+std::string Player::displayTileInHand(){
+   return hand->displayList();
 }
 
 void Player::setPlayerId(int id){
