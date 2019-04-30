@@ -22,13 +22,14 @@ void GameEngine::saveGame(std::string filename, Player* player){
     outFile << playerList[i]->getPlayerScore() << std::endl;
     outFile << playerList[i]->displayTileInHand() << std::endl;
   }
+  //print Board
   for (int i = 0; i < b->getRowsCharLength(); i++) {
     for (int j = 0; j < b->getColsCharLength(); j++) {
       outFile << g[i][j];
     }
     outFile << "\n";
   }
-  //Need Tile bag
+  //print Tile bag
   outFile << tileBag->displayList() << std::endl;
   //Display Turn
   outFile << player->getPlayerName()<< std::endl;

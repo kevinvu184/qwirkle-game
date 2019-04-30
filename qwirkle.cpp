@@ -15,7 +15,7 @@ int main(void) {
    Player* a = new Player(1,"Khoi");
    game->addPlayer(a);
    game->printState(a);
-   game->saveGame("a.txt");
+   game->saveGame("a.txt",a);
    delete a;
    delete game;
    return EXIT_SUCCESS;
