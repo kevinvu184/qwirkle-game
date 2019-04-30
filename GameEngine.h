@@ -18,7 +18,7 @@ public:
   // std::string getInput(); ??
   // bool verify(std::string input);
   // bool validateFormat(std::string input);
-  void saveGame(std::string filename);
+  void saveGame(std::string filename, Player* player);
   void addPlayer(Player* p);
   void play();
   Player* getPlayer(int id);

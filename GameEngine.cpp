@@ -14,7 +14,7 @@ GameEngine::~GameEngine(){
   delete b;
 }
 
-void GameEngine::saveGame(std::string filename){
+void GameEngine::saveGame(std::string filename, Player* player){
   std::ofstream outFile;
   outFile.open(filename);
   for (int i = 0; i < this->playerCount; i++){
@@ -31,6 +31,7 @@ void GameEngine::saveGame(std::string filename){
   //Need Tile bag
   outFile << tileBag->displayList() << std::endl;
   //Display Turn
+  outFile << player->getPlayerName()<< std::endl;
 
 }
 
