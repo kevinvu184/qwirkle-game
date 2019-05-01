@@ -124,8 +124,6 @@ bool GameEngine::checkFormatForTile(std::string input)
      if(char_array[1] > 54 || char_array[1] < 48)
      {
          result = false;
-         
-
      }
     }   
   
@@ -388,6 +386,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
   bool playerA = true;
   bool continueLoop = true;
 
+ 
+
   shuffleAndCreateTileBag(tileBag);
    
 
@@ -408,7 +408,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
   
   //game starts here
   do{
-        if(playerA == true)
+        if(playerA == true )
         {
           this->getState(player_1);
           std::getline(std::cin, inputFromUser);
@@ -446,19 +446,36 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 quit = true;
                             } 
                        }
-                       if((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false) && quit != true)
+                       while((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false) && quit != true)
                        {
-                            std::cout<<"\nInvalid Input\n";
-                            std::cout<<"> ";
+                                if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
+                                { 
+                                    std::cout<<"\nInvalid Input\n";
+                                    std::cout<<"> ";
 
-                            //after invalid input player quits 
-                            std::getline(std::cin, inputFromUser);
-                            if(std::cin.eof() == true)
-                            {
-                                std::cout<<"\nGoodbye\n";
-                                quit = true; 
-                            }
-                
+                                    std::getline(std::cin, inputFromUser);
+                                    if(std::cin.eof() == true)
+                                    {
+                                        std::cout<<"\nGoodbye\n";
+                                        quit = true;
+                                    }
+                                }
+                                else
+                                {
+                                   if(countToken(inputFromUser) == 2)
+                                   { 
+                                    //call saveGame() here
+                                    std::cout<<"\nGame successfully saved\n\n";
+                                    std::cout<<"> ";
+
+                                    std::getline(std::cin, inputFromUser);
+                                    if(std::cin.eof() == true)
+                                    {
+                                        std::cout<<"\nGoodbye\n";
+                                        quit = true;
+                                    }
+                                   }
+                                }
                         }
                     }
                     
@@ -486,7 +503,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 // update score
                                 turn++;
                                 continueLoop = false;
-                                // break;
+                                
          
                             }     
           
@@ -544,17 +561,37 @@ void GameEngine::playGame(std::string p1, std::string p2)
                  
                  
                         }
-                        if((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false )&& quit != true)
+                        while((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false )&& quit != true)
                         {
-                            std::cout<<"\nInvalid Input\n";
-                            std::cout<<"> ";
+                                if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
+                                { 
+                                    std::cout<<"\nInvalid Input\n";
+                                    std::cout<<"> ";
 
-                            std::getline(std::cin, inputFromUser);
-                            if(std::cin.eof() == true)
-                            {
-                                std::cout<<"\nGoodbye\n";
-                                quit = true;
-                            }
+                                    std::getline(std::cin, inputFromUser);
+                                    if(std::cin.eof() == true)
+                                    {
+                                        std::cout<<"\nGoodbye\n";
+                                        quit = true;
+                                    }
+                                }
+                                else
+                                {
+                                   if(countToken(inputFromUser) == 2)
+                                   { 
+                                    //call saveGame() here
+                                    std::cout<<"\nGame successfully saved\n\n";
+                                    std::cout<<"> ";
+
+                                    std::getline(std::cin, inputFromUser);
+                                    if(std::cin.eof() == true)
+                                    {
+                                        std::cout<<"\nGoodbye\n";
+                                        quit = true;
+                                    }
+                                   }
+                                }
+                           
                         }
 
                     }
@@ -630,7 +667,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             //suppose player wants to save game many times
                             while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                             {
-                            //call saveGame() here 
+                               //call saveGame() here 
                                 std::cout<<"\nGame successfully saved\n\n";
                                 std::cout<<"> ";
 
@@ -641,16 +678,35 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     std::cout<<"\nGoodbye\n";
                                 }
                             }
-                            if((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_2) == false)  && quit != true)
+                            while((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_2) == false)  && quit != true)
                             {
-                                std::cout<<"\nInvalid Input\n";
-                                std::cout<<"> ";
+                                if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
+                                { 
+                                    std::cout<<"\nInvalid Input\n";
+                                    std::cout<<"> ";
 
-                                std::getline(std::cin, inputFromUser);
-                                if(std::cin.eof())
+                                    std::getline(std::cin, inputFromUser);
+                                    if(std::cin.eof() == true)
+                                    {
+                                        std::cout<<"\nGoodbye\n";
+                                        quit = true;
+                                    }
+                                }
+                                else
                                 {
-                                    quit = true;
-                                    std::cout<<"\nGoodbye\n";
+                                   if(countToken(inputFromUser) == 2)
+                                   { 
+                                    //call saveGame() here   
+                                    std::cout<<"\nGame successfully saved\n\n";
+                                    std::cout<<"> ";
+
+                                    std::getline(std::cin, inputFromUser);
+                                    if(std::cin.eof() == true)
+                                    {
+                                        std::cout<<"\nGoodbye\n";
+                                        quit = true;
+                                    }
+                                   }
                                 }
 
                             }
@@ -730,6 +786,9 @@ void GameEngine::playGame(std::string p1, std::string p2)
         std::cout<<"\nGoodbye";
     }
     
+    delete hand_1;
+    delete hand_2;
+    delete tileBag;
   
 
 }   
@@ -772,10 +831,7 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
      
 
      tileBag->addBack(tileToBeAdded);
-   }
-
-   
-   
+   }  
 }
 
 
