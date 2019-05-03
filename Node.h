@@ -10,6 +10,7 @@ public:
    Node(Tile* tile, Node* next);
    Node(Node& other);
 
+   //declared as public but is this being public good or bad
    Tile*    tile;
    Node*    next;
 };
