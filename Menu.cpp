@@ -78,14 +78,17 @@ bool Menu::checkForNameInput(std::string name)
 
 void Menu::playGame()
 {
-    
-    std::string p1 ;
+    //read whitespace from previous input before use getline()
+    std::cin.ignore();
+
+    std::string p1 = "" ;
     std::string p2 ;
 
     //to check if it is the initial prompt  
     int count_1 = 0; 
     int count_2 = 0; 
-    std::getline(std::cin, p1);
+
+    
 
     std::cout<<"\nStarting a New Game\n";
     
@@ -95,7 +98,7 @@ void Menu::playGame()
       {
         std::cout<<"\nEnter a name for player 1 (uppercase characters only)\n";
         std::cout<<"> ";
-        // std::cin.ignore();
+        
         std::getline(std::cin, p1);
         
       }
@@ -104,10 +107,10 @@ void Menu::playGame()
       {
         std::cout<<"\nYour name may contain symbols or numbers or not in uppercase characters, please reenter\n";
         std::cout<<"> ";
-        // std::cin.ignore();
+        
         std::getline(std::cin, p1);
       }
-     
+      
     } while (!checkForNameInput(p1));
     
     do
