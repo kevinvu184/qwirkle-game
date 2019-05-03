@@ -8,7 +8,7 @@ Board::Board() {
 	m_coordinate.reserve(12);
 }
 
-void Board::addTileAt(Coordinate &coordinate) {
+bool Board::addTileAt(Coordinate &coordinate) {
 	if (m_coordinate.size() == 0) {
 		m_coordinate.push_back(coordinate);
 	} else {
@@ -19,8 +19,10 @@ void Board::addTileAt(Coordinate &coordinate) {
 		}
 		if (!verifyMove()) {
 			removeLastTile();
+			return false;
 		}
 	}
+	return true;
 }
 
 void Board::removeLastTile() {
