@@ -21,7 +21,7 @@ private:
 
 public:
 	Board();
-	void addTileAt(Coordinate &coordinate);
+	bool addTileAt(Coordinate &coordinate);
 	void removeLastTile();
 
 	Tile* getTileAt(Coordinate coordinate);
