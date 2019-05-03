@@ -10,6 +10,8 @@
 
 #define MAXIMUM_TILES_BAG 72
 #define MAXIMUM_PLAYER_HAND 6
+#define NUMBER_OF_COLOR 6
+#define NUMBER_OF_SHAPE 6
 
 #include <iostream>
 
@@ -374,9 +376,13 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
 
 void GameEngine::playGame(std::string p1, std::string p2)
 {
+
+  //tileBag created inside scope of playGame 
   LinkedList* tileBag = new LinkedList();
   LinkedList* hand_1 = new LinkedList();
   LinkedList* hand_2 = new LinkedList();
+
+
   Player* player_1 = new Player(1, p1, hand_1);
   Player* player_2 = new Player(2, p2, hand_2);
 
@@ -408,7 +414,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
   
   //game starts here
   do{
-        if(playerA == true )
+        if(playerA == true)
         {
           this->getState(player_1);
           std::getline(std::cin, inputFromUser);
@@ -789,7 +795,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
     delete hand_1;
     delete hand_2;
     delete tileBag;
-  
+     
 
 }   
 
@@ -816,8 +822,8 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
 {
 
    
-   std::array<char, 6> colours = {RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW};
-   std::array<int, 6> shapes  = {CIRCLE, STAR_4, DIAMOND, SQUARE, STAR_6, CLOVER};
+   std::array<char, NUMBER_OF_COLOR> colours = {RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW};
+   std::array<int, NUMBER_OF_SHAPE> shapes  = {CIRCLE, STAR_4, DIAMOND, SQUARE, STAR_6, CLOVER};
 
    //the algorithm can be found in linkedlist.cpp
    for(int count = 0; count < MAXIMUM_TILES_BAG; count++)
