@@ -39,29 +39,29 @@ bool Tile::compareTile(Tile* t){
 
 //Khoa's works
 Tile::Tile(const Tile &t) {
-	m_colour = t.m_colour;
-	m_shape = t.m_shape;
+	colour = t.colour;
+	shape = t.shape;
 }
 
 bool Tile::isSameColour(const Tile &t) {
-	return m_colour == t.m_colour;
+	return colour == t.colour;
 }
 
 bool Tile::isSameShape(const Tile &t) {
-	return m_shape == t.m_shape;
+	return shape == t.shape;
 }
 
 std::ostream &operator<<(std::ostream &out, const Tile &t) {
-	out << t.m_colour << std::to_string(t.m_shape);
+	out << t.colour << std::to_string(t.shape);
 	return out;
 }
 
 Tile &Tile::operator=(const Tile &t) {
-	m_colour = t.m_colour;
-	m_shape = t.m_shape;
+	colour = t.colour;
+	shape = t.shape;
 	return *this;
 }
 
 bool operator==(const Tile &t1, const Tile &t2) {
-	return t1.m_colour == t2.m_colour && t1.m_shape == t2.m_shape;
+	return t1.colour == t2.colour && t1.shape == t2.shape;
 }
