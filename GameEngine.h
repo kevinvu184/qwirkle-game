@@ -5,14 +5,15 @@
 #include "Player.h"
 #include <string>
 #include <iostream>
-// #include "Board.h" 
-// #include "BoardDisplay.h" 
+#include <regex>
+// #include "Board.h"
+// #include "BoardDisplay.h"
 
 class GameEngine{
 public:
   GameEngine();
   ~GameEngine();
-  
+
   void playGame(std::string p1, std::string p2);
 
   void addPlayer(Player* p);
@@ -23,16 +24,14 @@ public:
   int randomNumberGenerate();
 
   bool validateFormat(std::string input);
-  bool checkFormatForTile(std::string input);
-  bool checkFormatForLocation(std::string input);
 
   std::string getTileFromUserInput(std::string input);
   std::string getLocationFromUserInput(std::string input);
 
-  bool validateTileExistInHand(std::string tileInput, Player* player); 
+  bool validateTileExistInHand(std::string tileInput, Player* player);
   // bool validateMoveLocationExist(std::string inputFromUser, Board& board, Player* player);
   bool validateLegalMove(std::string tileInput, std::string gridLocation, std::string inputFromUser, Player* player);
-  
+
   void printScore();
   void scorePoint(Player* p);
   void scoreQwirkle(Player* p);
@@ -42,7 +41,7 @@ public:
   // Board& getBoard();
 
   int countToken(std::string);
-  
+
 
 
 private:
@@ -50,7 +49,7 @@ private:
   // Board board;
   Player* playerList[2];
   int playerCount;
-  // LinkedList* tileBag; 
+  // LinkedList* tileBag;
 };
 
 #endif //ASSIGN2_ENGINE_H

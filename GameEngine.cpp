@@ -100,130 +100,16 @@ void GameEngine::scoreQwirkle(Player* p){
 //   return board;
 // }
 
-bool GameEngine::checkFormatForTile(std::string input)
-{
-    bool result = false;
-
-    int size = input.size();
-
-    char char_array[size+1];
-    strcpy(char_array, input.c_str());
-
-    //tiles are always represented as a two-character of colour and shape
-    if(size == 2)
-    {
-     //three cases for incorrect tile in total only 1 correct tile will pass the validation here
-     //three incorrect tile:correct tile/incorrect shape, correct shape/ incorrect tile, incorrect tile/incorrect shape
-     if(char_array[0] == RED || char_array[0] == ORANGE || char_array[0] == YELLOW || char_array[0] == GREEN || char_array[0] == BLUE || char_array[0] == PURPLE)
-     {
-
-         result = true;
-
-
-     }
-     //ASCII if not from greater than 0 and smaller than 7 then result = false
-     //as shape is only represented as 1-6
-     if(char_array[1] > 54 || char_array[1] < 48)
-     {
-         result = false;
-     }
-    }
-
-
-    return result;
-
-}
-
-bool GameEngine::checkFormatForLocation(std::string input)
-{
-    bool result = false;
-
-
-    int size = input.size();
-
-    char char_array[size+1];
-
-    strcpy(char_array, input.c_str());
-
-    //two-char location e.g:A2
-    if(size == 2)
-    {
-        //A-Z 65-90 ASCII
-        if((char_array[0] > 64 && char_array[0] < 91) && (char_array[1] > 47 && char_array[1] < 58))
-        {
-            result = true;
-        }
-    }
-    //three-chars location e.g: A15
-    else if(size == 3)
-    {
-        //49  means first digit is 1 - ASCII - e.g: A12
-        //then the second digit can be between 0-9
-        if(char_array[1] == 49)
-        {
-          if((char_array[0] > 64 && char_array[0] < 91) && char_array[2] > 47 && char_array[2] < 58)
-          {
-            result = true;
-          }
-        }
-        //50 means first digit is 2 - ASCII - e.g: A21
-        //then the second digit can only be between 0-5
-        else if(char_array[1] == 50)
-        {
-          if((char_array[0] > 64 && char_array[0] < 91) && char_array[2] > 47 && char_array[2] < 54)
-          {
-            result = true;
-          }
-        }
-    }
-
-    return result;
-
-}
-
 bool GameEngine::validateFormat(std::string input)
 {
-    bool result = false;
+  bool result = false;
 
-    int size = countToken(input);
-    std::istringstream token(input);
-    std::string firstToken = "";
-    std::string secondToken ="";
-
-
-    //message size when placing, the format is "place <tile> at <grid location>"
-    if(size == 4)
-    {
-     std::string thirdToken = "";
-     std::string fourthToken ="";
-
-     token>>firstToken;
-     token>>secondToken;
-     token>>thirdToken;
-     token>>fourthToken;
-
-     if(firstToken == "place" && checkFormatForTile(secondToken) && thirdToken == "at" && checkFormatForLocation(fourthToken))
-     {
-         result = true;
-     }
-    }
-    //message size when replacing
-    else if(size == 2)
-    {
-
-        token>>firstToken;
-        token>>secondToken;
-
-        if(firstToken == "replace" && checkFormatForTile(secondToken))
-        {
-            result = true;
-        }
-    }
-
-
-
+  std::regex place ("^place ([ROYGBP][1-6]) at ([A-Z]([1-9]|1[0-9]|2[0-6]))");
+  std::regex replace ("^replace ([ROYGBP][1-6])");
+  if(std::regex_match(input, place) || std::regex_match(input, replace)){
+      result = true;
+  }
     return result;
-
 }
 
 bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
@@ -393,7 +279,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
   bool continueLoop = true;
 
 
-
+// Create the tile bag
   shuffleAndCreateTileBag(tileBag);
 
 
@@ -513,7 +399,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
                                 Tile* newTile = new Tile(cTileInput[0],cTileInput[1]-48);
                                 player_1->getPlayerHand()->deleteTile(newTile);
-                                //Place the tile on the board
+                                // board.addTile(newTile);
                                 player_1->getPlayerHand()->addBack(tileBag->getFront());
                                 tileBag->deleteFront();
                                 delete newTile;
