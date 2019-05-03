@@ -377,7 +377,7 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
 void GameEngine::playGame(std::string p1, std::string p2)
 {
 
-  //tileBag created inside scope of playGame 
+  //tileBag created inside scope of playGame
   LinkedList* tileBag = new LinkedList();
   LinkedList* hand_1 = new LinkedList();
   LinkedList* hand_2 = new LinkedList();
@@ -806,10 +806,6 @@ void GameEngine::playGame(std::string p1, std::string p2)
     delete hand_1;
     delete hand_2;
     delete tileBag;
-<<<<<<< HEAD
-=======
-     
->>>>>>> 6501aee318369b1e73d43ec51ce3ace0819fc95e
 
 
 }
@@ -835,16 +831,8 @@ int GameEngine::randomNumberGenerate()
 
 void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
 {
-
-<<<<<<< HEAD
-
-   std::array<char, 6> colours = {RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW};
-   std::array<int, 6> shapes  = {CIRCLE, STAR_4, DIAMOND, SQUARE, STAR_6, CLOVER};
-=======
-   
    std::array<char, NUMBER_OF_COLOR> colours = {RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW};
    std::array<int, NUMBER_OF_SHAPE> shapes  = {CIRCLE, STAR_4, DIAMOND, SQUARE, STAR_6, CLOVER};
->>>>>>> 6501aee318369b1e73d43ec51ce3ace0819fc95e
 
    //the algorithm can be found in linkedlist.cpp
    for(int count = 0; count < MAXIMUM_TILES_BAG; count++)
