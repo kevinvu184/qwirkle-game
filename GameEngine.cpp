@@ -789,5 +789,6 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
 
 
      tileBag->addBack(tileToBeAdded);
+     delete tileToBeAdded; 
    }
 }
