@@ -6,7 +6,7 @@
 #include <array>
 #include<random>
 #include<sstream>
-#include <bits/stdc++.h>  
+#include <bits/stdc++.h>
 
 #define MAXIMUM_TILES_BAG 72
 #define MAXIMUM_PLAYER_HAND 6
@@ -25,32 +25,32 @@ GameEngine::GameEngine(){
 GameEngine::~GameEngine(){
 
 //   BoardDisplay::deleteGrid(grid,board);
-//   delete tileBag; 
-  //error 
+//   delete tileBag;
+  //error
 //   delete[] playerList;
-  
+
 }
 
 void GameEngine::getState(Player* p){
-  
+
   std::cout <<"\n" << p->getPlayerName() << ", it's your turn" << std::endl;
   printScore();
   std::cout << std::endl;
 
   //print out the board
-  //place tile on grid and place tile on board are different 
+  //place tile on grid and place tile on board are different
 //   BoardDisplay::placeTile(grid,board);
 //   BoardDisplay::printGrid(grid,board);
   std::cout<<"\n\n\n\n\n\n\n\n\n             PRINT BOARD HERE                   \n\n\n\n\n\n\n\n\n";
   std::cout << "\nYour hand is " << std::endl;
-  p->displayTileInHand(); 
-  
+  p->displayTileInHand();
+
   std::cout << "\n> ";
 }
 
 int GameEngine::countToken(std::string input)
 {
-    int count  = 0; 
+    int count  = 0;
 
     std::string s1 = "";
 
@@ -61,7 +61,7 @@ int GameEngine::countToken(std::string input)
         count++;
     }
 
-    return count; 
+    return count;
 }
 
 
@@ -101,12 +101,12 @@ void GameEngine::scoreQwirkle(Player* p){
 bool GameEngine::checkFormatForTile(std::string input)
 {
     bool result = false;
-    
+
     int size = input.size();
 
     char char_array[size+1];
     strcpy(char_array, input.c_str());
-    
+
     //tiles are always represented as a two-character of colour and shape
     if(size == 2)
     {
@@ -125,10 +125,10 @@ bool GameEngine::checkFormatForTile(std::string input)
      {
          result = false;
      }
-    }   
-  
+    }
 
-    return result; 
+
+    return result;
 
 }
 
@@ -136,7 +136,7 @@ bool GameEngine::checkFormatForLocation(std::string input)
 {
     bool result = false;
 
-    
+
     int size = input.size();
 
     char char_array[size+1];
@@ -146,7 +146,7 @@ bool GameEngine::checkFormatForLocation(std::string input)
     //two-char location e.g:A2
     if(size == 2)
     {
-        //A-Z 65-90 ASCII 
+        //A-Z 65-90 ASCII
         if((char_array[0] > 64 && char_array[0] < 91) && (char_array[1] > 47 && char_array[1] < 58))
         {
             result = true;
@@ -155,8 +155,8 @@ bool GameEngine::checkFormatForLocation(std::string input)
     //three-chars location e.g: A15
     else if(size == 3)
     {
-        //49  means first digit is 1 - ASCII - e.g: A12 
-        //then the second digit can be between 0-9 
+        //49  means first digit is 1 - ASCII - e.g: A12
+        //then the second digit can be between 0-9
         if(char_array[1] == 49)
         {
           if((char_array[0] > 64 && char_array[0] < 91) && char_array[2] > 47 && char_array[2] < 58)
@@ -175,8 +175,8 @@ bool GameEngine::checkFormatForLocation(std::string input)
         }
     }
 
-    return result; 
-    
+    return result;
+
 }
 
 bool GameEngine::validateFormat(std::string input)
@@ -187,8 +187,8 @@ bool GameEngine::validateFormat(std::string input)
     std::istringstream token(input);
     std::string firstToken = "";
     std::string secondToken ="";
-  
-    
+
+
     //message size when placing, the format is "place <tile> at <grid location>"
     if(size == 4)
     {
@@ -208,7 +208,7 @@ bool GameEngine::validateFormat(std::string input)
     //message size when replacing
     else if(size == 2)
     {
-      
+
         token>>firstToken;
         token>>secondToken;
 
@@ -219,7 +219,7 @@ bool GameEngine::validateFormat(std::string input)
     }
 
 
-   
+
     return result;
 
 }
@@ -231,14 +231,14 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
     //tile is always a two-char representation
     char char_array[size+1];
     strcpy(char_array, tileInput.c_str());
-    
+
     //ASCII to convert character into an integer
     Tile* tileToBeCompare = new Tile(char_array[0], char_array[1] - 48);
     if(player->getPlayerHand()->contains(tileToBeCompare))
     {
       result = true;
     }
-    return result;   
+    return result;
 }
 
 
@@ -251,17 +251,17 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
 // //   if(inputFromUser.size() == 4)
 // //   {
 // //     std::string gridLocation = "";
-    
+
 
 // //     std::istringstream token(inputFromUser);
 
-// //     //loop to exclude the first three tokens 
+// //     //loop to exclude the first three tokens
 // //     for(int i = 0; i < 3; ++i)
 // //     {
 // //         token>>gridLocation;
 // //     }
 
-// //     token>>gridLocation; 
+// //     token>>gridLocation;
 
 
 // //     int size = gridLocation.size();
@@ -284,7 +284,7 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
 // //         }
 
 // //     }
-// //     //location is a three-char representation 
+// //     //location is a three-char representation
 // //     else
 // //     {
 // //         char char_array[size+1];
@@ -307,11 +307,11 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
 // //   {
 // //       if(validateFormat(inputFromUser) && validateTileExistInHand(inputFromUser, player))
 // //       {
-// //           result = true; 
+// //           result = true;
 // //       }
 // //   }
-  
-  
+
+
 //   return result;
 // }
 
@@ -327,13 +327,13 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
 //            result = true;
 //        }
 //     }
-//     else 
+//     else
 //     {
 //         /* code */
 //     }
 
-//     return result; 
-    
+//     return result;
+
 // }
 
 std::string GameEngine::getTileFromUserInput(std::string input)
@@ -343,21 +343,21 @@ std::string GameEngine::getTileFromUserInput(std::string input)
 
     std::istringstream token(input);
 
-    //tile in any command is at the second position 
+    //tile in any command is at the second position
     for(int i = 0; i < 1; i++)
     {
         token>>tile;
     }
     token>>tile;
-    
 
-    return tile; 
+
+    return tile;
 }
 
 std::string GameEngine::getLocationFromUserInput(std::string input)
 {
     std::string location ="";
-    
+
 
     std::istringstream token(input);
 
@@ -365,8 +365,8 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
     {
         token>>location;
     }
-    
-    token>>location; 
+
+    token>>location;
 
     return location;
 
@@ -382,14 +382,14 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
   addPlayer(player_1);
   addPlayer(player_2);
-  
+
   bool playerA = true;
   bool continueLoop = true;
 
- 
+
 
   shuffleAndCreateTileBag(tileBag);
-   
+
 
 
   setUpTilesInitially(player_1, tileBag);
@@ -397,15 +397,15 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
 
 
-  
+
 
   std::string inputFromUser = "";
-  std::string tileInput = ""; 
-  std::string gridLocation = ""; 
-  
+  std::string tileInput = "";
+  std::string gridLocation = "";
+
   int turn = 0;
   bool quit = false;
-  
+
   //game starts here
   do{
         if(playerA == true )
@@ -418,23 +418,23 @@ void GameEngine::playGame(std::string p1, std::string p2)
              quit = true;
           }
         }
-    
-        //at the start of the game we do not have to checkLegalMove() on board 
+
+        //at the start of the game we do not have to checkLegalMove() on board
         if(turn == 0 && playerA == true)
         {
-            
+
             if(quit != true)
-            {  
-               
+            {
+
                 do{
-        
+
                    //saveGame and invalid input (include invalidformat, invalidtileexistinhand and invalidmove ) goes into here
                     if(validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false)
-                    {     
+                    {
                         //suppose player saves game many times
                        while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                        {
-                            //call saveGame() here 
+                            //call saveGame() here
                             std::cout<<"\nGame successfully saved\n\n";
                             std::cout<<"> ";
 
@@ -444,12 +444,12 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             {
                                 std::cout<<"\nGoodbye\n";
                                 quit = true;
-                            } 
+                            }
                        }
                        while((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false) && quit != true)
                        {
                                 if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
-                                { 
+                                {
                                     std::cout<<"\nInvalid Input\n";
                                     std::cout<<"> ";
 
@@ -463,7 +463,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 else
                                 {
                                    if(countToken(inputFromUser) == 2)
-                                   { 
+                                   {
                                     //call saveGame() here
                                     std::cout<<"\nGame successfully saved\n\n";
                                     std::cout<<"> ";
@@ -478,77 +478,88 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 }
                         }
                     }
-                    
-                    
-                    //after save and invalid input and do not quit goes into here for further validation 
-                    //or input correctly the first time 
+
+
+                    //after save and invalid input and do not quit goes into here for further validation
+                    //or input correctly the first time
                     if(quit != true)
                     {
-                        
-                       
+
+
                         if(countToken(inputFromUser) == 4)
                         {
-            
-         
+
+
                             tileInput = getTileFromUserInput(inputFromUser); //get the second element
                             gridLocation = getLocationFromUserInput(inputFromUser); // get the fourth element
 
                             if(validateFormat(inputFromUser) == true && validateTileExistInHand(tileInput, player_1) == true)
                             {
-        
+
                                 //pass all the validation for placing
                                 playerA = false;
                                 //board processing
                                 // linkedlist processing here
+                                // int size = tileInput.size();
+                                // //tile is always a two-char representation
+                                // char cTileInput[size+1];
+                                // strcpy(cTileInput, tileInput.c_str());
+                                //
+                                // Tile* newTile = new Tile(cTileInput[0],cTileInput[1]-48);
+                                // player_1->getPlayerHand()->deleteTile(newTile);
+                                // //Place the tile on the board
+                                // player_1->getPlayerHand()->addBack(tileBag->getFront());
+                                // tileBag->deleteFront();
+                                // delete newTile;
                                 // update score
                                 turn++;
                                 continueLoop = false;
-                                
-         
-                            }     
-          
-                        }                      
+
+
+                            }
+
+                        }
                         else if(countToken(inputFromUser) == 2)
                         {
                             tileInput = getTileFromUserInput(inputFromUser);
                             if(validateFormat(inputFromUser) && validateTileExistInHand(tileInput, player_1))
                             {
-                                //pass all the validation for replacing tile 
-                                
+                                //pass all the validation for replacing tile
+
                                 playerA = false;
                                 //board processing
                                 //linkedlist processing here
-                                //update game score    
-                                turn++;     
+                                //update game score
+                                turn++;
                                 continueLoop = false;
-                            } 
+                            }
                         }
                     }
 
                   }while((validateFormat(inputFromUser) == false || validateTileExistInHand(inputFromUser, player_1) == false) && quit != true && continueLoop == true);
                   //quit != true to reprompt otherwise exit reprompt and end program
                   //validateLocationExist() and validateLegalMove() only apply for placing tile
-                  //so we have to have a special case for replacing inside each method implementation  
-            }  
+                  //so we have to have a special case for replacing inside each method implementation
+            }
         }
         else if(turn != 0)
         {
-           
+
           //if player 1 does not want to quit start validating input
           if(quit != true)
           {
-             
+
              if(playerA == true)
              {
                 do{
-        
+
                       //saveGame goes into this thread
                      if(validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false)
                      {
                         //suppose player saves game many times
                         while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                         {
-                            //call saveGame() here 
+                            //call saveGame() here
                             std::cout<<"\nGame successfully saved\n\n";
                             std::cout<<"> ";
 
@@ -558,13 +569,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 std::cout<<"\nGoodbye\n";
                                 quit = true;
                             }
-                 
-                 
+
+
                         }
                         while((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false )&& quit != true)
                         {
                                 if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
-                                { 
+                                {
                                     std::cout<<"\nInvalid Input\n";
                                     std::cout<<"> ";
 
@@ -578,7 +589,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 else
                                 {
                                    if(countToken(inputFromUser) == 2)
-                                   { 
+                                   {
                                     //call saveGame() here
                                     std::cout<<"\nGame successfully saved\n\n";
                                     std::cout<<"> ";
@@ -591,7 +602,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     }
                                    }
                                 }
-                           
+
                         }
 
                     }
@@ -599,17 +610,17 @@ void GameEngine::playGame(std::string p1, std::string p2)
                     //invalid two times
                     if(quit != true)
                     {
-                       
+
                         if(countToken(inputFromUser) == 4)
                         {
-            
-         
+
+
                             tileInput = getTileFromUserInput(inputFromUser); //get the second element
                             gridLocation = getLocationFromUserInput(inputFromUser); // get the fourth element
-         
+
                             if(validateFormat(inputFromUser) == true && validateTileExistInHand(tileInput, player_1) == true)
                             {
-        
+
                                 //pass all the validation for placing
 
                                 //board processing here
@@ -618,9 +629,9 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 turn++;
                                 playerA = false;
                                 continueLoop = false;
-         
+
                             }
-          
+
                         }
                         else if(countToken(inputFromUser) == 2)
                         {
@@ -633,23 +644,23 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
                                 //board processing here
                                 //doing linkedlist processing here
-                                //update score   
+                                //update score
 
-                                turn++; 
-                                continueLoop = false;  
-                            }  
+                                turn++;
+                                continueLoop = false;
+                            }
                         }
                     }
                 }while((validateFormat(inputFromUser) == false || validateTileExistInHand(inputFromUser, player_1) == false)&& quit != true && continueLoop == true);
-             }    
-            
+             }
+
             //redundant ???? - NO as player 1 save and quit
-            //we do not want the game to print out game state for player 2  
-            
+            //we do not want the game to print out game state for player 2
+
             if(quit != true && playerA == false)
-            {        
-                
-                this->getState(player_2); 
+            {
+
+                this->getState(player_2);
 
                 std::getline(std::cin, inputFromUser);
                 if(std::cin.eof())
@@ -657,8 +668,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                     std::cout<<"\nGoodbye\n";
                     quit = true;
                 }
-       
-                //if player 2 does not want to quit 
+
+                //if player 2 does not want to quit
                 if(quit != true)
                 {
                     do{
@@ -667,7 +678,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             //suppose player wants to save game many times
                             while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                             {
-                               //call saveGame() here 
+                               //call saveGame() here
                                 std::cout<<"\nGame successfully saved\n\n";
                                 std::cout<<"> ";
 
@@ -681,7 +692,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             while((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_2) == false)  && quit != true)
                             {
                                 if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
-                                { 
+                                {
                                     std::cout<<"\nInvalid Input\n";
                                     std::cout<<"> ";
 
@@ -695,8 +706,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 else
                                 {
                                    if(countToken(inputFromUser) == 2)
-                                   { 
-                                    //call saveGame() here   
+                                   {
+                                    //call saveGame() here
                                     std::cout<<"\nGame successfully saved\n\n";
                                     std::cout<<"> ";
 
@@ -713,17 +724,17 @@ void GameEngine::playGame(std::string p1, std::string p2)
                         }
                         if(quit != true)
                         {
-                           
+
                             if(countToken(inputFromUser) == 4)
                             {
-            
-         
+
+
                                 tileInput = getTileFromUserInput(inputFromUser); //get the second element
                                 gridLocation = getLocationFromUserInput(inputFromUser); // get the fourth element
-         
+
                                 if(validateFormat(inputFromUser) == true && validateTileExistInHand(tileInput, player_2))
                                 {
-        
+
                                         //pass all the validation for placing
                                         playerA = true;
                                         //board processing here
@@ -732,38 +743,38 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                         turn++;
                                         continueLoop = false;
                                 }
-         
-         
+
+
                             }
                             else
                             {
-                                 
+
                                  tileInput = getTileFromUserInput(inputFromUser);
                                  if(validateFormat(inputFromUser) && validateTileExistInHand(tileInput, player_2))
                                  {
-                                        
+
                                         //pass all the validation for replacing
 
                                         //board processing here
                                         //doing linkedlist processing here
-                                        //update game state 
+                                        //update game state
                                         playerA = true;
-                                 
+
 
                                     turn++;
                                     continueLoop = false;
-     
-                                }        
+
+                                }
                             }
                         }
-           
+
                     }while((validateFormat(inputFromUser) == false || validateTileExistInHand(inputFromUser, player_2) == false)&& quit != true && continueLoop == true);
-                }    
+                }
             }
           }
-          
-        }           
-    
+
+        }
+
     }  while((tileBag->getSize() != 0 || ((player_1->getPlayerHand()->getSize() != 0) && player_2->getPlayerHand()->getSize() != 0)) && quit != true);
 
 
@@ -773,7 +784,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
         std::cout<<"Game over\n";
         std::cout<<"Score for "<<player_1->getPlayerName()<<": "<<player_1->getPlayerScore()<<std::endl;
         std::cout<<"Score for "<<player_2->getPlayerName()<<": "<<player_2->getPlayerScore()<<std::endl;
-        
+
         if(player_1->getPlayerScore() > player_2->getPlayerScore())
         {
             std::cout<<"Player "<<player_1->getPlayerScore()<<" won!\n";
@@ -785,13 +796,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
         }
         std::cout<<"\nGoodbye";
     }
-    
+
     delete hand_1;
     delete hand_2;
     delete tileBag;
-  
 
-}   
+
+}
 
 void GameEngine::setUpTilesInitially(Player* player, LinkedList* tileBag)
 {
@@ -815,7 +826,7 @@ int GameEngine::randomNumberGenerate()
 void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
 {
 
-   
+
    std::array<char, 6> colours = {RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW};
    std::array<int, 6> shapes  = {CIRCLE, STAR_4, DIAMOND, SQUARE, STAR_6, CLOVER};
 
@@ -828,10 +839,8 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
         delete tileToBeAdded;
         tileToBeAdded = new Tile(colours[randomNumberGenerate()], shapes[randomNumberGenerate()]);
      }
-     
+
 
      tileBag->addBack(tileToBeAdded);
-   }  
+   }
 }
-
-

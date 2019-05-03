@@ -3,14 +3,14 @@
 
 #include<iostream>
 
-LinkedList::LinkedList() 
+LinkedList::LinkedList()
 {
    head = nullptr;
    tail = nullptr;
    size = 0;
 }
 
-LinkedList::~LinkedList() 
+LinkedList::~LinkedList()
 {
    clear();
 }
@@ -25,6 +25,45 @@ void LinkedList::deleteFront()
       size--;
    }
 }
+
+void LinkedList::deleteBack(){
+  Node* toDelete = head;
+  Node* prev = nullptr;
+  while(toDelete->next != nullptr)
+  {
+    prev = toDelete;
+    toDelete = toDelete->next;
+  }
+  prev->next = nullptr;
+  delete toDelete;
+  size--;
+}
+
+
+void LinkedList::deleteTile(Tile* tile){
+  bool found = false;
+  Node* current = head;
+  Node* prev = nullptr;
+
+  while(current->next != nullptr && found == false)
+  {
+     if(current->tile->compareTile(tile))
+     {
+        found = true;
+     }
+     prev = current;
+     current = current->next;
+  }
+  //delete back
+  if(current->next == nullptr){
+    deleteBack();
+  } else {
+    //delete middle and front
+    prev->next = current->next;
+    delete current;
+  }
+}
+
 
 void LinkedList::addBack(Tile* tile)
 {
@@ -63,14 +102,14 @@ void LinkedList::clear()
       copyNode = current->next;
       delete current;
       current = copyNode;
-   }  
+   }
    size = 0;
 }
 
 bool LinkedList::contains(Tile* tileToBeCompared)
 {
    bool found = false;
-   Node* current = head;
+   Node* current = head->next;
 
    while(current != nullptr && found == false)
    {
@@ -82,28 +121,28 @@ bool LinkedList::contains(Tile* tileToBeCompared)
    }
 
    return found;
-   
-}
-
-
-void LinkedList::remove(Tile* tileToBeRemoved)
-{
-   if(head != nullptr)
-   {
-      Node* toDelete = head;
-      while((toDelete->tile->compareTile(tileToBeRemoved) == false) && toDelete != nullptr)
-      {
-         toDelete = toDelete->next;
-      }
-
-      if(toDelete != nullptr)
-      {
-         delete toDelete;
-         size--;
-      }
-   }
 
 }
+
+
+// void LinkedList::remove(Tile* tileToBeRemoved)
+// {
+//    if(head != nullptr)
+//    {
+//       Node* toDelete = head;
+//       while((toDelete->tile->compareTile(tileToBeRemoved) == false) && toDelete != nullptr)
+//       {
+//          toDelete = toDelete->next;
+//       }
+//
+//       if(toDelete != nullptr)
+//       {
+//          delete toDelete;
+//          size--;
+//       }
+//    }
+//
+// }
 
 int LinkedList::tileExist(Tile* tileToBeCompared)
 {
@@ -112,7 +151,7 @@ int LinkedList::tileExist(Tile* tileToBeCompared)
    if(head != nullptr)
    {
       Node* current = head;
-      
+
       while(current != nullptr)
       {
        if(current->tile->compareTile(tileToBeCompared))
@@ -139,15 +178,15 @@ std::string LinkedList::displayList()
       if(current->next != nullptr)
       {
          result = result + current->tile->getColour() + std::to_string(current->tile->getShape()) +",";
-         
+
       }
       //at the last element of the list does not need ','
       else
       {
          result = result + current->tile->getColour() + std::to_string(current->tile->getShape());
       }
-      current = current->next;      
+      current = current->next;
    }
 
-   return result; 
+   return result;
 }
