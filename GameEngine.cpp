@@ -104,7 +104,7 @@ bool GameEngine::validateFormat(std::string input)
 {
   bool result = false;
 
-  std::regex place ("^place ([ROYGBP][1-6]) at ([A-Z]([1-9]|1[0-9]|2[0-6]))");
+  std::regex place ("^place ([ROYGBP][1-6]) at ([A-Z]([1-9]|1[0-9]|2[0-5]))");
   std::regex replace ("^replace ([ROYGBP][1-6])");
   if(std::regex_match(input, place) || std::regex_match(input, replace)){
       result = true;
