@@ -27,10 +27,6 @@ public:
    
 // compare 2 tiles
    bool compareTile(Tile* t);
-
-// toString and isExist
-   std::string toString();
-   bool isExist();
    
 // Khoa's works:
    Tile(const Tile &t);
