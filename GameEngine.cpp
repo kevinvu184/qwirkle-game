@@ -17,19 +17,9 @@
 
 GameEngine::GameEngine(){
   this->playerCount = 0;
-//   Board board  = Board();
-//   grid = BoardDisplay::makeGrid(board);
-//   BoardDisplay::buildGrid(grid,board);
-//   tileBag = new LinkedList();
-
 }
 
 GameEngine::~GameEngine(){
-
-//   BoardDisplay::deleteGrid(grid,board);
-//   delete tileBag;
-  //error
-//   delete[] playerList;
 
 }
 
@@ -39,16 +29,19 @@ void GameEngine::getState(Player* p){
   printScore();
   std::cout << std::endl;
 
-  //print out the board
-  //place tile on grid and place tile on board are different
-//   BoardDisplay::placeTile(grid,board);
-//   BoardDisplay::printGrid(grid,board);
-  std::cout<<"\n\n\n\n\n\n\n\n\n             PRINT BOARD HERE                   \n\n\n\n\n\n\n\n\n";
-  std::cout << "\nYour hand is " << std::endl;
-  p->displayTileInHand();
+  // print out the board
+  // @TODO: BoardDisplay::printGrid(grid,board);
+  std::cout<<"\n\n\n\n\n\n\n\n\n             PRINT BOARD HERE                   \n\n\n\n\n\n\n\n" << std::endl;
 
+  // place tile on grid and place tile on board are different
+  // @TODO: BoardDisplay::placeTile(grid,board);
+
+  // Display the current player's hand
+  std::cout << "\nYour hand is " << std::endl;
+  p->displayTilesInHand();
   std::cout << "\n> ";
 }
+
 
 int GameEngine::countToken(std::string input)
 {
@@ -72,15 +65,6 @@ void GameEngine::addPlayer(Player* p){
   playerCount++;
 }
 
-// Player* GameEngine::getPlayer(int id){
-//   for (int i = 0; i < playerCount; i++){
-//     if(playerList[i]->getPlayerId() == id){
-//       return playerList[i];
-//     }
-//   }
-//   return NULL;
-// }
-
 void GameEngine::printScore(){
   for (int i = 0; i < this->playerCount; i++){
     std::cout << "Score for " << playerList[i]->getPlayerName() << ": " << playerList[i]->getPlayerScore() << std::endl;
@@ -94,11 +78,6 @@ void GameEngine::scorePoint(Player* p){
 void GameEngine::scoreQwirkle(Player* p){
   p->setPlayerScore(p->getPlayerScore() + 6);
 }
-
-// Board& GameEngine::getBoard()
-// {
-//   return board;
-// }
 
 bool GameEngine::validateFormat(std::string input)
 {
@@ -121,108 +100,14 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
     strcpy(char_array, tileInput.c_str());
 
     //ASCII to convert character into an integer
-    Tile* tileToBeCompare = new Tile(char_array[0], char_array[1] - 48);
-    if(player->getPlayerHand()->contains(tileToBeCompare))
+    Tile* tileToCompare = new Tile(char_array[0], char_array[1] - 48);
+    if(player->getPlayerHand()->contains(
+    ))
     {
       result = true;
     }
     return result;
 }
-
-
-// bool GameEngine::validateMoveLocationExist(std::string inputFromUser, Board& board, Player* player)
-// {
-
-//   bool result = true;
-
-//   //message size when placing
-// //   if(inputFromUser.size() == 4)
-// //   {
-// //     std::string gridLocation = "";
-
-
-// //     std::istringstream token(inputFromUser);
-
-// //     //loop to exclude the first three tokens
-// //     for(int i = 0; i < 3; ++i)
-// //     {
-// //         token>>gridLocation;
-// //     }
-
-// //     token>>gridLocation;
-
-
-// //     int size = gridLocation.size();
-
-// //     if(size == 2)
-// //     {
-// //         char char_array[size+1];
-
-// //         strcpy(char_array, gridLocation.c_str());
-
-// //         //coordinate(y, x) A5
-// //         Coordinate* coordinate = new Coordinate(char_array[0], char_array[1] - 48);
-
-// //         Tile*  emptyTile = new Tile();
-
-// //         //so at that coordinate there is no tile
-// //         if(board.getTileAt(*coordinate).compareTile(emptyTile))
-// //         {
-// //             result = true;
-// //         }
-
-// //     }
-// //     //location is a three-char representation
-// //     else
-// //     {
-// //         char char_array[size+1];
-
-// //         strcpy(char_array, gridLocation.c_str());
-
-// //         int colConverter = (char_array[1] - 48) * 10 + (char_array[2] - 48);
-
-// //         Coordinate* coordinate = new Coordinate(char_array[0], colConverter);
-
-// //         Tile* emptyTile = new Tile();
-// //         if(board.getTileAt(*coordinate).compareTile(emptyTile))
-// //         {
-// //             result = true;
-// //         }
-// //     }
-// //   }
-// //   //replace tile case
-// //   else if(inputFromUser.size() == 2)
-// //   {
-// //       if(validateFormat(inputFromUser) && validateTileExistInHand(inputFromUser, player))
-// //       {
-// //           result = true;
-// //       }
-// //   }
-
-
-//   return result;
-// }
-
-
-
-// bool GameEngine::validateLegalMove(std::string tileInput, std::string gridLocation, std::string inputFromUser, Player* player)
-// {
-//     bool result = true;
-//     if(inputFromUser.size() == 2)
-//     {
-//        if(validateFormat(inputFromUser) && validateTileExistInHand(tileInput, player))
-//        {
-//            result = true;
-//        }
-//     }
-//     else
-//     {
-//         /* code */
-//     }
-
-//     return result;
-
-// }
 
 std::string GameEngine::getTileFromUserInput(std::string input)
 {
@@ -284,12 +169,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
 
 
-  setUpTilesInitially(player_1, tileBag);
-  setUpTilesInitially(player_2, tileBag);
-
-
-
-
+  initialisePlayerTiles(player_1, tileBag);
+  initialisePlayerTiles(player_2, tileBag);
 
   std::string inputFromUser = "";
   std::string tileInput = "";
@@ -679,8 +560,6 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                         turn++;
                                         continueLoop = false;
                                 }
-
-
                             }
                             else
                             {
@@ -724,7 +603,6 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
     }  while((tileBag->getSize() != 0 || ((player_1->getPlayerHand()->getSize() != 0) && player_2->getPlayerHand()->getSize() != 0)) && quit != true);
 
-
     //only display when the game ends not QUIT
     if(quit == false)
     {
@@ -739,7 +617,6 @@ void GameEngine::playGame(std::string p1, std::string p2)
         else
         {
             std::cout<<"Player "<<player_2->getPlayerScore()<<" won!\n";
-
         }
         std::cout<<"\nGoodbye";
     }
@@ -751,7 +628,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
 }
 
-void GameEngine::setUpTilesInitially(Player* player, LinkedList* tileBag)
+void GameEngine::initialisePlayerTiles(Player* player, LinkedList* tileBag)
 {
    for(int i = 0; i < MAXIMUM_PLAYER_HAND; ++i)
   {
@@ -770,10 +647,9 @@ int GameEngine::randomNumberGenerate()
    return distr(eng);
 }
 
+
 void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
 {
-
-
    std::array<char, NUMBER_OF_COLOR> colours = {RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW};
    std::array<int, NUMBER_OF_SHAPE> shapes  = {CIRCLE, STAR_4, DIAMOND, SQUARE, STAR_6, CLOVER};
 
@@ -786,7 +662,6 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
         delete tileToBeAdded;
         tileToBeAdded = new Tile(colours[randomNumberGenerate()], shapes[randomNumberGenerate()]);
      }
-
 
      tileBag->addBack(tileToBeAdded);
    }
