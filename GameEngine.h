@@ -27,6 +27,7 @@ public:
 
   std::string getTileFromUserInput(std::string input);
   std::string getLocationFromUserInput(std::string input);
+  std::string getNameOfFileFromUserInput(std::string input);
 
   bool validateTileExistInHand(std::string tileInput, Player* player);
   // bool validateMoveLocationExist(std::string inputFromUser, Board& board, Player* player);
@@ -41,6 +42,8 @@ public:
   // Board& getBoard();
 
   int countToken(std::string);
+
+  void saveGame(std::string fileName, Player* player, LinkedList* tileBag);
 
 
 

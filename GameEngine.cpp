@@ -7,6 +7,8 @@
 #include<random>
 #include<sstream>
 #include <bits/stdc++.h>
+#include<fstream>
+
 
 #define MAXIMUM_TILES_BAG 72
 #define MAXIMUM_PLAYER_HAND 6
@@ -224,6 +226,24 @@ bool GameEngine::validateTileExistInHand(std::string tileInput, Player* player)
 
 // }
 
+std::string GameEngine::getNameOfFileFromUserInput(std::string input)
+{
+    std::string fileName = "";
+
+    std::istringstream token(input);
+
+    //tile in any command is at the second position
+    for(int i = 0; i < 1; i++)
+    {
+        token>>fileName;
+    }
+    token>>fileName;
+
+
+    return fileName;
+}
+
+
 std::string GameEngine::getTileFromUserInput(std::string input)
 {
 
@@ -327,6 +347,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                        while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                        {
                             //call saveGame() here
+                            saveGame(getNameOfFileFromUserInput(inputFromUser), player_1, tileBag);
                             std::cout<<"\nGame successfully saved\n\n";
                             std::cout<<"> ";
 
@@ -463,6 +484,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                         while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                         {
                             //call saveGame() here
+                            saveGame(getNameOfFileFromUserInput(inputFromUser), player_1, tileBag);
                             std::cout<<"\nGame successfully saved\n\n";
                             std::cout<<"> ";
 
@@ -604,6 +626,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             while(inputFromUser.substr(0,4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                             {
                                //call saveGame() here
+                                saveGame(getNameOfFileFromUserInput(inputFromUser), player_2, tileBag);
                                 std::cout<<"\nGame successfully saved\n\n";
                                 std::cout<<"> ";
 
@@ -791,4 +814,30 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList* tileBag)
      tileBag->addBack(tileToBeAdded);
      delete tileToBeAdded; 
    }
+}
+
+void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tileBag){
+  std::ofstream outFile;
+  outFile.open(filename);
+  for (int i = 0; i < this->playerCount; i++){
+    outFile<< playerList[i]->getPlayerName() << std::endl;
+    outFile<< playerList[i]->getPlayerScore() << std::endl;
+    outFile<< playerList[i]->getPlayerHand()->displayList() << std::endl;
+  }
+  //print Board
+//   for (int i = 0; i < b->getRowsCharLength(); i++) {
+//     for (int j = 0; j < b->getColsCharLength(); j++) {
+//       outFile << g[i][j];
+//     }
+//     outFile << "\n";
+//   }
+  outFile<<"\n\n\n\n\n\n\n\n\n         PRINT BOARD HERE               \n\n\n\n\n\n\n\n\n";
+
+  //print Tile bag
+  outFile << tileBag->displayList() << std::endl;
+  //Display Turn
+  outFile << player->getPlayerName()<< std::endl;
+
+  outFile.close();
+
 }
