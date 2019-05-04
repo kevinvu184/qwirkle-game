@@ -147,27 +147,21 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
 
 void GameEngine::playGame(std::string p1, std::string p2)
 {
-
-  //tileBag created inside scope of playGame
+  // Declare new objects: tile bag, hands, players...
   LinkedList* tileBag = new LinkedList();
   LinkedList* hand_1 = new LinkedList();
   LinkedList* hand_2 = new LinkedList();
 
-
   Player* player_1 = new Player(1, p1, hand_1);
   Player* player_2 = new Player(2, p2, hand_2);
-
   addPlayer(player_1);
   addPlayer(player_2);
 
   bool playerA = true;
   bool continueLoop = true;
 
-
-// Create the tile bag
+  // Create the tile bag
   shuffleAndCreateTileBag(tileBag);
-
-
 
   initialisePlayerTiles(player_1, tileBag);
   initialisePlayerTiles(player_2, tileBag);
@@ -179,7 +173,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
   int turn = 0;
   bool quit = false;
 
-  //game starts here
+  // Begin the game
   do{
         if(playerA == true)
         {
