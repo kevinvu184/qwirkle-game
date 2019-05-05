@@ -16,7 +16,7 @@ public:
   void addPlayer(Player* p);
   void initialisePlayerTiles(Player* player, LinkedList* tileBag);
   void shuffleAndCreateTileBag(LinkedList* tileBag);
-  int randomNumberGenerate();
+  int generateRandomNumber();
 
   // Ensures string format matches valid formats of "place <tile> at <location>" or "replace <tile>"
   bool validateFormat(std::string input);
