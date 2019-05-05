@@ -42,8 +42,7 @@ void Player::setPlayerScore(int score){
   this->score = score;
 }
 
-void Player::displayTileInHand(){
-  
+void Player::displayTilesInHand(){
   std::cout << hand->displayList() << std::endl;
 }
 

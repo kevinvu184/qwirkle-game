@@ -113,14 +113,14 @@ void LinkedList::clear()
    size = 0;
 }
 
-bool LinkedList::contains(Tile* tileToBeCompared)
+bool LinkedList::contains(Tile* tileToCompared)
 {
    bool found = false;
    Node* current = head;
 
    while(current != nullptr && found == false)
    {
-      if(current->tile->compareTile(tileToBeCompared))
+      if(current->tile->compareTile(tileToCompared))
       {
          found = true;
       }
@@ -151,7 +151,7 @@ void LinkedList::remove(Tile* tileToBeRemoved)
 
 }
 
-int LinkedList::tileExist(Tile* tileToBeCompared)
+int LinkedList::tileExist(Tile* tileToCompared)
 {
    int count = 0;
 
@@ -161,7 +161,7 @@ int LinkedList::tileExist(Tile* tileToBeCompared)
 
       while(current != nullptr)
       {
-       if(current->tile->compareTile(tileToBeCompared))
+       if(current->tile->compareTile(tileToCompared))
        {
           count++;
        }
