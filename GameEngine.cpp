@@ -216,8 +216,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                      {
                               if(inputFromUser.substr(0,4) != "save" || countToken(inputFromUser) != 2)
                               {
-                                  std::cout<<"\nInvalid Input\n";
-                                  std::cout<<"> ";
+                                  std::cout<<"\nInvalid Input" << std::endl;
+                                  std::cout<<"> " << std::flush;
 
                                   std::getline(std::cin, inputFromUser);
                                   if(std::cin.eof() == true)
