@@ -37,7 +37,7 @@ public:
 
    //when player request for placing or replacing
    //check first if exist
-   bool contains(Tile* tileToCompared);
+   bool contains(Tile* tileToBeCompared);
 
    //when placing or replacing tile on player's hand
    //that selected tile being removed
@@ -47,7 +47,7 @@ public:
    // int get(int i);
 
    //function to count how many time a specific tile exist
-   int tileExist(Tile* tileToCompared);
+   int tileExist(Tile* tileToBeCompared);
 
    //display list - to construct a toString() representation of the
    //linkedlist when displaying tile in player's hand
