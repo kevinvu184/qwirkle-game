@@ -21,7 +21,7 @@ public:
     void setPlayerName(std::string name);
     void setPlayerScore(int score);
 
-    void displayTilesInHand();
+    void displayTileInHand();
 
     int id;
     std::string name;
