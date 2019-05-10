@@ -41,7 +41,11 @@ public:
 
   int countToken(std::string);
 
-  
+  void saveGame(std::string filename, Player* player, LinkedList* tileBag);
+  std::string getNameOfFileFromUserInput(std::string input);
+
+
+
 
 private:
   Board board;
