@@ -3,10 +3,14 @@
 
 Node::Node(Tile* tile, Node* next)
 {
-   //should be deep or shallow copy ? 
-   //currently shallow copy 
-   this->tile = tile;
+   //deep copy of tile now  
+   this->tile =  new Tile(tile->getColour(), tile->getShape());
    this->next = next;
+}
+
+Node::~Node()
+{
+   delete tile; 
 }
 
 Node::Node(Node& other)

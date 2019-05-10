@@ -1,16 +1,20 @@
+#ifndef ASSIGN2_BOARD_H
+#define ASSIGN2_BOARD_H
+
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 #include "Coordinate.h"
 
-#define NORTH 0
-#define SOUTH 25
-#define WEST 0
-#define EAST 25
+#define NORTH -2
+#define SOUTH 2
+#define WEST -2
+#define EAST 2
 
-class Board {
+class Board
+{
 private:
 	int m_northBound;
 	int m_southBound;
@@ -24,8 +28,8 @@ public:
 	bool addTileAt(Coordinate &coordinate);
 	void removeLastTile();
 
-	Tile* getTileAt(Coordinate coordinate);
-	Tile* getLatestTile();
+	Tile getTileAt(Coordinate coordinate);
+	Tile getLatestTile();
 
 	int northBound();
 	int southBound();
@@ -59,3 +63,5 @@ public:
 	bool verify(std::vector<Tile> line);
 	bool verifyMove();
 };
+
+#endif // ASSIGN2_BOARD_H
