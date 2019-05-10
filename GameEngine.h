@@ -41,6 +41,8 @@ public:
 
   int countToken(std::string);
 
+  
+
 private:
   Board board;
   Player *playerList[2];

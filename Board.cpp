@@ -23,6 +23,7 @@ bool Board::addTileAt(Coordinate &coordinate)
 		if (isAddable(coordinate))
 		{
 			m_coordinate.push_back(coordinate);
+		} else {
 			return false;
 		}
 		if (!verifyMove())

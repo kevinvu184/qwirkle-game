@@ -37,6 +37,7 @@ void GameEngine::getState(Player *p)
     std::cout << board;
     std::cout << "\nYour hand is " << std::endl;
     p->displayTileInHand();
+    
 
     std::cout << "\n> ";
 }
@@ -150,6 +151,7 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
     return location;
 }
 
+
 void GameEngine::playGame(std::string p1, std::string p2)
 {
 
@@ -165,8 +167,10 @@ void GameEngine::playGame(std::string p1, std::string p2)
     addPlayer(player_2);
 
     bool playerA = true;
+
     bool continueLoop_1 = true;
     bool continueLoop_2 = true;
+
     bool addTileVerify_1 = true;
     bool addTileVerify_2 = true; 
 
@@ -231,6 +235,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             {
                                 std::cout << "\nInvalid Input\n";
                                 std::cout << "> ";
+                                addTileVerify_1 = true;
                                 std::getline(std::cin, inputFromUser);
                                 if (std::cin.eof() == true)
                                 {
@@ -245,6 +250,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     //call saveGame() here
                                     std::cout << "\nGame successfully saved\n\n";
                                     std::cout << "> ";
+                                    addTileVerify_1 = true;
                                     std::getline(std::cin, inputFromUser);
                                     if (std::cin.eof() == true)
                                     {
@@ -254,18 +260,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 }
                             }
                         }
-                        if (addTileVerify_1 == false)
-                        {
-                            std::cout << "\nInvalid Input\n";
-                            std::cout << "> ";
-
-                            std::getline(std::cin, inputFromUser);
-                            if (std::cin.eof() == true)
-                            {
-                                std::cout << "\nGoodbye\n";
-                                quit = true;
-                            }
-                        }
+                       
                     }
 
                     //after save and invalid input and do not quit goes into here for further validation
@@ -302,17 +297,19 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     strcpy(cSizeInput, gridLocation.c_str());
                                     //cSizeInput[0] = y , cSizeInput[1] = x
                                     Coordinate c = Coordinate(cSizeInput[0], cSizeInput[1] - 48, *newTile);
-                                    if (!board.addTileAt(c))
-                                    {
-                                        addTileVerify_1 = false;
-                                    }
-                                    else
-                                    {
+                                    board.addTileAt(c);
+                                    
+                                        addTileVerify_1 = true;
+                                        std::cout<<"RESULT: "<<addTileVerify_1<<std::endl;
+                                
+                                    
                                         player_1->setPlayerScore(board.totalPoint(c));
                                         player_1->getPlayerHand()->deleteTile(newTile);
                                         player_1->getPlayerHand()->addBack(tileBag->getFront());
                                         tileBag->deleteFront();
-                                    }
+                                       
+                                        std::cout<<"RESULT: "<<addTileVerify_1<<std::endl;
+                                
                                 }
                                 else
                                 {
@@ -325,17 +322,22 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
                                     //cSizeInput[0] = y, x = x coordinate
                                     Coordinate c = Coordinate(cSizeInput[0], x, *newTile);
-                                    if (!board.addTileAt(c))
-                                    {
-                                        addTileVerify_1 = false;
-                                    }
-                                    else
-                                    {
+                                    board.addTileAt(c);
+                                    
+                                      
+                                        std::cout<<"RESULT: "<<addTileVerify_1<<std::endl;
+                                    
+                                    
+                                    
                                         player_1->setPlayerScore(board.totalPoint(c));
                                         player_1->getPlayerHand()->deleteTile(newTile);
                                         player_1->getPlayerHand()->addBack(tileBag->getFront());
                                         tileBag->deleteFront();
-                                    }
+                                        
+                                        std::cout<<"RESULT: "<<addTileVerify_1<<std::endl;
+                                        addTileVerify_1 = true;
+
+                            
                                 }          
                                 
                                 delete newTile;
@@ -360,13 +362,14 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 strcpy(cTileInput, tileInput.c_str());
 
                                 Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - 48);
+                                tileBag->addBack(newTile);
                                 player_1->getPlayerHand()->deleteTile(newTile);
                                 //Place the tile on the board
                                 player_1->getPlayerHand()->addBack(tileBag->getFront());
                                 tileBag->deleteFront();
                                 delete newTile;
                                 //update game score
-                                
+                                addTileVerify_1 = true;
                                 turn++;
                                 continueLoop_1 = false;
                             }
@@ -381,7 +384,10 @@ void GameEngine::playGame(std::string p1, std::string p2)
         }
         else if (turn != 0)
         {
-
+            
+            std::cout<<"DEBUG_3"<<std::endl;
+            std::cout<<addTileVerify_1<<std::endl;
+            std::cout<<addTileVerify_2<<std::endl;
             //if player 1 does not want to quit start validating input
             if (quit != true)
             {
@@ -445,7 +451,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             }
                             if (addTileVerify_1 == false)
                             {
-                                std::cout << "\nInvalid Input\n";
+                                std::cout << "\nInvalid Input due to board\n";
                                 std::cout << "> ";
 
                                 std::getline(std::cin, inputFromUser);
@@ -469,11 +475,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
                                 if (validateFormat(inputFromUser) == true && validateTileExistInHand(tileInput, player_1) == true)
                                 {
-
-                                    //pass all the validation for placing
-
-                                    //board processing here
-                                    //doing linkedlist processing here
+                                  
                                     int size = tileInput.size();
                                     //tile is always a two-char representation
                                     char cTileInput[size + 1];
@@ -492,12 +494,14 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                         Coordinate c = Coordinate(cSizeInput[0], cSizeInput[1] - 48, *newTile);
                                         if (!board.addTileAt(c))
                                         {
+                                            std::cout<<"DEBUG"<<std::endl;
                                             addTileVerify_1 = false;
                                             playerA = true;
                                             continueLoop_1 = true;
                                         }
                                         else
                                         {
+                                            std::cout<<"DEBUG_2"<<std::endl;
                                             player_1->setPlayerScore(board.totalPoint(c));
                                             if (board.totalPoint(c) == 12)
                                             {
@@ -531,6 +535,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                         }
                                         else
                                         {
+                                            std::cout<<"DEBUG_2"<<std::endl;
+
                                             player_1->setPlayerScore(board.totalPoint(c));
                                             if (board.totalPoint(c) == 12)
                                             {
@@ -567,9 +573,11 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     strcpy(cTileInput, tileInput.c_str());
 
                                     Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - 48);
+                                    tileBag->addBack(newTile);
                                     player_1->getPlayerHand()->deleteTile(newTile);
 
                                     player_1->getPlayerHand()->addBack(tileBag->getFront());
+                                    
                                     tileBag->deleteFront();
                                     delete newTile;
                             
@@ -655,7 +663,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 }
                                 if (addTileVerify_2 == false)
                                 {
-                                    std::cout << "\nInvalid Input\n";
+                                    std::cout << "\nInvalid Input due to board\n";
                                     std::cout << "> ";
 
                                     std::getline(std::cin, inputFromUser);
@@ -700,6 +708,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                            
                                             if (!board.addTileAt(c))
                                             {
+                                                std::cout<<"DEBUG"<<std::endl;
                                                 addTileVerify_2 = false;
                                                 continueLoop_2 = true;
                                                 playerA = false;
@@ -775,7 +784,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
                                         Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - 48);
                                         player_2->getPlayerHand()->deleteTile(newTile);
-                                     
+                                        tileBag->addBack(newTile);
                                         player_2->getPlayerHand()->addBack(tileBag->getFront());
                                         tileBag->deleteFront();
                                         delete newTile;
@@ -855,5 +864,6 @@ void GameEngine::shuffleAndCreateTileBag(LinkedList *tileBag)
         }
 
         tileBag->addBack(tileToBeAdded);
+        delete tileToBeAdded;
     }
 }
