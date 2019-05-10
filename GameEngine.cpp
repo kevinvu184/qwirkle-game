@@ -166,6 +166,8 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
   //   }
   //   outFile << "\n";
   // }
+
+  // tmpFile.txt to go here
   outFile<<"\n\n\n\n\n\n\n\n\n         PRINT BOARD HERE               \n\n\n\n\n\n\n\n\n";
 
   //print Tile bag
@@ -175,6 +177,16 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
 
   outFile.close();
 
+}
+
+// Test this
+// Call this after each valid move from the user.
+// When a user saves the game, append tempFile.txt to new file
+void storeMoves(std::string inputFromUser){
+  std::ofstream moves;
+  moves.open ("tempFile.txt", std::ofstream::out | std::ofstream::app);
+  moves << inputFromUser;
+  moves.close();
 }
 
 std::string GameEngine::getNameOfFileFromUserInput(std::string input)
@@ -333,6 +345,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
 
                                 Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - 48);
 
+                                // append inputUser text to 'tmpFile.txt'
+                                // place ?? at ?? -> (??,??)
+                                // place ?? at ??
+                                // place ?? at ??
+                                // place ?? at ??
+                                // when user saves, cp tmpFile.txt to user's file
+
 
                                 if (gridLocation.size() == 2)
                                 {
@@ -447,7 +466,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             {
                                 if (inputFromUser.substr(0, 4) != "save" || countToken(inputFromUser) != 2)
                                 {
-                                    std::cout << "\nInvalid Input\n";
+
+                                    std::cout << "\nInvalid Input" << std::endl;
                                     std::cout << "> " << std::flush;
 
                                     addTileVerify_1 = true;
@@ -455,7 +475,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     std::getline(std::cin, inputFromUser);
                                     if (std::cin.eof() == true)
                                     {
-                                        std::cout << "\nGoodbye\n";
+                                        std::cout << "\nGoodbye\n" << std::flush;
                                         quit = true;
                                     }
                                 }
@@ -481,6 +501,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             }
                             if (addTileVerify_1 == false)
                             {
+                                // tile cannot be added to the Board
+                                // Meaningful message: "This move is illegal, please try again."
                                 std::cout << "\nInvalid Input\n";
                                 std::cout << "> ";
 
