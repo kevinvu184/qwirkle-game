@@ -44,6 +44,12 @@ public:
   void saveGame(std::string filename, Player* player, LinkedList* tileBag);
   std::string getNameOfFileFromUserInput(std::string input);
 
+  void printMessageWhenSaveGame(std::string& inputFromUser,Player* player, LinkedList* tileBag, bool& quitGame);
+  void printMessageWhenInvalidFormat(std::string& inputFromUser, Player* player, LinkedList* tileBag, bool& quitGame, bool& ableToAdd);
+  void printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame, std::string& inputFromUser);
+
+  void processLinkedListWhenPlacing(Player* player, LinkedList* tileBag, Tile* newTile);
+
 
 
 
