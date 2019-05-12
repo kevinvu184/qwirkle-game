@@ -16,7 +16,7 @@ public:
 
   void playGame(std::string p1, std::string p2);
 
-  void addPlayer(Player *p);
+  void addPlayer(Player* p);
 
   void setUpTilesInitially(Player *player, LinkedList *tileBag);
   void shuffleAndCreateTileBag(LinkedList *tileBag);
@@ -36,14 +36,18 @@ public:
   void scoreQwirkle(Player *p);
 
   void getState(Player *p);
-  // Player* getPlayer(int id);
+  int getPlayerCount();
+  Player* getPlayer(int id);
   // Board& getBoard();
 
   int countToken(std::string);
-
+  void keepRecords(std::string inputFromUser);
+  std::string getRecords();
   void saveGame(std::string filename, Player* player, LinkedList* tileBag);
   std::string getNameOfFileFromUserInput(std::string input);
 
+  //Get tileBag
+  LinkedList* getTileBag();
 
 
 
@@ -51,7 +55,7 @@ private:
   Board board;
   Player *playerList[2];
   int playerCount;
-  // LinkedList* tileBag;
+  LinkedList* tileBag;
 };
 
 #endif //ASSIGN2_ENGINE_H

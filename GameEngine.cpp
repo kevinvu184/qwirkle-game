@@ -17,12 +17,29 @@
 GameEngine::GameEngine()
 {
     this->playerCount = 0;
-
+    this->tileBag = nullptr;
 }
 
 GameEngine::~GameEngine()
 {
 
+}
+
+LinkedList* GameEngine::getTileBag(){
+  return this->tileBag;
+}
+
+int GameEngine::getPlayerCount(){
+  return this->playerCount;
+}
+
+Player* GameEngine::getPlayer(int id){
+  for(int i = 0; i < this->playerCount; i++){
+    if(playerList[i]->getPlayerId() == id){
+      return playerList[i];
+    }
+  }
+  return NULL;
 }
 
 void GameEngine::getState(Player *p)
@@ -150,23 +167,40 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
 
     return location;
 }
+//Functions that append valid input From User (check for validation)
+void GameEngine::keepRecords(std::string inputFromUser){
+  std::ofstream outFile;
+  outFile.open("records.txt",ios::app);
+  outFile << inputFromUser << std::endl;
+  outFile.close();
+}
+
+//Functions return String of valid inputFromUser
+std::string GameEngine::getRecords(){
+  std::string allMoves = "";
+  std::ifstream file("records.txt");
+
+  if (file.is_open()){
+    std::string line = "";
+    while (std::getlin(file, line)){
+      allMoves.append(line);
+      allMoves.append('\n');
+    }
+  }
+  return allMoves;
+}
 
 void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tileBag){
   std::ofstream outFile;
   outFile.open(filename);
   for (int i = 0; i < this->playerCount; i++){
-    outFile<< playerList[i]->getPlayerName() << std::endl;
-    outFile<< playerList[i]->getPlayerScore() << std::endl;
-    outFile<< playerList[i]->getPlayerHand()->displayList() << std::endl;
+    outFile << playerList[i]->getPlayerName() << std::endl;
+    outFile << playerList[i]->getPlayerScore() << std::endl;
+    outFile << playerList[i]->getPlayerHand()->displayList() << std::endl;
   }
-  //print Board
-  // for (int i = 0; i < b->getRowsCharLength(); i++) {
-  //   for (int j = 0; j < b->getColsCharLength(); j++) {
-  //     outFile << g[i][j];
-  //   }
-  //   outFile << "\n";
-  // }
-  outFile<<"\n\n\n\n\n\n\n\n\n         PRINT BOARD HERE               \n\n\n\n\n\n\n\n\n";
+
+  //Write the getRecords String to save File
+  outFile << getRecords();
 
   //print Tile bag
   outFile << tileBag->displayList() << std::endl;
@@ -198,7 +232,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
 {
 
     //tileBag created inside scope of playGame
-    LinkedList *tileBag = new LinkedList();
+    tileBag = new LinkedList();
     LinkedList *hand_1 = new LinkedList();
     LinkedList *hand_2 = new LinkedList();
 
