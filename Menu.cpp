@@ -180,7 +180,7 @@ void Menu::loadGame()
 
         //Add tiles
         for(int i = 0; i < line.size()+1; i += 3){
-          tileToAdd = new Tile(input[0],input[1]-48);
+          tileToAdd = new Tile(input[i],input[i+1]-48);
           gameEngine.getTileBag()->deleteTile(tileToAdd);
           gameEngine.getPlayer(gameEngine.getPlayerCount())->getPlayerHand()->addBack(tileToAdd);
         }
