@@ -158,6 +158,7 @@ void Menu::loadGame()
     std::string line = "";
     //Auto jump 1 line
     while(std::getline(file,line)){
+      //Rebuild Players
       if (!line.substr(0,5).c_str().strcmp("place")) {
         //Add Player name
         LinkedList* hand_1 = new LinkedList();
