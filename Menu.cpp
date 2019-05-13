@@ -146,11 +146,8 @@ void Menu::loadGame()
   //Check file format before loading
 
   //Load game starts here
-  //create an empty board ??
-
-  //create and shuffle tile bag ??
-  gameEngine.shuffleAndCreateTileBag(gameEngine.getTileBag());
-
+  //create an empty board
+  b = Board();
   //Begin reading file
   std::ifstream file(filename);
 
@@ -181,7 +178,6 @@ void Menu::loadGame()
         //Add tiles
         for(int i = 0; i < line.size()+1; i += 3){
           tileToAdd = new Tile(input[i],input[i+1]-48);
-          gameEngine.getTileBag()->deleteTile(tileToAdd);
           gameEngine.getPlayer(gameEngine.getPlayerCount())->getPlayerHand()->addBack(tileToAdd);
         }
       }
