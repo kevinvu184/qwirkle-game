@@ -156,7 +156,7 @@ void Menu::loadGame()
     //Auto jump 1 line
     while(std::getline(file,line)){
       //Rebuild Players
-      if (!line.substr(0,5).c_str().strcmp("place")) {
+      if (line.substr(0,5) != "place") {
         //Add Player name
         LinkedList* hand_1 = new LinkedList();
         Player* p1 = new Player(1,line,hand_1);
@@ -182,7 +182,7 @@ void Menu::loadGame()
         }
       }
       //Rebuild Place move
-      else if(line.substr(0,5).c_str().strcmp("place")){
+      else if(line.substr(0,5) == "place"){
 
       }
       //Rebuild tileBag and player turn

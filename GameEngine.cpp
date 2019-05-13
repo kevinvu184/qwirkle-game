@@ -167,7 +167,7 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
 
     return location;
 }
-//Functions that append valid input From User (check for validation)
+//Functions that append valid input From User (check for validation first)
 void GameEngine::keepRecords(std::string inputFromUser){
   std::ofstream outFile;
   outFile.open("records.txt",ios::app);
