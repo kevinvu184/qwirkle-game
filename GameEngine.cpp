@@ -6,6 +6,7 @@
 #include <iostream>
 #include <random>
 #include <sstream>
+#include <fstream>
 
 #define MAXIMUM_TILES_BAG 72
 #define MAXIMUM_PLAYER_HAND 6
@@ -24,6 +25,12 @@ GameEngine::~GameEngine()
 {
 
 }
+
+Board& GameEngine::getBoard()
+{
+  return board;
+}
+
 
 LinkedList* GameEngine::getTileBag(){
   return this->tileBag;
@@ -170,7 +177,7 @@ std::string GameEngine::getLocationFromUserInput(std::string input)
 //Functions that append valid input From User (check for validation first)
 void GameEngine::keepRecords(std::string inputFromUser){
   std::ofstream outFile;
-  outFile.open("records.txt",ios::app);
+  outFile.open("records.txt",std::ios::app);
   outFile << inputFromUser << std::endl;
   outFile.close();
 }
@@ -184,7 +191,7 @@ std::string GameEngine::getRecords(){
     std::string line = "";
     while (std::getline(file, line)){
       allMoves.append(line);
-      allMoves.append('\n');
+      allMoves.append("\n");
     }
   }
   return allMoves;

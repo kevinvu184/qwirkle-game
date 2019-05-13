@@ -147,7 +147,7 @@ void Menu::loadGame()
 
   //Load game starts here
   //create an empty board
-  b = Board();
+  gameEngine.getBoard() = Board();
   //Begin reading file
   std::ifstream file(filename);
 
@@ -176,7 +176,7 @@ void Menu::loadGame()
         Tile* tileToAdd = nullptr;
 
         //Add tiles
-        for(int i = 0; i < line.size(); i += 3){
+        for(unsigned int i = 0; i < line.size(); i += 3){
           tileToAdd = new Tile(input[i],input[i+1]-48);
           gameEngine.getPlayer(gameEngine.getPlayerCount())->getPlayerHand()->addBack(tileToAdd);
         }
@@ -191,7 +191,7 @@ void Menu::loadGame()
         strcpy(input,line.c_str());
         Tile* tileToAdd = nullptr;
 
-        for(int i = 0; i < line.size(); i += 3){
+        for(unsigned int i = 0; i < line.size(); i += 3){
           tileToAdd = new Tile(input[i],input[i+1]-48);
           gameEngine.getTileBag()->addBack(tileToAdd);
         }
@@ -199,7 +199,7 @@ void Menu::loadGame()
         //Manually jump down 1 line
         std::getline(file,line);
         for(int i = 0; i < gameEngine.getPlayerCount(); i++){
-          if (line.c_str().strcmp(gameEngine.getPlayer(i)->getPlayerName())){
+          if (line == gameEngine.getPlayer(i)->getPlayerName()){
             // ??
           }
         }

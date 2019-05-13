@@ -38,7 +38,7 @@ public:
   void getState(Player *p);
   int getPlayerCount();
   Player* getPlayer(int id);
-  // Board& getBoard();
+  Board& getBoard();
 
   int countToken(std::string);
   void keepRecords(std::string inputFromUser);
