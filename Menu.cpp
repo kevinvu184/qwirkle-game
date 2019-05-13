@@ -176,7 +176,7 @@ void Menu::loadGame()
         Tile* tileToAdd = nullptr;
 
         //Add tiles
-        for(int i = 0; i < line.size()+1; i += 3){
+        for(int i = 0; i < line.size(); i += 3){
           tileToAdd = new Tile(input[i],input[i+1]-48);
           gameEngine.getPlayer(gameEngine.getPlayerCount())->getPlayerHand()->addBack(tileToAdd);
         }
@@ -191,7 +191,7 @@ void Menu::loadGame()
         strcpy(input,line.c_str());
         Tile* tileToAdd = nullptr;
 
-        for(int i = 0; i < line.size()+1; i += 3){
+        for(int i = 0; i < line.size(); i += 3){
           tileToAdd = new Tile(input[i],input[i+1]-48);
           gameEngine.getTileBag()->addBack(tileToAdd);
         }

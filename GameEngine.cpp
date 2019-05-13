@@ -182,7 +182,7 @@ std::string GameEngine::getRecords(){
 
   if (file.is_open()){
     std::string line = "";
-    while (std::getlin(file, line)){
+    while (std::getline(file, line)){
       allMoves.append(line);
       allMoves.append('\n');
     }
