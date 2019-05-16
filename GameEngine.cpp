@@ -26,7 +26,7 @@ GameEngine::GameEngine()
 
 GameEngine::~GameEngine()
 {
-    // delete[] playerList;
+
 }
 
 void GameEngine::getState(Player *p)
@@ -217,13 +217,16 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser, Playe
                     if(validateFormat(inputFromUser) == false)
                     {
                         std::cout << "\nInvalid Input, Please check your format again\n";
+                       
                     }
                     else if(validateTileExistInHand(inputFromUser, player) == false)
                     {
                         std::cout<<"\nInvalid Input, tile input does not exist in your hand\n";
                     }
+                   
                      std::cout << "> ";
                      ableToAdd = true;
+                     
                      std::getline(std::cin, inputFromUser);
                      if (std::cin.eof() == true)
                      {
@@ -247,9 +250,6 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser, Playe
                         {
                             std::cout << "\n\nGoodbye\n";
                             quitGame = true;
-                            
-                            
-
                         }
                     }
                 }
@@ -442,11 +442,185 @@ void GameEngine::constructBoard(std::string& moves)
             }
         }
         
-        
-        
+            
         delete newTile; 
     }
     
+}
+
+void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile, bool& firstPlayerTurn, bool& repromptPlayer, bool& quitGame, Player* player, LinkedList* tileBag)
+{
+    bool passTurn = false;
+    bool printState = true;
+    std::string inputFromUser ="";
+
+    do{
+        if(printState == true)
+        {
+            getState(player);
+            std::getline(std::cin, inputFromUser);
+        }
+    
+        if(inputFromUser == "pass")
+        {
+            ableToAddTile = true;
+            repromptPlayer = false;
+            if(player->getPlayerId() == 1)
+            {
+                firstPlayerTurn = false;
+            }
+            passTurn = true;
+        }
+        else if(std::cin.eof() == true)
+        {
+            std::cout<<"\n\nGoodbye\n";
+            passTurn = true;
+            quitGame = true;
+        }
+        else
+        {
+          
+          if(validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser),player) == false || ableToAddTile == false)
+          {
+              if(validateFormat(inputFromUser) == false)
+              {
+                if(countToken(inputFromUser) == 2 && inputFromUser.substr(0,4) == "save")
+                {
+                    std::cout<<"\nGame successfully saved\n";
+                    std::string filename = getNameOfFileFromUserInput(inputFromUser);
+                    saveGame(filename, player, tileBag);
+                    std::cout<<"> ";
+
+                    std::getline(std::cin, inputFromUser);
+                } 
+                else{ 
+                    std::cout<<"Invalid Input, please check your format\n";
+                    std::cout<<"> ";
+                    std::getline(std::cin, inputFromUser);
+                }
+              }
+              else if(validateTileExistInHand(getTileFromUserInput(inputFromUser), player) == false)
+              {
+                std::cout<<"Invalid Input, no tile from hand \n";
+                std::cout<<"> ";
+                std::getline(std::cin, inputFromUser);
+              }
+              else if(ableToAddTile == false)
+              {
+                std::cout<<"Invalid Input, please check your move board\n";
+                std::cout<<"> ";
+                std::getline(std::cin, inputFromUser);
+                ableToAddTile = true;
+              }
+              
+              printState = false;
+          }else{
+        
+            if(countToken(inputFromUser) == COMMAND_SIZE_WHEN_PLACE_TILE)
+            {
+                
+                std::string tileInput = getTileFromUserInput(inputFromUser);
+                std::string gridLocation = getLocationFromUserInput(inputFromUser);
+                if(validateFormat(inputFromUser) == true && validateTileExistInHand(tileInput, player) == true)
+                {
+                    int size = tileInput.size();
+                    char cTileInput[size + 1];
+                    strcpy(cTileInput, tileInput.c_str());
+
+                    Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - 48);
+
+                    if (gridLocation.size() == 2)
+                    {       
+                            
+                            int sizeLocation = gridLocation.size();
+
+                            char cSizeInput[sizeLocation + 1];
+                            strcpy(cSizeInput, gridLocation.c_str());
+                            //cSizeInput[0] = y , cSizeInput[1] = x
+                            Coordinate c = Coordinate(cSizeInput[0], cSizeInput[1] - 48, *newTile);
+
+                            if (!board.addTileAt(c))
+                            {
+                                ableToAddTile = false;
+                                repromptPlayer = true;
+                                if(player->getPlayerId() == 2)
+                                {
+                                    firstPlayerTurn = false;
+                                }
+                                printState = false;
+                            }
+                            else
+                            {
+                            
+                                player->setPlayerScore(board.totalPoint(c));
+                                if (board.totalPoint(c) == 12 || board.totalPoint(c) == 24)
+                                {
+                                       std::cout << "\nQWIRKLE!!!\n";
+                                }
+                                processLinkedListWhenPlacing(player, tileBag, newTile);
+
+                                repromptPlayer = false;
+                                if(player->getPlayerId() == 2)
+                                {
+                                    firstPlayerTurn = true;
+                                }
+                                ableToAddTile = true;
+                                printState = true;
+                                keepRecords(inputFromUser);
+                            }
+                    }
+                    //grid location is a three-char
+                    else
+                    {
+                        int sizeLocation = gridLocation.size();
+                        char cSizeInput[sizeLocation + 1];
+                        strcpy(cSizeInput, gridLocation.c_str());
+
+                        int x = (cSizeInput[1] - 48) * 10 + (cSizeInput[2] - 48);
+
+                        //cSizeInput[0] = y, x = x coordinate
+                        Coordinate c = Coordinate(cSizeInput[0], x, *newTile);
+                        if (!board.addTileAt(c))
+                        {
+                            ableToAddTile = false;
+                            if(player->getPlayerId() == 2)
+                            {
+                                firstPlayerTurn = false;
+                            }
+                            repromptPlayer = true;
+                            printState = false;
+                        }
+                        else
+                        {
+                            player->setPlayerScore(board.totalPoint(c));
+                            if (board.totalPoint(c) == 12)
+                            {
+                                std::cout << "\nQWIRKLE!!!\n";
+                            }
+                            processLinkedListWhenPlacing(player, tileBag, newTile);
+                            if(player->getPlayerId() == 2)
+                            {
+                                firstPlayerTurn = true;
+                            }
+                            repromptPlayer = false;
+                            ableToAddTile = true;  
+                            printState = true;
+                            keepRecords(inputFromUser);
+                        }
+                    }
+                }
+             }
+             else
+             {
+                 printState = false;
+                 std::cout<<"\nInvalid Input, you can only continue place tile\n\n";
+                 std::cout<<">";
+                 std::getline(std::cin, inputFromUser);
+             }
+             
+          }
+        }
+    }while(passTurn == false);
 }
 
 void GameEngine::playGame(std::string p1, std::string p2, int selection)
@@ -454,9 +628,10 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
 
     
         //tileBag created inside scope of playGame
-        LinkedList *tileBag = nullptr;
-        LinkedList *firstPlayerHand = new LinkedList();
-        LinkedList *secondPlayerHand = new LinkedList();
+        LinkedList* tileBag = nullptr;
+        LinkedList* firstPlayerHand = new LinkedList();
+        LinkedList* secondPlayerHand = new LinkedList();
+
         bool firstPlayerTurn = true;
         bool repromtFirstPlayer = true;
         bool repromptSecondPlayer = true;
@@ -576,6 +751,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                     firstPlayer->setPlayerScore(board.totalPoint(c));
                                     processLinkedListWhenPlacing(firstPlayer, tileBag, newTile);
                                     keepRecords(inputFromUser);
+                                    askingForPlacingMultipleTiles(ableToAddTileForPlayer1, firstPlayerTurn, repromtFirstPlayer, quitGame, firstPlayer, tileBag);
                                     
                                 }
                                 else
@@ -595,7 +771,9 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                     processLinkedListWhenPlacing(firstPlayer, tileBag, newTile);
                                     ableToAddTileForPlayer1 = true;
                                     keepRecords(inputFromUser);
+                                    askingForPlacingMultipleTiles(ableToAddTileForPlayer1, firstPlayerTurn, repromtFirstPlayer, quitGame, firstPlayer, tileBag);
                                 }
+                                //askToPlaceMultipleTiles() list of parameter and pass to end method remember still to validate invalid input here 
 
                                 delete newTile;
                                 turn++;
@@ -699,12 +877,14 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                                 std::cout << "\nQWIRKLE!!!\n";
                                             }
                                             processLinkedListWhenPlacing(firstPlayer, tileBag, newTile);
+                                            keepRecords(inputFromUser);
+
 
                                             ableToAddTileForPlayer1 = true;
                                             firstPlayerTurn = false;
                                             repromtFirstPlayer = false;
+                                            askingForPlacingMultipleTiles(ableToAddTileForPlayer1, firstPlayerTurn, repromtFirstPlayer, quitGame, firstPlayer, tileBag);
 
-                                            keepRecords(inputFromUser);
                                         }
                                     }
                                     else
@@ -737,8 +917,9 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                             ableToAddTileForPlayer1 = true;
                                             firstPlayerTurn = false;
                                             repromtFirstPlayer = false;
-
                                             keepRecords(inputFromUser);
+                                            askingForPlacingMultipleTiles(ableToAddTileForPlayer1, firstPlayerTurn, repromtFirstPlayer, quitGame, firstPlayer, tileBag);
+                                            
                                         }
                                     }
                                     delete newTile;
@@ -775,7 +956,6 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                         }
                     } while ((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), firstPlayer) == false || ableToAddTileForPlayer1 == false) && quitGame != true && repromtFirstPlayer == true);
                 }
-                
                 //player 2 turn- start prompting player 2 here
                 if (quitGame != true && firstPlayerTurn == false)
                 {
@@ -848,8 +1028,9 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                                 repromptSecondPlayer = false;
                                                 firstPlayerTurn = true;
                                                 ableToAddTileForPlayer2 = true;
-
                                                 keepRecords(inputFromUser);
+                                                askingForPlacingMultipleTiles(ableToAddTileForPlayer2, firstPlayerTurn, repromptSecondPlayer, quitGame, secondPlayer, tileBag);
+                                                
                                             }
                                         }
                                         //grid location is a three-char
@@ -882,8 +1063,10 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                                 firstPlayerTurn = true;
                                                 repromptSecondPlayer = false;
                                                 ableToAddTileForPlayer2 = true;
-
                                                 keepRecords(inputFromUser);
+                                                askingForPlacingMultipleTiles(ableToAddTileForPlayer2, firstPlayerTurn, repromptSecondPlayer, quitGame, secondPlayer, tileBag);
+
+                                                
                                             }
                                         }
                                         delete newTile;
@@ -945,6 +1128,12 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
     delete firstPlayerHand;
     delete secondPlayerHand;
     delete tileBag;
+    
+    if(selection == 2)
+    {
+        delete firstPlayer;
+        delete secondPlayer;
+    }
 }
 
 void GameEngine::loadGame(std::string& playerTurn, int selection)

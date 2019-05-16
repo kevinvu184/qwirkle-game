@@ -58,7 +58,7 @@ public:
   void keepRecords(std::string inputFromUser);
   std::string getRecords();
 
-
+  void askingForPlacingMultipleTiles(bool& ableToAddTile, bool& firstPlayerTurn, bool& repromptPlayer, bool& quitGame, Player* player, LinkedList* tileBag);
 
 
 
