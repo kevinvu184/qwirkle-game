@@ -63,7 +63,32 @@ bool Tile::isSameShape(const Tile &t)
 
 std::ostream &operator<<(std::ostream &out, const Tile &t)
 {
-  out << t.colour << std::to_string(t.shape);
+  std::string setColour = "";
+  if (t.colour == RED)
+    setColour = SET_RED;
+  if (t.colour == ORANGE)
+    setColour = SET_ORANGE;
+  if (t.colour == YELLOW)
+    setColour = SET_YELLOW;
+  if (t.colour == GREEN)
+    setColour = SET_GREEN;
+  if (t.colour == BLUE)
+    setColour = SET_BLUE;
+  if (t.colour == PURPLE)
+    setColour = SET_PURPLE;
+
+  if (t.shape == CIRCLE)
+    out << setColour << SET_CIRCLE << RESET_COLOUR;
+  if (t.shape == STAR_4)
+    out << setColour << SET_STAR_4 << RESET_COLOUR;
+  if (t.shape == DIAMOND)
+    out << setColour << SET_DIAMOND << RESET_COLOUR;
+  if (t.shape == SQUARE)
+    out << setColour << SET_SQUARE << RESET_COLOUR;
+  if (t.shape == STAR_6)
+    out << setColour << SET_STAR_6 << RESET_COLOUR;
+  if (t.shape == CLOVER)
+    out << setColour << SET_CLOVER << RESET_COLOUR;
   return out;
 }
 
@@ -78,3 +103,4 @@ bool operator==(const Tile &t1, const Tile &t2)
 {
   return t1.colour == t2.colour && t1.shape == t2.shape;
 }
+
