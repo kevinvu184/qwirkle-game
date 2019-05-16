@@ -3,7 +3,7 @@
 #include<fstream>
 #include<array>
 #include<sstream>
-#include<string> 
+#include<string>
 #include <bits/stdc++.h>
 
 Menu::Menu()
@@ -30,7 +30,7 @@ void Menu::runProgram()
        std::cout << "Invalid Input" << std::endl;
      }
      else{
-         if ( userInput == 1 ){ 
+         if ( userInput == 1 ){
            playGame();
          }
          else if( userInput == 2){
@@ -43,11 +43,11 @@ void Menu::runProgram()
          {
            std::cout<<"\nGoodbye\n";
          }
-         
+
        }
      } while ( (std::getline(std::cin, line)) && (userInput != 4) );
 
-   
+
 
 
 }
@@ -71,7 +71,7 @@ bool Menu::checkForNameInput(std::string name)
     }
   }
 
-  return result; 
+  return result;
 
 
 }
@@ -84,35 +84,35 @@ void Menu::playGame()
     std::string p1 = "" ;
     std::string p2 ;
 
-    //to check if it is the initial prompt  
-    int count_1 = 0; 
-    int count_2 = 0; 
+    //to check if it is the initial prompt
+    int count_1 = 0;
+    int count_2 = 0;
 
-    
+
 
     std::cout<<"\nStarting a New Game\n";
-    
+
     do
     {
       if(count_1 == 0)
       {
         std::cout<<"\nEnter a name for player 1 (uppercase characters only)\n";
         std::cout<<"> ";
-        
+
         std::getline(std::cin, p1);
-        
+
       }
       count_1++;
       if(checkForNameInput(p1) == false)
       {
         std::cout<<"\nYour name may contain symbols or numbers or not in uppercase characters, please reenter\n";
         std::cout<<"> ";
-        
+
         std::getline(std::cin, p1);
       }
-      
+
     } while (!checkForNameInput(p1));
-    
+
     do
     {
        if(count_2 == 0)
@@ -120,7 +120,7 @@ void Menu::playGame()
         std::cout<<"\nEnter a name for player 2 (uppercase characters only)\n";
         std::cout<<"> ";
         std::getline(std::cin, p2);
-       
+
       }
       count_2++;
       if(checkForNameInput(p2) == false)
@@ -128,13 +128,13 @@ void Menu::playGame()
         std::cout<<"\nYour name may contain symbols or numbers or not in upper case characters, please reenter\n";
         std::cout<<"> ";
         std::getline(std::cin, p2);
-     
+
       }
-    } while (!checkForNameInput(p2));  
-    
+    } while (!checkForNameInput(p2));
+
     std::cout<<"\n\nLet's Play!\n\n";
     gameEngine.playGame(p1,p2);
-    
+
 }
 
 void Menu::loadGame()
@@ -175,5 +175,3 @@ void Menu::showStudentInformation(){
 
   std::cout << "---------------------------------------------\n" << std::endl;
 }
-
-

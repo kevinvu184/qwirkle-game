@@ -27,19 +27,18 @@ GameEngine::~GameEngine()
 
 void GameEngine::getState(Player *p)
 {
-
     std::cout << "\n"
               << p->getPlayerName() << ", it's your turn" << std::endl;
     printScore();
     std::cout << std::endl;
 
 
-    std::cout << board;
+    std::cout << board << std::flush;
     std::cout << "\nYour hand is " << std::endl;
     p->displayTileInHand();
 
 
-    std::cout << "\n> ";
+    std::cout << "\n> " << std::flush;
 }
 
 int GameEngine::countToken(std::string input)
@@ -166,6 +165,8 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
   //   }
   //   outFile << "\n";
   // }
+
+  // tmpFile.txt to go here
   outFile<<"\n\n\n\n\n\n\n\n\n         PRINT BOARD HERE               \n\n\n\n\n\n\n\n\n";
 
   //print Tile bag
@@ -175,6 +176,16 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
 
   outFile.close();
 
+}
+
+// Test this
+// Call this after each valid move from the user.
+// When a user saves the game, append tempFile.txt to new file
+void storeMoves(std::string inputFromUser){
+  std::ofstream moves;
+  moves.open ("tempFile.txt", std::ofstream::out | std::ofstream::app);
+  moves << inputFromUser;
+  moves.close();
 }
 
 std::string GameEngine::getNameOfFileFromUserInput(std::string input)
@@ -238,7 +249,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
             std::getline(std::cin, inputFromUser);
             if (std::cin.eof() == true)
             {
-                std::cout << "\n\nGoodbye\n";
+                std::cout << "\n\nGoodbye" << std::endl;
                 quit = true;
             }
         }
@@ -261,14 +272,14 @@ void GameEngine::playGame(std::string p1, std::string p2)
                         {
                             //call saveGame() here
                             saveGame(getNameOfFileFromUserInput(inputFromUser), player_1, tileBag);
-                            std::cout << "\nGame successfully saved\n\n";
-                            std::cout << "> ";
+                            std::cout << "\nGame successfully saved\n" << std::endl;
+                            std::cout << "> " << std::flush;
 
                             //saveGame or Quit(first time input) goes into here
                             std::getline(std::cin, inputFromUser);
                             if (std::cin.eof() == true)
                             {
-                                std::cout << "\nGoodbye\n";
+                                std::cout << "\nGoodbye\n" << std::flush;
                                 quit = true;
                             }
                         }
@@ -276,13 +287,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
                         {
                             if (inputFromUser.substr(0, 4) != "save" || countToken(inputFromUser) != 2)
                             {
-                                std::cout << "\nInvalid Input\n";
-                                std::cout << "> ";
+                                std::cout << "\nInvalid Input\n" << std::flush;
+                                std::cout << "> " << std::flush;
                                 addTileVerify_1 = true;
                                 std::getline(std::cin, inputFromUser);
                                 if (std::cin.eof() == true)
                                 {
-                                    std::cout << "\nGoodbye\n";
+                                    std::cout << "\nGoodbye" << std::endl;
                                     quit = true;
                                 }
                             }
@@ -293,13 +304,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     //call saveGame() here
                                     saveGame(getNameOfFileFromUserInput(inputFromUser), player_1, tileBag);
 
-                                    std::cout << "\nGame successfully saved\n\n";
-                                    std::cout << "> ";
+                                    std::cout << "\nGame successfully saved\n" << std::endl;
+                                    std::cout << "> " << std::flush;
                                     addTileVerify_1 = true;
                                     std::getline(std::cin, inputFromUser);
                                     if (std::cin.eof() == true)
                                     {
-                                        std::cout << "\nGoodbye\n";
+                                        std::cout << "\nGoodbye" << std::endl;
                                         quit = true;
                                     }
                                 }
@@ -332,6 +343,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 strcpy(cTileInput, tileInput.c_str());
 
                                 Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - 48);
+
+                                // append inputUser text to 'tmpFile.txt'
+                                // place ?? at ?? -> (??,??)
+                                // place ?? at ??
+                                // place ?? at ??
+                                // place ?? at ??
+                                // when user saves, cp tmpFile.txt to user's file
 
 
                                 if (gridLocation.size() == 2)
@@ -430,8 +448,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             while (inputFromUser.substr(0, 4) == "save" && validateFormat(inputFromUser) == false && countToken(inputFromUser) == 2)
                             {
                                 //call saveGame() here
-                                std::cout << "\nGame successfully saved\n\n";
-                                std::cout << "> ";
+                                std::cout << "\nGame successfully saved\n" << std::endl;
+                                std::cout << "> " << std::flush;
                                 saveGame(getNameOfFileFromUserInput(inputFromUser), player_1, tileBag);
 
                                 addTileVerify_1 = true;
@@ -439,7 +457,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 std::getline(std::cin, inputFromUser);
                                 if (std::cin.eof() == true)
                                 {
-                                    std::cout << "\nGoodbye\n";
+                                    std::cout << "\nGoodbye\n" << std::flush;
                                     quit = true;
                                 }
                             }
@@ -447,7 +465,8 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             {
                                 if (inputFromUser.substr(0, 4) != "save" || countToken(inputFromUser) != 2)
                                 {
-                                    std::cout << "\nInvalid Input\n";
+
+                                    std::cout << "\nInvalid Input" << std::endl;
                                     std::cout << "> " << std::flush;
 
                                     addTileVerify_1 = true;
@@ -455,7 +474,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     std::getline(std::cin, inputFromUser);
                                     if (std::cin.eof() == true)
                                     {
-                                        std::cout << "\nGoodbye\n";
+                                        std::cout << "\nGoodbye\n" << std::flush;
                                         quit = true;
                                     }
                                 }
@@ -466,14 +485,14 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                         //call saveGame() here
                                         saveGame(getNameOfFileFromUserInput(inputFromUser), player_1, tileBag);
 
-                                        std::cout << "\nGame successfully saved\n\n";
-                                        std::cout << "> ";
+                                        std::cout << "\nGame successfully saved\n" << std::endl;
+                                        std::cout << "> " << std::flush;
                                         addTileVerify_1 = true;
 
                                         std::getline(std::cin, inputFromUser);
                                         if (std::cin.eof() == true)
                                         {
-                                            std::cout << "\nGoodbye\n";
+                                            std::cout << "\nGoodbye\n" << std::flush;
                                             quit = true;
                                         }
                                     }
@@ -481,13 +500,15 @@ void GameEngine::playGame(std::string p1, std::string p2)
                             }
                             if (addTileVerify_1 == false)
                             {
-                                std::cout << "\nInvalid Input\n";
-                                std::cout << "> ";
+                                // tile cannot be added to the Board
+                                // Meaningful message: "This move is illegal, please try again."
+                                std::cout << "\nInvalid Input\n" << std::flush;
+                                std::cout << "> " << std::flush;
 
                                 std::getline(std::cin, inputFromUser);
                                 if (std::cin.eof() == true)
                                 {
-                                    std::cout << "\nGoodbye\n";
+                                    std::cout << "\nGoodbye\n" << std::flush;
                                     quit = true;
                                 }
                             }
@@ -535,7 +556,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                             player_1->setPlayerScore(board.totalPoint(c));
                                             if (board.totalPoint(c) == 12 || board.totalPoint(c) == 24)
                                             {
-                                                std::cout << "\nQWIRKLE!!!\n";
+                                                std::cout << "\nQWIRKLE!!!\n" << std::flush;
                                             }
                                             player_1->getPlayerHand()->deleteTile(newTile);
                                             player_1->getPlayerHand()->addBack(tileBag->getFront());
@@ -569,7 +590,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                             player_1->setPlayerScore(board.totalPoint(c));
                                             if (board.totalPoint(c) == 12)
                                             {
-                                                std::cout << "\nQWIRKLE!!!\n";
+                                                std::cout << "\nQWIRKLE!!!\n" << std::flush;
                                             }
                                             player_1->getPlayerHand()->deleteTile(newTile);
                                             player_1->getPlayerHand()->addBack(tileBag->getFront());
@@ -628,7 +649,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                     std::getline(std::cin, inputFromUser);
                     if (std::cin.eof())
                     {
-                        std::cout << "\nGoodbye\n";
+                        std::cout << "\nGoodbye\n" << std::flush;
                         quit = true;
                     }
 
@@ -645,29 +666,29 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     //call saveGame() here
                                     saveGame(getNameOfFileFromUserInput(inputFromUser), player_2, tileBag);
 
-                                    std::cout << "\nGame successfully saved\n\n";
-                                    std::cout << "> ";
+                                    std::cout << "\nGame successfully saved\n"  << std::flush;
+                                    std::cout << "> " << std::flush;
                                     addTileVerify_2 = true;
                                     std::getline(std::cin, inputFromUser);
                                     if (std::cin.eof())
                                     {
                                         quit = true;
-                                        std::cout << "\nGoodbye\n";
+                                        std::cout << "\nGoodbye\n" << std::flush;
                                     }
                                 }
                                 while ((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_2) == false) && quit != true)
                                 {
                                     if (inputFromUser.substr(0, 4) != "save" || countToken(inputFromUser) != 2)
                                     {
-                                        std::cout << "\nInvalid Input\n";
-                                        std::cout << "> ";
+                                        std::cout << "\nInvalid Input\n" << std::flush;
+                                        std::cout << "> " << std::flush;
 
                                         addTileVerify_2 = true;
 
                                         std::getline(std::cin, inputFromUser);
                                         if (std::cin.eof() == true)
                                         {
-                                            std::cout << "\nGoodbye\n";
+                                            std::cout << "\nGoodbye\n" << std::flush;
                                             quit = true;
                                         }
                                     }
@@ -678,15 +699,15 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                             //call saveGame() here
                                             saveGame(getNameOfFileFromUserInput(inputFromUser), player_2, tileBag);
 
-                                            std::cout << "\nGame successfully saved\n\n";
-                                            std::cout << "> ";
+                                            std::cout << "\nGame successfully saved\n" << std::flush;
+                                            std::cout << "> " << std::flush;
 
                                             addTileVerify_2 = true;
 
                                             std::getline(std::cin, inputFromUser);
                                             if (std::cin.eof() == true)
                                             {
-                                                std::cout << "\nGoodbye\n";
+                                                std::cout << "\nGoodbye\n" << std::flush;
                                                 quit = true;
                                             }
                                         }
@@ -694,13 +715,13 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                 }
                                 if (addTileVerify_2 == false)
                                 {
-                                    std::cout << "\nInvalid Input\n";
-                                    std::cout << "> ";
+                                    std::cout << "\nInvalid Input\n" << std::flush;
+                                    std::cout << "> " << std::flush;
 
                                     std::getline(std::cin, inputFromUser);
                                     if (std::cin.eof() == true)
                                     {
-                                        std::cout << "\nGoodbye\n";
+                                        std::cout << "\nGoodbye\n" << std::flush;
                                         quit = true;
                                     }
                                 }
@@ -747,7 +768,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                                 player_2->setPlayerScore(board.totalPoint(c));
                                                 if (board.totalPoint(c) == 12 || board.totalPoint(c) == 24)
                                                 {
-                                                    std::cout << "\nQWIRKLE!!!\n";
+                                                    std::cout << "\nQWIRKLE!!!\n" << std::flush;
                                                 }
                                                 player_2->getPlayerHand()->deleteTile(newTile);
                                                 player_2->getPlayerHand()->addBack(tileBag->getFront());
@@ -780,7 +801,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                                 player_2->setPlayerScore(board.totalPoint(c));
                                                 if (board.totalPoint(c) == 12)
                                                 {
-                                                    std::cout << "\nQWIRKLE!!!\n";
+                                                    std::cout << "\nQWIRKLE!!!\n" << std::flush;
                                                 }
                                                 player_2->getPlayerHand()->deleteTile(newTile);
                                                 player_2->getPlayerHand()->addBack(tileBag->getFront());
@@ -837,17 +858,17 @@ void GameEngine::playGame(std::string p1, std::string p2)
     //only display when the game ends not QUIT
     if (quit == false)
     {
-        std::cout << "Game over\n";
+        std::cout << "Game over\n" << std::flush;
         std::cout << "Score for " << player_1->getPlayerName() << ": " << player_1->getPlayerScore() << std::endl;
         std::cout << "Score for " << player_2->getPlayerName() << ": " << player_2->getPlayerScore() << std::endl;
 
         if (player_1->getPlayerScore() > player_2->getPlayerScore())
         {
-            std::cout << "Player " << player_1->getPlayerScore() << " won!\n";
+            std::cout << "Player " << player_1->getPlayerScore() << " won!\n" << std::flush;
         }
         else
         {
-            std::cout << "Player " << player_2->getPlayerScore() << " won!\n";
+            std::cout << "Player " << player_2->getPlayerScore() << " won!\n" << std::flush;
         }
         std::cout << "\nGoodbye";
     }
