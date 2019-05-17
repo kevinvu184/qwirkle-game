@@ -90,6 +90,7 @@ bool GameEngine::validateFormat(std::string input)
 
     std::regex place("^place ([ROYGBP][1-6]) at ([A-Z]([0-9]|1[0-9]|2[0-5]))");
     std::regex replace("^replace ([ROYGBP][1-6])");
+
     if (std::regex_match(input, place) || std::regex_match(input, replace))
     {
         result = true;
@@ -158,15 +159,7 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
     outFile<< playerList[i]->getPlayerScore() << std::endl;
     outFile<< playerList[i]->getPlayerHand()->displayList() << std::endl;
   }
-  //print Board
-  // for (int i = 0; i < b->getRowsCharLength(); i++) {
-  //   for (int j = 0; j < b->getColsCharLength(); j++) {
-  //     outFile << g[i][j];
-  //   }
-  //   outFile << "\n";
-  // }
 
-  // tmpFile.txt to go here
   outFile<<"\n\n\n\n\n\n\n\n\n         PRINT BOARD HERE               \n\n\n\n\n\n\n\n\n";
 
   //print Tile bag
@@ -285,6 +278,14 @@ void GameEngine::playGame(std::string p1, std::string p2)
                         }
                         while ((validateFormat(inputFromUser) == false || validateTileExistInHand(getTileFromUserInput(inputFromUser), player_1) == false) && quit != true)
                         {
+                          std::regex help("^help");
+                          if (std::regex_match(inputFromUser, help)){
+                            std::cout << "Please enter a command in the following format: \n"
+                            "To place a tile on the board: 'place <tile> at <location>'\n"
+                            "To replace a tile: 'replace <til e>'\n"
+                            "To save: 'save'" << std::endl;
+                          }
+
                             if (inputFromUser.substr(0, 4) != "save" || countToken(inputFromUser) != 2)
                             {
                                 std::cout << "\nInvalid Input\n" << std::flush;
@@ -297,6 +298,7 @@ void GameEngine::playGame(std::string p1, std::string p2)
                                     quit = true;
                                 }
                             }
+
                             else
                             {
                                 if (countToken(inputFromUser) == 2)
