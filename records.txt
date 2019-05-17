@@ -1,2 +1,0 @@
-place O3 at A0
-place R3 at C1
