@@ -6,7 +6,7 @@
 #include<fstream>
 #include<array>
 #include<sstream>
-#include<string>
+#include<string> 
 #include <bits/stdc++.h>
 #include<algorithm>
 
@@ -17,10 +17,9 @@
 #define NUMBER_OF_COLOR 6
 #define NUMBER_OF_SHAPE 6
 #define NUMBER_OF_TILES_IN_PLAYER_HAND 6
-#define NUMBER_OF_COMMAS 5
+#define NUMBER_OF_COMMAS 5 
 #define NUMBER_OF_TILES_TOTAL 72
-#define LINE_INF_ABOUT_PLAYER 6
-#define HIGH_SCORE_LIST 1
+#define LINE_INF_ABOUT_PLAYER 6 
 
 Menu::Menu()
 {
@@ -41,34 +40,30 @@ void Menu::runProgram()
      std::cin >> userInput;
 
      // Validate userInput
-     if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 5) or (!std::cin)) ){
+     if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 4) or (!std::cin)) ){
        std::cin.clear();
        std::cout << "Invalid Input" << std::endl;
      }
      else{
-         if ( userInput == 1 ){
+         if ( userInput == 1 ){ 
            remove("records.txt");
            playGame();
          }
-         else if( userInput == 2){
+         else if( userInput == 2){    
            loadGame();
          }
          else if( userInput == 3){
            showStudentInformation();
          }
-         else if( userInput == 4)
-         {
-           showHighScore();
-         }
          else
          {
            std::cout<<"\nGoodbye\n";
          }
-
+         
        }
-     } while ( (std::getline(std::cin, line)) && (userInput != 5) );
+     } while ( (std::getline(std::cin, line)) && (userInput != 4) );
 
-
+   
 
 
 }
@@ -91,8 +86,8 @@ bool Menu::checkForNameInput(std::string name)
       result = false;
     }
   }
-
-  return result;
+  
+  return result; 
 
 
 }
@@ -105,35 +100,35 @@ void Menu::playGame()
     std::string p1 = "" ;
     std::string p2 ;
 
-    //to check if it is the initial prompt
-    int count_1 = 0;
-    int count_2 = 0;
+    //to check if it is the initial prompt  
+    int count_1 = 0; 
+    int count_2 = 0; 
 
-
+    
 
     std::cout<<"\nStarting a New Game\n";
-
+    
     do
     {
       if(count_1 == 0)
       {
         std::cout<<"\nEnter a name for player 1 (uppercase characters only)\n";
         std::cout<<"> ";
-
+        
         std::getline(std::cin, p1);
-
+        
       }
       count_1++;
       if(checkForNameInput(p1) == false)
       {
         std::cout<<"\nYour name may contain symbols or numbers or not in uppercase characters, please reenter\n";
         std::cout<<"> ";
-
+        
         std::getline(std::cin, p1);
       }
-
+      
     } while (!checkForNameInput(p1));
-
+    
     do
     {
        if(count_2 == 0)
@@ -141,7 +136,7 @@ void Menu::playGame()
         std::cout<<"\nEnter a name for player 2 (uppercase characters only)\n";
         std::cout<<"> ";
         std::getline(std::cin, p2);
-
+       
       }
       count_2++;
       if(checkForNameInput(p2) == false)
@@ -149,13 +144,13 @@ void Menu::playGame()
         std::cout<<"\nYour name may contain symbols or numbers or not in upper case characters, please reenter\n";
         std::cout<<"> ";
         std::getline(std::cin, p2);
-
+     
       }
-    } while (!checkForNameInput(p2));
-
+    } while (!checkForNameInput(p2));  
+    
     std::cout<<"\n\nLet's Play!\n\n";
     gameEngine.playGame(p1,p2,1);
-
+    
 }
 
 bool Menu::checkFileExist(std::string& fileName)
@@ -166,12 +161,12 @@ bool Menu::checkFileExist(std::string& fileName)
 
 bool Menu::checkFormatForPlayerHand(std::string& playerHand)
 {
-
+ 
   bool result = true;
   std::vector<std::string> tokens;
   std::string tmp = "";
   std::istringstream input(playerHand);
-
+  
   std::regex tileFormat("([ROYGBP][1-6])");
 
   int numberOfActualCommas = std::count(playerHand.begin(), playerHand.end(), ',');
@@ -197,9 +192,9 @@ bool Menu::checkFormatForPlayerHand(std::string& playerHand)
     result = false;
   }
 
-
+  
   return result;
-
+  
 
 }
 
@@ -229,17 +224,17 @@ bool Menu::validateFormat(std::string& fileName)
 
     if(input.good())
     {
-
+      
       std::getline(input, playerHand);
       if(checkForNameInput(playerName[i]) == false || checkFormatForPlayerHand(playerHand) == false)
       {
        result = false;
-
+      
       }
     }
     else
     {
-      result = false;
+      result = false; 
     }
   }
   if(result == true)
@@ -258,21 +253,21 @@ bool Menu::validateFormat(std::string& fileName)
       else
       {
         numberOfTileInBag++;
-      }
+      }  
     }
-
-
+   
+    
   }
 
   if(result == true)
   {
-
+   
     numberOfTileOnBoard = NUMBER_OF_TILES_TOTAL - numberOfTileInBag - NUMBER_OF_PLAYERS*NUMBER_OF_TILES_IN_PLAYER_HAND;
 
     int countTileOnBoard = 0;
 
     std::string tmp = "";
-
+    
 
     while(std::getline(input, tmp) && result == true)
     {
@@ -287,9 +282,9 @@ bool Menu::validateFormat(std::string& fileName)
       {
           countTileOnBoard++;
       }
-
+       
     }
-
+   
     if(result == true)
     {
       if(countTileOnBoard != numberOfTileOnBoard)
@@ -297,36 +292,11 @@ bool Menu::validateFormat(std::string& fileName)
         result = false;
       }
     }
-
-
+    
+    
   }
 
   return result;
-}
-
-void Menu::keepRecordFileInSyncWithSavingFile(std::string& fileName)
-{
-  std::ofstream output("records.txt");
-  std::ifstream input(fileName);
-  bool endOfMove = false;
-
-  std::string tmp = "";
-  for(int i = 0; i < 7; i++)
-  {
-    std::getline(input, tmp);
-  }
-
-  while(std::getline(input, tmp) && endOfMove == false)
-  {
-    if(checkForNameInput(tmp) == true)
-    {
-      endOfMove = true;
-    }
-    else
-    {
-      output<<tmp<<std::endl;
-    }
-  }
 }
 
 void Menu::loadGame()
@@ -334,26 +304,28 @@ void Menu::loadGame()
 
   std::string fileName = "";
   std::vector<std::string> constructPlayerState;
+  
+  
+ 
+  
+  std::cout<<"\nEnter the filename from which load a game\n";
+  std::cout<<"> ";
+  std::cin.ignore();
+  std::getline(std::cin, fileName);
 
-  bool load = false;
-  bool constructBoardSuccessful = true;
-
-  do{
-   std::cout<<"\nEnter the filename from which load a game\n";
-   std::cout<<"> ";
-   std::cin.ignore();
-   std::getline(std::cin, fileName);
-
-   while(!checkFileExist(fileName))
-   {
-     std::cout<<"\nFile does not exist please reenter:\n";
-     std::cout<<"> ";
-     std::getline(std::cin, fileName);
-   }
-
-   if(validateFormat(fileName))
-   {
-      load = true;
+  while(!checkFileExist(fileName))
+  {
+    std::cout<<"\nFile name does not exist please reenter:\n";
+    std::cout<<"> ";
+    std::getline(std::cin, fileName);
+  }
+  
+  if(validateFormat(fileName))
+  {
+      
+      std::cout<<"\nQwirkle game successfully loaded !!!\n";
+      
+      
 
       std::string tmp = "";
       std::string moves ="";
@@ -366,11 +338,11 @@ void Menu::loadGame()
         std::getline(input, tmp);
         constructPlayerState.push_back(tmp);
       }
-
-
+      
+      
       gameEngine.constructPlayerState(constructPlayerState[0], constructPlayerState[1], constructPlayerState[2], constructPlayerState[3], constructPlayerState[4], constructPlayerState[5]);
       input>>tileBag;
-
+    
       gameEngine.forwardTileBag(tileBag);
       input>>std::ws;
 
@@ -385,80 +357,43 @@ void Menu::loadGame()
         else
         {
           continueLoop = false;
-          playerTurn = tmp;
+          playerTurn = tmp; 
         }
-
+        
       }
-
+      
+     
       try
       {
         gameEngine.constructBoard(moves);
       }
       catch(const std::exception& e)
       {
-        constructBoardSuccessful = false;
-        load = false;
+        loadGame();
       }
-
-      if(constructBoardSuccessful == true)
-      {
-        keepRecordFileInSyncWithSavingFile(fileName);
-        std::cout<<"\nQwirkle game successfully loaded !!!\n";
-        gameEngine.loadGame(playerTurn, 2);
-
-      }
-
-
-   }
-   else
-   {
-      std::cout<<"ERROR: Your file name entered has wrong format, cannot load file\n";
-   }
-  }while(load == false);
-
+      gameEngine.loadGame(playerTurn, 2);
+      
+      
+  }
+  else
+  {
+     std::cout<<"ERROR: Your file name entered has wrong format, cannot load file\n";
+     loadGame();   
+  }
+  
 }
 
 void Menu::printMenu(){
 	std::cout << "Menu\n"
-     "1. New Game\n"
+    "1. New Game\n"
 	   "2. Load Game\n"
 	   "3. Show student information\n"
-	   "4. Show High Score\n"
-     "5. Quit\n"
+	   "4. Quit\n"
      "> " << std::flush;
 }
 
-void Menu::showHighScore(){
-  std::cout << "\nHighest Score--------------------------------" << std::endl;
-  std::vector<std::string> tokens;
-  std::string filename = "hrecords.txt";
-  if (!checkFileExist(filename)) {
-    std::cout<<"\nLoading file does not exist, please start a game\n";
-  } else {
-    std::string line = "";
-    std::string tempStr = "";
-    std::ifstream input(filename);
-    while (std::getline(input,line)){
-      std::istringstream stringInput(line);
-      while(std::getline(stringInput, tempStr, ':'))
-      {
-        tokens.push_back(tempStr);
-      }
-    }
-  }
-  for (unsigned int i = 0, k = 0; i < tokens.size() && k < HIGH_SCORE_LIST; i+=2, k++){
-    gameEngine.getHighScorePlayer(k)->setPlayerName(tokens[i]);
-    gameEngine.getHighScorePlayer(k)->setPlayerScore(std::stoi(tokens[i+1]));
-  }
-  for (int i = 0; i < HIGH_SCORE_LIST; i++){
-    std::cout<< i+1 << ". " << gameEngine.getHighScorePlayer(i)->getPlayerName() << ": " << gameEngine.getHighScorePlayer(i)->getPlayerScore() << std::endl;
-  }
-  std::cout << "---------------------------------------------\n" << std::endl;
-
-}
-
 void Menu::showStudentInformation(){
-  std::cout << "\n---------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------" << std::endl;
 
   std::cout << "Name: Jessica Cruz" << std::endl;
   std::cout << "Student ID: s3571051" << std::endl;
@@ -467,7 +402,6 @@ void Menu::showStudentInformation(){
   std::cout << "Name: Kevin Vu" << std::endl;
   std::cout << "Student ID: s3678490" << std::endl;
   std::cout << "Email: s3678490@rmit.edu.vn\n" << std::endl;
-
   std::cout << "Name: Khoi Nguyen" << std::endl;
   std::cout << "Student ID: s3678755" << std::endl;
   std::cout << "Email: s3678755@rmit.edu.vn\n" << std::endl;
@@ -478,3 +412,5 @@ void Menu::showStudentInformation(){
 
   std::cout << "---------------------------------------------\n" << std::endl;
 }
+
+
