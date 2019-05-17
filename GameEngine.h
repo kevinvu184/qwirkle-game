@@ -18,6 +18,10 @@ public:
 
   void addPlayer(Player *p);
 
+  Player* getHighScorePlayer(int i);
+  void addHighestPlayer(Player* p);
+  Player* getPlayerWithHighestScoreWhenEnd();
+
   void setUpTilesInitially(Player *player, LinkedList *tileBag);
   void shuffleAndCreateTileBag(LinkedList *tileBag);
   int randomNumberGenerate();
@@ -28,7 +32,7 @@ public:
   std::string getLocationFromUserInput(std::string input);
 
   bool validateTileExistInHand(std::string tileInput, Player *player);
-  
+
   bool validateLegalMove(std::string tileInput, std::string gridLocation, std::string inputFromUser, Player *player);
 
   void printScore();
@@ -55,6 +59,7 @@ public:
   void constructBoard(std::string& moves);
   void loadGame(std::string& playerTurn, int selection);
 
+  void keepHighestRecords();
   void keepRecords(std::string inputFromUser);
   std::string getRecords();
 
@@ -67,7 +72,8 @@ private:
   Player *playerList[2];
   int playerCount;
   std::string tileBagStr;
-  
+  std::array<Player*,1> highScoreplayer;
+
 };
 
 #endif //ASSIGN2_ENGINE_H
