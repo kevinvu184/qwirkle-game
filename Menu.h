@@ -13,16 +13,11 @@ public:
     void loadGame();
 
     void printMenu();
-    void showStudentInformation(); 
+    void showStudentInformation();
     bool checkForNameInput(std::string name);
 
-
-
 private:
-    GameEngine gameEngine; 
-
-
-
+    GameEngine gameEngine;
 };
 
 #endif //ASSIGNMENT_2_MENU

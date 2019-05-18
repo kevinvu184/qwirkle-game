@@ -13,7 +13,6 @@ Menu::Menu()
 
 void Menu::runProgram()
 {
-
    int userInput = 0;
    std::string line;
 
@@ -149,9 +148,9 @@ void Menu::loadGame()
 void Menu::printMenu(){
 	std::cout << "Menu\n"
     "1. New Game\n"
-	   "2. Load Game\n"
-	   "3. Show student information\n"
-	   "4. Quit\n"
+    "2. Load Game\n"
+    "3. Show student information\n"
+    "4. Quit\n"
      "> " << std::flush;
 }
 
