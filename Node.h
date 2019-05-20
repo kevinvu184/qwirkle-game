@@ -4,15 +4,15 @@
 #include "Tile.h"
 
 class Node {
-public:
+  public:
 
-	Node(Tile* tile, Node* next);
-	Node(Node& other);
-	~Node();
+    Node(Tile* tile, Node* next);
+    Node(Node& other);
+    ~Node();
 
-	//declared as public but is this being public good or bad
-	Tile* tile;
-	Node* next;
+    //declared as public but is this being public good or bad
+    Tile* tile;
+    Node* next;
 };
 
 #endif // ASSIGN2_NODE_H
