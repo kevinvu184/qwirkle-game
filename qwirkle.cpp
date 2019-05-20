@@ -7,11 +7,9 @@
 #define EXIT_SUCCESS    0
 
 int main(void) {
-  
 
-   Menu menu = Menu();
-   menu.runProgram();
+	Menu menu = Menu();
+	menu.runProgram();
 
-
-   return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

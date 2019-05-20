@@ -1,4 +1,3 @@
-
 #ifndef ASSIGN2_ENGINE_H
 #define ASSIGN2_ENGINE_H
 
@@ -28,11 +27,12 @@ public:
   std::string getLocationFromUserInput(std::string input);
 
   bool validateTileExistInHand(std::string tileInput, Player *player);
-  
+
   bool validateLegalMove(std::string tileInput, std::string gridLocation, std::string inputFromUser, Player *player);
 
   void printScore();
- 
+  void scorePoint(Player *p);
+  void scoreQwirkle(Player *p);
 
   void getState(Player *p);
 
@@ -60,15 +60,13 @@ public:
   void askingForPlacingMultipleTiles(bool& ableToAddTile, bool& firstPlayerTurn, bool& repromptPlayer, bool& quitGame, Player* player, LinkedList* tileBag);
 
   void tileBagForUnitTest(LinkedList* tileBag);
- 
-
 
 private:
   Board board;
   Player *playerList[2];
   int playerCount;
   std::string tileBagStr;
-  
+
 };
 
 #endif //ASSIGN2_ENGINE_H

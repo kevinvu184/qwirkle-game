@@ -13,7 +13,7 @@ public:
     void loadGame();
 
     void printMenu();
-    void showStudentInformation(); 
+    void showStudentInformation();
     bool checkForNameInput(std::string name);
 
     bool checkFileExist(std::string& fileName);
@@ -22,7 +22,7 @@ public:
 
     void keepRecordFileInSyncWithSavingFile(std::string& fileName);
 private:
-    GameEngine gameEngine; 
+    GameEngine gameEngine;
 
 
 
