@@ -273,7 +273,6 @@ void Menu::loadGame()
   std::vector<std::string> constructPlayerState;
 
   bool load = false;
-  bool constructBoardSuccessful = true;
 
   do{
    std::cout<<"\nEnter the filename from which load a game\n";
