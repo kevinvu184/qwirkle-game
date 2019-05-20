@@ -136,19 +136,11 @@ void GameEngine::addHighestPlayer(Player* p){
 Player* GameEngine::getPlayerWithHighestScoreWhenEnd(){
     int max = 0;
     int index = 0;
-    bool found = false;
 
     for (int i = 0; i < this->playerCount; i++){
       if (max < playerList[i]->getPlayerScore()){
         max = playerList[i]->getPlayerScore();
-      }
-    }
-
-    for (int i = 0; i < this->playerCount; i++){
-      if (playerList[i]->getPlayerScore() < max && found == false){
-        index++;
-      } else {
-        found = true;
+        index = i;
       }
     }
 
