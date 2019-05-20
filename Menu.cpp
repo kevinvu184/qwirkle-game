@@ -45,10 +45,7 @@ void Menu::runProgram()
      }
      else{
          if ( userInput == 1 ){
-<<<<<<< HEAD
-=======
            remove("records.txt");
->>>>>>> origin/PlacingMultipleTilesDebug
            playGame();
          }
          else if( userInput == 2){
@@ -64,13 +61,6 @@ void Menu::runProgram()
 
        }
      } while ( (std::getline(std::cin, line)) && (userInput != 4) );
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> origin/PlacingMultipleTilesDebug
 }
 
 bool Menu::checkForNameInput(std::string name)
@@ -154,10 +144,6 @@ void Menu::playGame()
     } while (!checkForNameInput(p2));
 
     std::cout<<"\n\nLet's Play!\n\n";
-<<<<<<< HEAD
-    gameEngine.playGame(p1,p2);
-
-=======
     gameEngine.playGame(p1,p2,1);
 
 }
@@ -193,7 +179,7 @@ bool Menu::checkFormatForPlayerHand(std::string& playerHand)
       result = false;
     }
   }
-  
+
 
   return result;
 
@@ -209,7 +195,7 @@ bool Menu::validateFormat(std::string& fileName)
   int playerScore = 0;
   std::string playerHand = "";
   std::string tileBag = "";
-  
+
 
   std::regex tileFormat("([ROYGBP][1-6])");
 
@@ -255,7 +241,7 @@ bool Menu::validateFormat(std::string& fileName)
 
 
   }
-  
+
   if(result == true)
   {
 
@@ -299,7 +285,6 @@ void Menu::keepRecordFileInSyncWithSavingFile(std::string& fileName)
       output<<tmp<<std::endl;
     }
   }
->>>>>>> origin/PlacingMultipleTilesDebug
 }
 
 void Menu::loadGame()
@@ -326,7 +311,7 @@ void Menu::loadGame()
 
    if(validateFormat(fileName))
    {
-      
+
       load = true;
 
       std::string tmp = "";
@@ -385,7 +370,7 @@ void Menu::loadGame()
    }
    else
    {
-      
+
       std::cout<<"ERROR: Your file name entered has wrong format, cannot load file\n";
    }
   }while(load == false);

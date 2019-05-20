@@ -16,10 +16,6 @@ public:
     void showStudentInformation();
     bool checkForNameInput(std::string name);
 
-<<<<<<< HEAD
-private:
-    GameEngine gameEngine;
-=======
     bool checkFileExist(std::string& fileName);
     bool validateFormat(std::string& fileName);
     bool checkFormatForPlayerHand(std::string& playerHand);
@@ -30,7 +26,6 @@ private:
 
 
 
->>>>>>> origin/PlacingMultipleTilesDebug
 };
 
 #endif //ASSIGNMENT_2_MENU

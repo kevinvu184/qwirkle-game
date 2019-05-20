@@ -871,19 +871,6 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                         else
                                         {
 
-<<<<<<< HEAD
-                                            player_1->setPlayerScore(board.totalPoint(c));
-                                            if (board.totalPoint(c) == 12 || board.totalPoint(c) == 24)
-                                            {
-                                                std::cout << "\nQWIRKLE!!!\n" << std::flush;
-                                            }
-                                            player_1->getPlayerHand()->deleteTile(newTile);
-                                            player_1->getPlayerHand()->addBack(tileBag->getFront());
-                                            tileBag->deleteFront();
-                                            addTileVerify_1 = true;
-                                            playerA = false;
-                                            continueLoop_1 = false;
-=======
 
                                             firstPlayer->getPlayerHand()->deleteTile(newTile);
                                             keepRecords(inputFromUser);
@@ -894,7 +881,6 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                             repromtFirstPlayer = false;
                                             askingForPlacingMultipleTiles(ableToAddTileForPlayer1, firstPlayerTurn, repromtFirstPlayer, quitGame, firstPlayer, tileBag);
 
->>>>>>> origin/PlacingMultipleTilesDebug
                                         }
                                     }
                                     else
@@ -1030,20 +1016,6 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                             }
                                             else
                                             {
-<<<<<<< HEAD
-                                                player_2->setPlayerScore(board.totalPoint(c));
-                                                if (board.totalPoint(c) == 12 || board.totalPoint(c) == 24)
-                                                {
-                                                    std::cout << "\nQWIRKLE!!!\n" << std::flush;
-                                                }
-                                                player_2->getPlayerHand()->deleteTile(newTile);
-                                                player_2->getPlayerHand()->addBack(tileBag->getFront());
-                                                tileBag->deleteFront();
-
-                                                continueLoop_2 = false;
-                                                playerA = true;
-                                                addTileVerify_2 = true;
-=======
 
                                                secondPlayer->getPlayerHand()->deleteTile(newTile);
 
@@ -1053,7 +1025,6 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                                                 keepRecords(inputFromUser);
                                                 askingForPlacingMultipleTiles(ableToAddTileForPlayer2, firstPlayerTurn, repromptSecondPlayer, quitGame, secondPlayer, tileBag);
 
->>>>>>> origin/PlacingMultipleTilesDebug
                                             }
                                         }
                                         //grid location is a three-char
