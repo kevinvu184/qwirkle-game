@@ -6,26 +6,26 @@
 #include <string>
 
 class Player {
-public:
+  public:
     Player(int id, std::string name);
     Player(int id, std::string name, LinkedList* newHand);
     ~Player();
 
-	int getPlayerId();
-	std::string getPlayerName();
-	int getPlayerScore();
-	LinkedList* getPlayerHand();
+    int getPlayerId();
+    std::string getPlayerName();
+    int getPlayerScore();
+    LinkedList* getPlayerHand();
 
-	void setPlayerId(int id);
-	void setPlayerName(std::string name);
-	void setPlayerScore(int score);
+    void setPlayerId(int id);
+    void setPlayerName(std::string name);
+    void setPlayerScore(int score);
 
-	void displayTileInHand();
+    void displayTileInHand();
 
-	int id;
-	std::string name;
-	int score;
-	LinkedList* hand;
+    int id;
+    std::string name;
+    int score;
+    LinkedList* hand;
 
 };
 
