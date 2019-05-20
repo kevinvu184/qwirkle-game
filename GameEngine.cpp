@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "TileCodes.h"
 
+#include <iostream>
 #include <array>
 #include <bits/stdc++.h>
 #include <iostream>
@@ -12,7 +13,6 @@
 #define NUMBER_OF_COLOR 6
 #define NUMBER_OF_SHAPE 6
 
-#include <iostream>
 
 GameEngine::GameEngine()
 {

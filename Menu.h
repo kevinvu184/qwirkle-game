@@ -14,7 +14,12 @@ public:
 
     void printMenu();
     void showStudentInformation();
-    bool checkForNameInput(std::string name);
+
+    // accept player names from user
+    std::string inputPlayerNames(int player);
+
+    //check player name is all uppercase characters
+    bool validatePlayerName(std::string playerName);
 
 private:
     GameEngine gameEngine;
