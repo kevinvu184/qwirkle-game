@@ -6,8 +6,7 @@
 
 #include "Tile.h"
 
-class Coordinate
-{
+class Coordinate {
 private:
 	int m_x;
 	int m_y;
