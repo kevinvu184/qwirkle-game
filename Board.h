@@ -8,34 +8,36 @@
 
 #include "Coordinate.h"
 
-#define NORTH -2
-#define SOUTH 2
-#define WEST -2
-#define EAST 2
+#define MIN_NORTH -2
+#define MIN_SOUTH 2
+#define MIN_WEST -2
+#define MIN_EAST 2
 
-class Board
-{
+#define INITIAL_STATE 0
+#define ONE_TILE_ADD 1
+#define TWO_TILES_ADD 2
+#define HORIZONTAL_ADD 3
+#define VERTICAL_ADD 4
+#define INVALID_ADD 5
+
+class Board {
 private:
-	int m_northBound;
-	int m_southBound;
-	int m_westBound;
-	int m_eastBound;
+	bool m_qwirkle;
+	int m_numberOfTileInThisTurn;
+	int m_orientationOfTileInThisTurn;
 
 	std::vector<Coordinate> m_coordinate;
 
 public:
 	Board();
 	bool addTileAt(Coordinate &coordinate);
-	void removeLastTile();
 
 	Tile getTileAt(Coordinate coordinate);
-	Tile getLatestTile();
 
-	int northBound();
-	int southBound();
-	int westBound();
-	int eastBound();
-	void resize();
+	int getNorthBound();
+	int getSouthBound();
+	int getWestBound();
+	int getEastBound();
 
 	friend std::ostream &operator<<(std::ostream &out, Board &b);
 
@@ -55,13 +57,29 @@ public:
 	int numOfRowTile(Coordinate coordinate);
 	int numOfColTile(Coordinate coordinate);
 
-	int totalPoint(Coordinate coordinate);
+	int getAddOrientation();
+
+	int colPoint(Coordinate coordinate);
+	int rowPoint(Coordinate coordinate);
+
+	int pointWhenPlayerPlaceOneTile();
+	int pointWhenPlayerPlaceHorizontalTiles();
+	int pointWhenPlayerPlaceVerticalTiles();
+
+	int totalPoint();
+	bool isQwirkle();
 
 	std::vector<Tile> colLine();
 	std::vector<Tile> rowLine();
 
-	bool verify(std::vector<Tile> line);
-	bool verifyMove();
+	bool verifyByLine(std::vector<Tile> line);
+	bool isValidForOneCoordinateCondition();
+
+	bool validateSecondTileCondition();
+	bool validateMoreThanTwoTileCondition();
+	bool validateHorizontalAdd();
+	bool validateVerticalAdd();
+	bool isValsidForMultiplePlaceCondition();
 };
 
 #endif // ASSIGN2_BOARD_H

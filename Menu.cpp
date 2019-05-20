@@ -66,11 +66,7 @@ void Menu::runProgram()
          }
 
        }
-     } while ( (std::getline(std::cin, line)) && (userInput != 5) );
-
-
-
-
+    } while ( (std::getline(std::cin, line)) && (userInput != 5) );
 }
 
 bool Menu::checkForNameInput(std::string name)
@@ -174,27 +170,20 @@ bool Menu::checkFormatForPlayerHand(std::string& playerHand)
 
   std::regex tileFormat("([ROYGBP][1-6])");
 
-  int numberOfActualCommas = std::count(playerHand.begin(), playerHand.end(), ',');
 
-  if(numberOfActualCommas == NUMBER_OF_COMMAS)
+
+  while(std::getline(input, tmp, ','))
   {
-    while(std::getline(input, tmp, ','))
-    {
       //each tokens = tile
-      tokens.push_back(tmp);
-    }
-
-    for(unsigned int i = 0; i < tokens.size() && result == true; ++i)
-    {
-      if(std::regex_match(tokens[i], tileFormat) == false)
-      {
-        result = false;
-      }
-    }
+    tokens.push_back(tmp);
   }
-  else
+
+  for(unsigned int i = 0; i < tokens.size() && result == true; ++i)
   {
-    result = false;
+    if(std::regex_match(tokens[i], tileFormat) == false)
+    {
+      result = false;
+    }
   }
 
 
@@ -212,8 +201,7 @@ bool Menu::validateFormat(std::string& fileName)
   int playerScore = 0;
   std::string playerHand = "";
   std::string tileBag = "";
-  int numberOfTileInBag = 0;
-  int numberOfTileOnBoard = 0;
+
 
   std::regex tileFormat("([ROYGBP][1-6])");
 
@@ -242,6 +230,7 @@ bool Menu::validateFormat(std::string& fileName)
       result = false;
     }
   }
+
   if(result == true)
   {
     std::string tmp = "";
@@ -255,10 +244,6 @@ bool Menu::validateFormat(std::string& fileName)
       {
         result = false;
       }
-      else
-      {
-        numberOfTileInBag++;
-      }
     }
 
 
@@ -267,11 +252,7 @@ bool Menu::validateFormat(std::string& fileName)
   if(result == true)
   {
 
-    numberOfTileOnBoard = NUMBER_OF_TILES_TOTAL - numberOfTileInBag - NUMBER_OF_PLAYERS*NUMBER_OF_TILES_IN_PLAYER_HAND;
-
-    int countTileOnBoard = 0;
-
-    std::string tmp = "";
+   std::string tmp = "";
 
 
     while(std::getline(input, tmp) && result == true)
@@ -283,22 +264,7 @@ bool Menu::validateFormat(std::string& fileName)
           result = false;
         }
       }
-      else
-      {
-          countTileOnBoard++;
-      }
-
     }
-
-    if(result == true)
-    {
-      if(countTileOnBoard != numberOfTileOnBoard)
-      {
-        result = false;
-      }
-    }
-
-
   }
 
   return result;
@@ -344,6 +310,7 @@ void Menu::loadGame()
    std::cin.ignore();
    std::getline(std::cin, fileName);
 
+
    while(!checkFileExist(fileName))
    {
      std::cout<<"\nFile does not exist please reenter:\n";
@@ -353,6 +320,7 @@ void Menu::loadGame()
 
    if(validateFormat(fileName))
    {
+
       load = true;
 
       std::string tmp = "";
@@ -392,7 +360,9 @@ void Menu::loadGame()
 
       try
       {
+
         gameEngine.constructBoard(moves);
+        constructBoardSuccessful = true;
       }
       catch(const std::exception& e)
       {
@@ -408,10 +378,10 @@ void Menu::loadGame()
 
       }
 
-
    }
    else
    {
+
       std::cout<<"ERROR: Your file name entered has wrong format, cannot load file\n";
    }
   }while(load == false);
@@ -420,11 +390,11 @@ void Menu::loadGame()
 
 void Menu::printMenu(){
 	std::cout << "Menu\n"
-     "1. New Game\n"
+    "1. New Game\n"
 	   "2. Load Game\n"
 	   "3. Show student information\n"
-	   "4. Show High Score\n"
-     "5. Quit\n"
+     "4. Show High Score\n"
+	   "5. Quit\n"
      "> " << std::flush;
 }
 
@@ -458,7 +428,7 @@ void Menu::showHighScore(){
 }
 
 void Menu::showStudentInformation(){
-  std::cout << "\n---------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------" << std::endl;
 
   std::cout << "Name: Jessica Cruz" << std::endl;
   std::cout << "Student ID: s3571051" << std::endl;
@@ -467,7 +437,6 @@ void Menu::showStudentInformation(){
   std::cout << "Name: Kevin Vu" << std::endl;
   std::cout << "Student ID: s3678490" << std::endl;
   std::cout << "Email: s3678490@rmit.edu.vn\n" << std::endl;
-
   std::cout << "Name: Khoi Nguyen" << std::endl;
   std::cout << "Student ID: s3678755" << std::endl;
   std::cout << "Email: s3678755@rmit.edu.vn\n" << std::endl;
