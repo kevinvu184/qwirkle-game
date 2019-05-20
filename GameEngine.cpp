@@ -20,16 +20,13 @@
 GameEngine::GameEngine()
 {
     this->playerCount = 0;
-    for (unsigned int i = 0; i < highScoreplayer.size(); i++){
-      highScoreplayer[i] = new Player("player");
-    }
     tileBagStr = "";
 
 }
 
 GameEngine::~GameEngine()
 {
-
+    // delete[] playerList;
 }
 
 void GameEngine::getState(Player *p)
@@ -230,9 +227,8 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
     outFile<< playerList[i]->getPlayerScore() << std::endl;
     outFile<< playerList[i]->getPlayerHand()->displayList() << std::endl;
   }
-
   outFile << tileBag->displayList() << std::endl;
-  outFile <<getRecords();
+  outFile<<getRecords();
   outFile << player->getPlayerName()<< std::endl;
 
   outFile.close();
@@ -279,11 +275,8 @@ void GameEngine::printMessageWhenSaveGame(std::string& inputFromUser, Player* pl
                 std::getline(std::cin, inputFromUser);
                 if (std::cin.eof() == true)
                 {
-                    addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-                    keepHighestRecords();
-                    std::cout << "\n\nGoodbye\n";
+                    std::cout << "\nGoodbye\n";
                     quitGame = true;
-
                 }
       }
 }
@@ -310,12 +303,8 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser, Playe
                      std::getline(std::cin, inputFromUser);
                      if (std::cin.eof() == true)
                      {
-                         addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-                         keepHighestRecords();
-                         std::cout << "\n\nGoodbye\n";
+                         std::cout << "\nGoodbye\n";
                          quitGame = true;
-
-
                      }
                 }
                 else
@@ -330,9 +319,7 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser, Playe
                         std::getline(std::cin, inputFromUser);
                         if (std::cin.eof() == true)
                         {
-                            addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-                            keepHighestRecords();
-                            std::cout << "\n\nGoodbye\n";
+                            std::cout << "\nGoodbye\n";
                             quitGame = true;
                         }
                     }
@@ -351,27 +338,16 @@ void GameEngine::printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame, st
 {
   if (ableToAdd == false)
   {
-        std::cout << "\nInvalid Input, Please check your move on the board\n";
+        std::cout << "\nInvalid Input\n";
         std::cout << "> ";
 
         std::getline(std::cin, inputFromUser);
         if (std::cin.eof() == true)
         {
-               addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-               keepHighestRecords();
-               std::cout << "\n\nGoodbye\n";
+               std::cout << "\nGoodbye\n";
                quitGame = true;
         }
   }
-}
-
-void GameEngine::keepHighestRecords(){
-  std::ofstream outFile;
-  outFile.open("hrecords.txt");
-  for (unsigned int i = 0; i < highScoreplayer.size(); i++){
-    outFile << highScoreplayer[i]->getPlayerName() << ":" << highScoreplayer[i]->getPlayerScore() << std::endl;
-  }
-  outFile.close();
 }
 
 void GameEngine::keepRecords(std::string inputFromUser){
@@ -753,7 +729,10 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
         addPlayer(secondPlayer);
 
        // Create the tile bag
-        shuffleAndCreateTileBag(tileBag);
+        // shuffleAndCreateTileBag(tileBag);
+
+        //for testing purpose
+        tileBagForUnitTest(tileBag);
 
         //tile bag for testing purpose
         // tileBagForUnitTest(tileBag);
@@ -790,8 +769,6 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
             std::getline(std::cin, inputFromUser);
             if (std::cin.eof() == true)
             {
-                addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-                keepHighestRecords();
                 std::cout << "\n\nGoodbye\n";
                 quitGame = true;
             }
@@ -1060,11 +1037,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                     std::getline(std::cin, inputFromUser);
                     if (std::cin.eof())
                     {
-                        addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-                        keepHighestRecords();
-                        std::cout << "\n\nGoodbye\n";
+                        std::cout << "\nGoodbye\n";
                         quitGame = true;
-
                     }
 
                     //if player 2 does not want to quitGame
@@ -1217,9 +1191,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
         {
             std::cout << "Player " << secondPlayer->getPlayerScore() << " won!" << std::endl;
         }
-        addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
-        keepHighestRecords();
-        std::cout << "\n\nGoodbye";
+        std::cout << "\nGoodbye";
     }
 
     delete firstPlayerHand;

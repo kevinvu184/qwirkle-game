@@ -9,8 +9,6 @@ class Player {
 public:
     Player(int id, std::string name);
     Player(int id, std::string name, LinkedList* newHand);
-    Player(std::string name);
-
     ~Player();
 
 	int getPlayerId();

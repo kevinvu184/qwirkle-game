@@ -14,12 +14,6 @@ Player::Player(int id, std::string name, LinkedList *newHand) {
 	this->hand = newHand;
 }
 
-Player::Player(std::string name)
-{
-  this->name = name;
-  this->score = 0;
-}
-
 Player::~Player()
 {
   delete hand;

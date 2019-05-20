@@ -20,7 +20,6 @@
 #define NUMBER_OF_COMMAS 5
 #define NUMBER_OF_TILES_TOTAL 72
 #define LINE_INF_ABOUT_PLAYER 6
-#define HIGH_SCORE_LIST 1
 
 Menu::Menu()
 {
@@ -40,7 +39,7 @@ void Menu::runProgram()
      std::cin >> userInput;
 
      // Validate userInput
-     if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 5) or (!std::cin)) ){
+     if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 4) or (!std::cin)) ){
        std::cin.clear();
        std::cout << "Invalid Input" << std::endl;
      }
@@ -55,17 +54,13 @@ void Menu::runProgram()
          else if( userInput == 3){
            showStudentInformation();
          }
-         else if( userInput == 4)
-         {
-           showHighScore();
-         }
          else
          {
            std::cout<<"\nGoodbye\n";
          }
 
        }
-     } while ( (std::getline(std::cin, line)) && (userInput != 5) );
+     } while ( (std::getline(std::cin, line)) && (userInput != 4) );
 
 
 
@@ -271,31 +266,6 @@ bool Menu::validateFormat(std::string& fileName)
   return result;
 }
 
-void Menu::keepRecordFileInSyncWithSavingFile(std::string& fileName)
-{
-  std::ofstream output("records.txt");
-  std::ifstream input(fileName);
-  bool endOfMove = false;
-
-  std::string tmp = "";
-  for(int i = 0; i < 7; i++)
-  {
-    std::getline(input, tmp);
-  }
-
-  while(std::getline(input, tmp) && endOfMove == false)
-  {
-    if(checkForNameInput(tmp) == true)
-    {
-      endOfMove = true;
-    }
-    else
-    {
-      output<<tmp<<std::endl;
-    }
-  }
-}
-
 void Menu::loadGame()
 {
 
@@ -358,22 +328,14 @@ void Menu::loadGame()
 
       }
 
+
       try
       {
         gameEngine.constructBoard(moves);
       }
       catch(const std::exception& e)
       {
-        constructBoardSuccessful = false;
-        load = false;
-      }
-
-      if(constructBoardSuccessful == true)
-      {
-        keepRecordFileInSyncWithSavingFile(fileName);
-        std::cout<<"\nQwirkle game successfully loaded !!!\n";
-        gameEngine.loadGame(playerTurn, 2);
-
+        loadGame();
       }
 
    }
@@ -388,45 +350,15 @@ void Menu::loadGame()
 
 void Menu::printMenu(){
 	std::cout << "Menu\n"
-     "1. New Game\n"
+    "1. New Game\n"
 	   "2. Load Game\n"
 	   "3. Show student information\n"
-	   "4. Show High Score\n"
-     "5. Quit\n"
+	   "4. Quit\n"
      "> " << std::flush;
 }
 
-void Menu::showHighScore(){
-  std::cout << "\nHighest Score--------------------------------" << std::endl;
-  std::vector<std::string> tokens;
-  std::string filename = "hrecords.txt";
-  if (!checkFileExist(filename)) {
-    std::cout<<"\nLoading file does not exist, please start a game\n";
-  } else {
-    std::string line = "";
-    std::string tempStr = "";
-    std::ifstream input(filename);
-    while (std::getline(input,line)){
-      std::istringstream stringInput(line);
-      while(std::getline(stringInput, tempStr, ':'))
-      {
-        tokens.push_back(tempStr);
-      }
-    }
-  }
-  for (unsigned int i = 0, k = 0; i < tokens.size() && k < HIGH_SCORE_LIST; i+=2, k++){
-    gameEngine.getHighScorePlayer(k)->setPlayerName(tokens[i]);
-    gameEngine.getHighScorePlayer(k)->setPlayerScore(std::stoi(tokens[i+1]));
-  }
-  for (int i = 0; i < HIGH_SCORE_LIST; i++){
-    std::cout<< i+1 << ". " << gameEngine.getHighScorePlayer(i)->getPlayerName() << ": " << gameEngine.getHighScorePlayer(i)->getPlayerScore() << std::endl;
-  }
-  std::cout << "---------------------------------------------\n" << std::endl;
-
-}
-
 void Menu::showStudentInformation(){
-  std::cout << "\n---------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------" << std::endl;
 
   std::cout << "Name: Jessica Cruz" << std::endl;
   std::cout << "Student ID: s3571051" << std::endl;
@@ -435,7 +367,6 @@ void Menu::showStudentInformation(){
   std::cout << "Name: Kevin Vu" << std::endl;
   std::cout << "Student ID: s3678490" << std::endl;
   std::cout << "Email: s3678490@rmit.edu.vn\n" << std::endl;
-
   std::cout << "Name: Khoi Nguyen" << std::endl;
   std::cout << "Student ID: s3678755" << std::endl;
   std::cout << "Email: s3678755@rmit.edu.vn\n" << std::endl;
