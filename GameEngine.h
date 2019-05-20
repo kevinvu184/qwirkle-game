@@ -61,12 +61,17 @@ public:
 
   void askingForPlacingMultipleTiles(bool& ableToAddTile, bool& firstPlayerTurn, bool& repromptPlayer, bool& quitGame, Player* player, LinkedList* tileBag);
   void tileBagForUnitTest(LinkedList* tileBag);
-  
+
+  void addHighestPlayer(Player*);
+  Player* getHighScorePlayer(int);
+  Player* getPlayerWithHighestScoreWhenEnd();
+
 private:
   Board board;
   Player *playerList[2];
   int playerCount;
   std::string tileBagStr;
+  std::array<Player*,1> highScoreplayer;
 
 };
 
