@@ -1,7 +1,7 @@
 #ifndef ASSIGN2_ENGINE_H
 #define ASSIGN2_ENGINE_H
 
-// #define 
+// #define
 
 #include "Board.h"
 #include "Player.h"
@@ -18,6 +18,10 @@ public:
   void playGame(std::string p1, std::string p2, int selection);
 
   void addPlayer(Player *p);
+
+  Player* getHighScorePlayer(int i);
+  void addHighestPlayer(Player* p);
+  Player* getPlayerWithHighestScoreWhenEnd();
 
   void setUpTilesInitially(Player *player, LinkedList *tileBag);
   void shuffleAndCreateTileBag(LinkedList *tileBag);
@@ -56,6 +60,7 @@ public:
   void constructBoard(std::string& moves);
   void loadGame(std::string& playerTurn, int selection);
 
+  void keepHighestRecords();
   void keepRecords(std::string inputFromUser);
   std::string getRecords();
 
@@ -68,6 +73,7 @@ private:
   Player *playerList[2];
   int playerCount;
   std::string tileBagStr;
+  std::array<Player*,1> highScoreplayer;
 
 };
 

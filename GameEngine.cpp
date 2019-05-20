@@ -20,6 +20,9 @@
 GameEngine::GameEngine()
 {
     this->playerCount = 0;
+    for (unsigned int i = 0; i < highScoreplayer.size(); i++){
+      highScoreplayer[i] = new Player("player");
+    }
     tileBagStr = "";
 
 }
@@ -67,7 +70,90 @@ void GameEngine::addPlayer(Player *p)
     playerCount++;
 }
 
+Player* GameEngine::getHighScorePlayer(int i){
+    return highScoreplayer[i];
+}
 
+void GameEngine::addHighestPlayer(Player* p){
+  std::vector<std::string> tokens;
+  std::string filename = "hrecords.txt";
+  std::ifstream iffile(filename.c_str());
+  // return (bool)iffile;
+  if ((bool)iffile) {
+    for (Player* i : highScoreplayer){
+      if (i->getPlayerScore() < p->getPlayerScore()){
+        i->setPlayerName(p->getPlayerName());
+        i->setPlayerScore(p->getPlayerScore());
+      }
+    }
+  } else {
+    std::string line = "";
+    std::string tempStr = "";
+    std::ifstream input(filename);
+    while (std::getline(input,line)){
+      std::istringstream stringInput(line);
+      while(std::getline(stringInput, tempStr, ':'))
+      {
+        tokens.push_back(tempStr);
+      }
+    }
+  }
+  for (unsigned int i = 0, k = 0; i < tokens.size() && k < highScoreplayer.size(); i+=2, k++){
+    highScoreplayer[k]->setPlayerName(tokens[i]);
+    highScoreplayer[k]->setPlayerScore(std::stoi(tokens[i+1]));
+  }
+  for (Player* i : highScoreplayer){
+    if (i->getPlayerScore() < p->getPlayerScore()){
+      i->setPlayerName(p->getPlayerName());
+      i->setPlayerScore(p->getPlayerScore());
+    }
+  }
+
+    // for (unsigned int i = 0; i < highScoreplayer.size(); i++){
+    //   if (highScoreplayer[i]->getPlayerScore() < p->getPlayerScore() && i == 0){
+    //     for (unsigned int k = highScoreplayer.size()-1; k >=0; k--){
+    //       highScoreplayer[k+1]->setPlayerName(highScoreplayer[k]->getPlayerName());
+    //       highScoreplayer[k+1]->setPlayerScore(highScoreplayer[k]->getPlayerScore());
+    //     }
+    //     highScoreplayer[0]->setPlayerName(p->getPlayerName());
+    //     highScoreplayer[0]->setPlayerScore(p->getPlayerScore());
+    //   }
+    //   if (highScoreplayer[i]->getPlayerScore() < p->getPlayerScore() && i == 1){
+    //     for (unsigned int k = highScoreplayer.size()-1; k >=1; k--){
+    //       highScoreplayer[k+1]->setPlayerName(highScoreplayer[k]->getPlayerName());
+    //       highScoreplayer[k+1]->setPlayerScore(highScoreplayer[k]->getPlayerScore());
+    //     }
+    //     highScoreplayer[1]->setPlayerName(p->getPlayerName());
+    //     highScoreplayer[1]->setPlayerScore(p->getPlayerScore());
+    //   }
+    //   if (highScoreplayer[i]->getPlayerScore() < p->getPlayerScore() && i == 2){
+    //     highScoreplayer[i]->setPlayerName(p->getPlayerName());
+    //     highScoreplayer[i]->setPlayerScore(p->getPlayerScore());
+    //   }
+    // }
+}
+
+Player* GameEngine::getPlayerWithHighestScoreWhenEnd(){
+    int max = 0;
+    int index = 0;
+    bool found = false;
+
+    for (int i = 0; i < this->playerCount; i++){
+      if (max < playerList[i]->getPlayerScore()){
+        max = playerList[i]->getPlayerScore();
+      }
+    }
+
+    for (int i = 0; i < this->playerCount; i++){
+      if (playerList[i]->getPlayerScore() < max && found == false){
+        index++;
+      } else {
+        found = true;
+      }
+    }
+
+    return playerList[index];
+}
 
 void GameEngine::printScore()
 {
@@ -152,8 +238,9 @@ void GameEngine::saveGame(std::string filename, Player* player, LinkedList* tile
     outFile<< playerList[i]->getPlayerScore() << std::endl;
     outFile<< playerList[i]->getPlayerHand()->displayList() << std::endl;
   }
+
   outFile << tileBag->displayList() << std::endl;
-  outFile<<getRecords();
+  outFile <<getRecords();
   outFile << player->getPlayerName()<< std::endl;
 
   outFile.close();
@@ -200,6 +287,8 @@ void GameEngine::printMessageWhenSaveGame(std::string& inputFromUser, Player* pl
                 std::getline(std::cin, inputFromUser);
                 if (std::cin.eof() == true)
                 {
+                    addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+                    keepHighestRecords();
                     std::cout << "\n\nGoodbye\n";
                     quitGame = true;
 
@@ -229,6 +318,8 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser, Playe
                      std::getline(std::cin, inputFromUser);
                      if (std::cin.eof() == true)
                      {
+                         addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+                         keepHighestRecords();
                          std::cout << "\n\nGoodbye\n";
                          quitGame = true;
 
@@ -247,6 +338,8 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser, Playe
                         std::getline(std::cin, inputFromUser);
                         if (std::cin.eof() == true)
                         {
+                            addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+                            keepHighestRecords();
                             std::cout << "\n\nGoodbye\n";
                             quitGame = true;
                         }
@@ -272,10 +365,21 @@ void GameEngine::printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame, st
         std::getline(std::cin, inputFromUser);
         if (std::cin.eof() == true)
         {
+               addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+               keepHighestRecords();
                std::cout << "\n\nGoodbye\n";
                quitGame = true;
         }
   }
+}
+
+void GameEngine::keepHighestRecords(){
+  std::ofstream outFile;
+  outFile.open("hrecords.txt");
+  for (unsigned int i = 0; i < highScoreplayer.size(); i++){
+    outFile << highScoreplayer[i]->getPlayerName() << ":" << highScoreplayer[i]->getPlayerScore() << std::endl;
+  }
+  outFile.close();
 }
 
 void GameEngine::keepRecords(std::string inputFromUser){
@@ -417,7 +521,6 @@ void GameEngine::constructBoard(std::string& moves)
                 char cLocationArray[sizeLocation + 1];
                 strcpy(cLocationArray, location.c_str());
                 Coordinate c = Coordinate(cLocationArray[0], cLocationArray[1] - 48, * newTile);
-
 
                 if(!board.addTileAt(c))
                 {
@@ -695,6 +798,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
             std::getline(std::cin, inputFromUser);
             if (std::cin.eof() == true)
             {
+                addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+                keepHighestRecords();
                 std::cout << "\n\nGoodbye\n";
                 quitGame = true;
             }
@@ -963,7 +1068,9 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
                     std::getline(std::cin, inputFromUser);
                     if (std::cin.eof())
                     {
-                        std::cout << "\n\nGoodbye\n"<<std::flush;
+                        addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+                        keepHighestRecords();
+                        std::cout << "\n\nGoodbye\n";
                         quitGame = true;
 
                     }
@@ -1118,6 +1225,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection)
         {
             std::cout << "Player " << secondPlayer->getPlayerScore() << " won!" << std::endl;
         }
+        addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+        keepHighestRecords();
         std::cout << "\n\nGoodbye";
     }
 

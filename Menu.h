@@ -13,6 +13,7 @@ public:
     void loadGame();
 
     void printMenu();
+    void showHighScore();
     void showStudentInformation();
     bool checkForNameInput(std::string name);
 
