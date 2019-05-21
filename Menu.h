@@ -3,9 +3,9 @@
 
 #include "GameEngine.h"
 
-class Menu{
+class Menu {
 
-public:
+  public:
 
     Menu();
     void runProgram();
@@ -25,10 +25,9 @@ public:
     bool validateFormat(std::string& fileName);
     bool checkFormatForPlayerHand(std::string& playerHand);
 
-private:
+    void keepRecordFileInSyncWithSavingFile(std::string& fileName);
+  private:
     GameEngine gameEngine;
-
-
 
 };
 
