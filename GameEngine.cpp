@@ -31,7 +31,7 @@ GameEngine::~GameEngine() {
 
 void GameEngine::getState(Player *p) {
 
-  std::cout << "\n" << p->getPlayerName() << ", it's your turn" << std::endl;
+  std::cout << "\n" << p->getPlayerName() << ", it's your turn." << std::endl;
   printScore();
   std::cout << std::endl;
 
@@ -39,7 +39,7 @@ void GameEngine::getState(Player *p) {
   std::cout << "\nYour hand is " << std::endl;
   p->displayTileInHand();
 
-  std::cout << "\n> ";
+  std::cout << "\n> " << std::flush;
 }
 
 int GameEngine::countToken(std::string input) {
@@ -120,7 +120,7 @@ std::string GameEngine::getTileFromUserInput(std::string input) {
   return tile;
 }
 
-//location in any command is at the second position 
+//location in any command is at the second position
 std::string GameEngine::getLocationFromUserInput(std::string input) {
   std::string location = "";
 
@@ -417,7 +417,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
   bool printState = true;
   std::string inputFromUser = "";
   int countTilePlacing = MAXIMUM_PLAYER_HAND - player->getPlayerHand()->getSize();
-  
+
 
   do {
     if (printState == true) {
@@ -708,7 +708,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                       firstPlayerTurn, repromtFirstPlayer, quitGame,
                       firstPlayer, tileBag);
                 }
-               
+
                 delete newTile;
                 turn++;
                 repromtFirstPlayer = false;
@@ -718,7 +718,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
               tileInput = getTileFromUserInput(inputFromUser);
               if (validateFormat(inputFromUser)
                   && validateTileExistInHand(tileInput, firstPlayer)) {
-            
+
 
                 firstPlayerTurn = false;
 
@@ -748,12 +748,12 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                 firstPlayer) == false) && quitGame != true
             && repromtFirstPlayer == true && ableToAddTileForPlayer1 == false);
       }
-    //not the initial turn 
+    //not the initial turn
     } else if (turn != 0) {
 
       //if player 1 does not want to quitGame start validating input
       if (quitGame != true) {
-        //deciding whether it is the first turn of that player or player has already made one move and 
+        //deciding whether it is the first turn of that player or player has already made one move and
         //can pass or continue placing tiles
         if (firstPlayerTurn == true
             && firstPlayer->getPlayerHand()->getSize() == MAXIMUM_PLAYER_HAND) {
@@ -826,7 +826,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
                     int x = (cSizeInput[1] - ASCII_FOR_0) * 10 + (cSizeInput[2] - ASCII_FOR_0);
 
-                    
+
                     Coordinate c = Coordinate(cSizeInput[0], x, *newTile);
                     if (!board.addTileAt(c)) {
                       ableToAddTileForPlayer1 = false;
