@@ -574,6 +574,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
                 keepRecords(inputFromUser);
               }
             }
+            delete newTile;
           }
         } else {
           printState = false;
