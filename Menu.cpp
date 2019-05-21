@@ -162,7 +162,7 @@ bool Menu::validateFormat(std::string& fileName) {
     if (input.good()) {
 
       std::getline(input, playerHand);
-      if (checkForNameInput(playerName[i]) == false
+      if (validatePlayerName(playerName[i]) == false
           || checkFormatForPlayerHand(playerHand) == false) {
         result = false;
 
@@ -186,7 +186,7 @@ bool Menu::validateFormat(std::string& fileName) {
   }
 
   if (result == true) {
-
+    std::string tmp = "";
     while(std::getline(input, tmp) && result == true)
     {
       if(gameEngine.validateFormat(tmp) == false)
@@ -213,7 +213,7 @@ void Menu::keepRecordFileInSyncWithSavingFile(std::string& fileName) {
   }
 
   while (std::getline(input, tmp) && endOfMove == false) {
-    if (checkForNameInput(tmp) == true) {
+    if (validatePlayerName(tmp) == true) {
       endOfMove = true;
     } else {
       output << tmp << std::endl;
@@ -230,22 +230,19 @@ void Menu::loadGame() {
   bool constructBoardSuccessful = true;
 
   do{
-   std::cout<<"\nEnter the filename from which load a game" << std::endl;
-   std::cout<<"> ";
-   std::cin.ignore();
+   std::cout<<"\nEnter the filename of the game you would like to load" << std::endl;
+   std::cout<<"> " << std::flush;
    std::getline(std::cin, fileName);
 
    while(!checkFileExist(fileName))
    {
      std::cout << ERR_FILE_NOT_EXIST << std::endl;
-     std::cout<<"> ";
+     std::cout<<"> " << std::flush;
      std::getline(std::cin, fileName);
    }
 
-    if (validateFormat(fileName)) {
-
+    if(validateFormat(fileName)) {
       load = true;
-
       std::string tmp = "";
       std::string moves = "";
       std::string tileBag = "";
@@ -288,7 +285,7 @@ void Menu::loadGame() {
 
       if (constructBoardSuccessful == true) {
         keepRecordFileInSyncWithSavingFile(fileName);
-        std::cout << "\nQwirkle game successfully loaded !!!\n";
+        std::cout << "\nQwirkle game successfully loaded !!!" << std::endl;
         gameEngine.loadGame(playerTurn, 2);
 
       }
