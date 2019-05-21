@@ -1,0 +1,1133 @@
+
+
+Welcome to Qwirkle!
+-------------------
+Menu
+1. New Game
+2. Load Game
+3. Show student information
+4. Show High Score
+5. Quit
+> 
+Starting a New Game
+
+Enter a name for player 1 (uppercase characters only)
+> 
+Enter a name for player 2 (uppercase characters only)
+> 
+
+Let's Play!
+
+
+KEVIN, it's your turn.
+Score for KEVIN: 0
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |  |  |  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R1,P3,B2,R5,P6,G4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 0
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |  |P3|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,P6,G4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 0
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |P6|  |  |
+C |  |  |P3|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,G4
+
+> 
+TED, it's your turn.
+Score for KEVIN: 2
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |P6|  |  |
+C |  |  |P3|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+P1,R4,P1,G1,G5,B6
+
+> 
+TED, it's your turn.
+Score for KEVIN: 2
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |P1|  |  |
+C |  |  |P6|  |  |
+D |  |  |P3|  |  |
+E |  |  |  |  |  |
+F |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G1,G5,B6
+
+> 
+TED, it's your turn.
+Score for KEVIN: 2
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |G1|P1|  |  |
+C |  |  |P6|  |  |
+D |  |  |P3|  |  |
+E |  |  |  |  |  |
+F |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,B6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 2
+Score for TED: 5
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |G1|P1|  |  |
+C |  |  |P6|  |  |
+D |  |  |P3|  |  |
+E |  |  |  |  |  |
+F |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,G4,Y4,R4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 2
+Score for TED: 5
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |G4|  |  |  |
+C |  |G1|P1|  |  |
+D |  |  |P6|  |  |
+E |  |  |P3|  |  |
+F |  |  |  |  |  |
+G |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,Y4,R4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 2
+Score for TED: 5
+
+   0  1  2  3  4  5 
+  -------------------
+A |  |  |  |  |  |  |
+B |  |R4|G4|  |  |  |
+C |  |  |G1|P1|  |  |
+D |  |  |  |P6|  |  |
+E |  |  |  |P3|  |  |
+F |  |  |  |  |  |  |
+G |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,Y4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 2
+Score for TED: 5
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |Y4|R4|G4|  |  |  |
+C |  |  |  |G1|P1|  |  |
+D |  |  |  |  |P6|  |  |
+E |  |  |  |  |P3|  |  |
+F |  |  |  |  |  |  |  |
+G |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5
+
+> 
+TED, it's your turn.
+Score for KEVIN: 7
+Score for TED: 5
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |Y4|R4|G4|  |  |  |
+C |  |  |  |G1|P1|  |  |
+D |  |  |  |  |P6|  |  |
+E |  |  |  |  |P3|  |  |
+F |  |  |  |  |  |  |  |
+G |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,B6,G5,Y5
+
+> 
+TED, it's your turn.
+Score for KEVIN: 7
+Score for TED: 5
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|  |  |
+F |  |  |  |  |P3|  |  |
+G |  |  |  |  |  |  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,B6,G5,Y5
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 7
+Score for TED: 8
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|  |  |
+F |  |  |  |  |P3|  |  |
+G |  |  |  |  |  |  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,O1,P2,B5
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 7
+Score for TED: 8
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|  |  |
+F |  |  |  |  |P3|  |  |
+G |  |  |  |  |P2|  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,O1,B5
+
+> 
+TED, it's your turn.
+Score for KEVIN: 11
+Score for TED: 8
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|  |  |
+F |  |  |  |  |P3|  |  |
+G |  |  |  |  |P2|  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,B6,G5,Y5,Y3
+
+> 
+TED, it's your turn.
+Score for KEVIN: 11
+Score for TED: 8
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|  |  |
+F |  |  |  |Y3|P3|  |  |
+G |  |  |  |  |P2|  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,B6,G5,Y5
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 11
+Score for TED: 10
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|  |  |
+F |  |  |  |Y3|P3|  |  |
+G |  |  |  |  |P2|  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,O1,B5,O6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 11
+Score for TED: 10
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|O6|  |
+F |  |  |  |Y3|P3|  |  |
+G |  |  |  |  |P2|  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,O1,B5
+
+> 
+TED, it's your turn.
+Score for KEVIN: 13
+Score for TED: 10
+
+   0  1  2  3  4  5  6 
+  ----------------------
+A |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |
+C |  |Y4|R4|G4|  |  |  |
+D |  |  |  |G1|P1|  |  |
+E |  |  |  |  |P6|O6|  |
+F |  |  |  |Y3|P3|  |  |
+G |  |  |  |  |P2|  |  |
+H |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,B6,G5,Y5,P5
+
+> 
+TED, it's your turn.
+Score for KEVIN: 13
+Score for TED: 10
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |  |  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|  |  |  |
+H |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,Y5,P5
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 13
+Score for TED: 13
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |  |  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|  |  |  |
+H |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,B2,R5,O1,B5,B1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 13
+Score for TED: 13
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |  |  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,R5,O1,B5,B1
+
+> 
+TED, it's your turn.
+Score for KEVIN: 15
+Score for TED: 13
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |  |  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,Y5,P5,B6
+
+> 
+TED, it's your turn.
+Score for KEVIN: 15
+Score for TED: 13
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |  |  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |B6|  |  |
+I |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,Y5,P5
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 15
+Score for TED: 15
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |  |  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |B6|  |  |
+I |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,R5,O1,B5,B1,O3
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 15
+Score for TED: 15
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |B5|  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |B6|  |  |
+I |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,R5,O1,B1,O3
+
+> 
+TED, it's your turn.
+Score for KEVIN: 17
+Score for TED: 15
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |  |  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |B5|  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |B6|  |  |
+I |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,Y5,P5,P3
+
+> 
+TED, it's your turn.
+Score for KEVIN: 17
+Score for TED: 15
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |B5|  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |B6|  |  |
+I |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,G5,Y5,P5,P3
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 17
+Score for TED: 17
+
+   0  1  2  3  4  5  6  7 
+  -------------------------
+A |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |
+D |  |  |  |G1|P1|  |B5|  |
+E |  |  |  |  |P6|O6|B6|  |
+F |  |  |  |Y3|P3|  |  |  |
+G |  |  |  |  |P2|B2|  |  |
+H |  |  |  |  |  |B6|  |  |
+I |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,R5,O1,B1,O3,O2
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 17
+Score for TED: 17
+
+   0  1  2  3  4  5  6  7  8 
+  ----------------------------
+A |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|  |
+E |  |  |  |  |P6|O6|B6|  |  |
+F |  |  |  |Y3|P3|  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |
+H |  |  |  |  |  |B6|  |  |  |
+I |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2
+
+> 
+TED, it's your turn.
+Score for KEVIN: 19
+Score for TED: 17
+
+   0  1  2  3  4  5  6  7  8 
+  ----------------------------
+A |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|  |
+E |  |  |  |  |P6|O6|B6|  |  |
+F |  |  |  |Y3|P3|  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |
+H |  |  |  |  |  |B6|  |  |  |
+I |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,G5,Y5,P5,P3,G1
+
+> 
+TED, it's your turn.
+Score for KEVIN: 19
+Score for TED: 17
+
+   0  1  2  3  4  5  6  7  8  9 
+  -------------------------------
+A |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |
+H |  |  |  |  |  |B6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,Y5,P5,P3,G1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 19
+Score for TED: 20
+
+   0  1  2  3  4  5  6  7  8  9 
+  -------------------------------
+A |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |
+H |  |  |  |  |  |B6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2,G6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 19
+Score for TED: 20
+
+   0  1  2  3  4  5  6  7  8  9 
+  -------------------------------
+A |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2
+
+> 
+TED, it's your turn.
+Score for KEVIN: 21
+Score for TED: 20
+
+   0  1  2  3  4  5  6  7  8  9 
+  -------------------------------
+A |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,Y5,P5,P3,G1,Y1
+
+> 
+TED, it's your turn.
+Score for KEVIN: 21
+Score for TED: 20
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,P3,G1,Y1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 21
+Score for TED: 24
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2,Y4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 21
+Score for TED: 24
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |Y4|  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2
+
+> 
+TED, it's your turn.
+Score for KEVIN: 23
+Score for TED: 24
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |  |  |  |Y4|  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,P3,G1,Y1,B2
+
+> 
+TED, it's your turn.
+Score for KEVIN: 23
+Score for TED: 24
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,P3,G1,Y1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 23
+Score for TED: 27
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |  |  |
+C |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2,Y3
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 23
+Score for TED: 27
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |Y3|  |
+C |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2
+
+> 
+TED, it's your turn.
+Score for KEVIN: 26
+Score for TED: 27
+
+   0  1  2  3  4  5  6  7  8  9  10
+  ----------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |Y3|  |
+C |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,P3,G1,Y1,O1
+
+> 
+TED, it's your turn.
+Score for KEVIN: 26
+Score for TED: 27
+
+   0  1  2  3  4  5  6  7  8  9  10 11
+  -------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |Y3|P3|  |
+C |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,G1,Y1,O1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 26
+Score for TED: 29
+
+   0  1  2  3  4  5  6  7  8  9  10 11
+  -------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |R4|  |G5|  |  |  |  |  |Y3|P3|  |
+C |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |  |
+D |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |
+E |  |  |  |  |P6|O6|B6|  |  |  |  |  |
+F |  |  |  |Y3|P3|  |  |  |  |  |  |  |
+G |  |  |  |  |P2|B2|  |  |  |  |  |  |
+H |  |  |  |  |  |B6|G6|  |  |  |  |  |
+I |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O3,O2,Y1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 26
+Score for TED: 29
+
+   0  1  2  3  4  5  6  7  8  9  10 11
+  -------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O2,Y1
+
+> 
+TED, it's your turn.
+Score for KEVIN: 28
+Score for TED: 29
+
+   0  1  2  3  4  5  6  7  8  9  10 11
+  -------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,G1,Y1,O1,B3
+
+> 
+TED, it's your turn.
+Score for KEVIN: 28
+Score for TED: 29
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12
+  ----------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |  |  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,G1,Y1,O1
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 28
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12
+  ----------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |  |  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,B1,O2,Y1,O6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 28
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12
+  ----------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O1,O2,Y1,O6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 28
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13
+  -------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O2,Y1,O6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 28
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14
+  ----------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|Y1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R1,O2,O6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 28
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
+  -------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|Y1|R1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O2,O6
+
+> 
+TED, it's your turn.
+Score for KEVIN: 34
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
+  -------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|Y1|R1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,G1,Y1,O1,B3
+
+> 
+TED, it's your turn.
+Score for KEVIN: 34
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |  |  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|Y1|R1|G1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P1,P5,Y1,O1,B3
+
+> 
+TED, it's your turn.
+Score for KEVIN: 34
+Score for TED: 32
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17
+  -------------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |  |  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |  |  |  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|Y1|R1|G1|P1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P5,Y1,O1,B3
+
+> 
+QWRIKLEEEEEEEE!!!
+
+
+KEVIN, it's your turn.
+Score for KEVIN: 34
+Score for TED: 44
+
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17
+  -------------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |  |O3|  |  |  |  |  |  |  |
+C |  |R4|  |G5|  |  |  |  |  |Y3|P3|B3|  |  |  |  |  |  |
+D |  |Y4|R4|G4|  |  |B2|  |  |Y4|  |B1|O1|Y1|R1|G1|P1|  |
+E |  |  |  |G1|P1|  |B5|R5|G5|Y5|  |  |  |  |  |  |  |  |
+F |  |  |  |  |P6|O6|B6|  |  |  |  |  |  |  |  |  |  |  |
+G |  |  |  |Y3|P3|  |  |  |  |  |  |  |  |  |  |  |  |  |
+H |  |  |  |  |P2|B2|  |  |  |  |  |  |  |  |  |  |  |  |
+I |  |  |  |  |  |B6|G6|  |  |  |  |  |  |  |  |  |  |  |
+J |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O2,O6,P5,R5,Y6,O2
+
+> 
+
+Goodbye
