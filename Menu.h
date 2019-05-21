@@ -13,15 +13,20 @@ public:
     void loadGame();
 
     void printMenu();
-    void showStudentInformation(); 
-    bool checkForNameInput(std::string name);
+    void showStudentInformation();
+
+    // accept player names from user
+    std::string inputPlayerNames(int player);
+
+    //check player name is all uppercase characters
+    bool validatePlayerName(std::string playerName);
 
     bool checkFileExist(std::string& fileName);
     bool validateFormat(std::string& fileName);
     bool checkFormatForPlayerHand(std::string& playerHand);
 
 private:
-    GameEngine gameEngine; 
+    GameEngine gameEngine;
 
 
 

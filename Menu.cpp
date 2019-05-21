@@ -1,6 +1,5 @@
 #include "Menu.h"
 #include "TileCodes.h"
-
 #include<regex>
 #include<iostream>
 #include<fstream>
@@ -10,9 +9,6 @@
 #include <bits/stdc++.h>
 #include<algorithm>
 
-
-
-
 #define NUMBER_OF_PLAYERS 2
 #define NUMBER_OF_COLOR 6
 #define NUMBER_OF_SHAPE 6
@@ -20,6 +16,10 @@
 #define NUMBER_OF_COMMAS 5
 #define NUMBER_OF_TILES_TOTAL 72
 #define LINE_INF_ABOUT_PLAYER 6
+
+#define INVALID "Invalid input."
+#define GOODBYE "\nGoodbye\n"
+#define NUMPLAYERS  2
 
 Menu::Menu()
 {
@@ -31,8 +31,8 @@ void Menu::runProgram()
    int userInput = 0;
    std::string line;
 
-   std::cout << "\n\nWelcome to Qwirkle!" << std::endl;
-   std::cout << "-------------------" << std::endl;
+   std::cout << "\n\nWelcome to Qwirkle!"
+    "\n-------------------"<< std::endl;
 
     do {
      printMenu();
@@ -41,115 +41,78 @@ void Menu::runProgram()
      // Validate userInput
      if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 4) or (!std::cin)) ){
        std::cin.clear();
-       std::cout << "Invalid Input" << std::endl;
+       std::cout << INVALID << std::endl;
      }
      else{
-         if ( userInput == 1 ){
+         if (userInput == 1){
            remove("records.txt");
            playGame();
          }
-         else if( userInput == 2){
+         else if(userInput == 2){
            loadGame();
          }
-         else if( userInput == 3){
+         else if(userInput == 3){
            showStudentInformation();
          }
          else
          {
-           std::cout<<"\nGoodbye\n";
+           std::cout << GOODBYE << std::flush;
          }
-
        }
      } while ( (std::getline(std::cin, line)) && (userInput != 4) );
-
-
-
-
-}
-
-bool Menu::checkForNameInput(std::string name)
-{
-  bool result = true;
-
-  int size = name.size();
-
-  char cArray[size + 1];
-
-  strcpy(cArray, name.c_str());
-
-  for(int i = 0; i < size && result == true; i++)
-  {
-    //ASCII A-Z:65-90 , a-z:97-122, space:32  -> different than these then set result = false
-    if((cArray[i] < 65 || cArray[i] > 90) && cArray[i] != 32)
-    {
-      result = false;
-    }
-  }
-
-  return result;
-
-
 }
 
 void Menu::playGame()
 {
-    //read whitespace from previous input before use getline()
+    //clear whitespace from previous input before use getline()
     std::cin.ignore();
 
-    std::string p1 = "" ;
-    std::string p2 ;
+    std::string playerNames[NUMPLAYERS];
 
-    //to check if it is the initial prompt
-    int count_1 = 0;
-    int count_2 = 0;
+    std::cout<<"\nStarting a New Game" << std::endl;
 
+    // for(int i = 0; i < NUMPLAYERS; i++){
+    //   playerNames[i] = inputPlayerNames(i+1);
+    // }
+    playerNames[0] = inputPlayerNames(1);
+    playerNames[1] = inputPlayerNames(2);
 
+    std::cout << "Let's Play!" << std::endl;
+    gameEngine.playGame(playerNames[0], playerNames[1]); //Need to adjust this for multiplayers
+}
 
-    std::cout<<"\nStarting a New Game\n";
+std::string Menu::inputPlayerNames(int player){
+  bool validatePlayerName(std::string playerName);
+  bool initialPrompt = true;
 
-    do
-    {
-      if(count_1 == 0)
-      {
-        std::cout<<"\nEnter a name for player 1 (uppercase characters only)\n";
-        std::cout<<"> ";
+  std::string playerName = "";
 
-        std::getline(std::cin, p1);
+  do{
+    if(initialPrompt){
+      std::cout << "Please enter a name for player " << player << " (uppercase characters only)" << std::endl;
+      std::cout << "> " << std::flush;
+      std::getline(std::cin, playerName);
+      initialPrompt = false;
+    }
 
-      }
-      count_1++;
-      if(checkForNameInput(p1) == false)
-      {
-        std::cout<<"\nYour name may contain symbols or numbers or not in uppercase characters, please reenter\n";
-        std::cout<<"> ";
+    if(!validatePlayerName(playerName)){
+      std::cout << "\nYour name must contain uppercase characters only. Please try again." << std::endl;
+      std::cout << "> " << std::flush;
+      std::getline(std::cin, playerName);
+    }
+  } while(!validatePlayerName(playerName));
+  return playerName;
+}
 
-        std::getline(std::cin, p1);
-      }
+bool Menu::validatePlayerName(std::string playerName){
+  bool result = false;
 
-    } while (!checkForNameInput(p1));
-
-    do
-    {
-       if(count_2 == 0)
-      {
-        std::cout<<"\nEnter a name for player 2 (uppercase characters only)\n";
-        std::cout<<"> ";
-        std::getline(std::cin, p2);
-
-      }
-      count_2++;
-      if(checkForNameInput(p2) == false)
-      {
-        std::cout<<"\nYour name may contain symbols or numbers or not in upper case characters, please reenter\n";
-        std::cout<<"> ";
-        std::getline(std::cin, p2);
-
-      }
-    } while (!checkForNameInput(p2));
-
-    std::cout<<"\n\nLet's Play!\n\n";
-    gameEngine.playGame(p1,p2,1);
-
+  // Only accept UPPERCASE CHARACTERS 1-25 inclusive in length
+  std::regex name("[A-Z]{1,25}");
+  if(std::regex_match(playerName, name)){
+    result = true;
+  }
+  return result;
 }
 
 bool Menu::checkFileExist(std::string& fileName)

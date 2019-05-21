@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "TileCodes.h"
 
+#include <iostream>
 #include <array>
 #include <bits/stdc++.h>
 #include <iostream>
@@ -15,7 +16,6 @@
 #define COMMAND_SIZE_WHEN_PLACE_TILE 4
 #define COMMAND_SIZE_WHEN_REPLACE_TILE 2
 
-#include <iostream>
 
 GameEngine::GameEngine()
 {
