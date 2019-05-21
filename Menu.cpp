@@ -94,7 +94,6 @@ bool Menu::validatePlayerName(std::string playerName){
 
 std::string Menu::inputPlayerNames(int player){
   bool initialPrompt = true;
-
   std::string playerName = "";
 
   do{
@@ -105,7 +104,10 @@ std::string Menu::inputPlayerNames(int player){
       initialPrompt = false;
     }
 
-    if(!validatePlayerName(playerName)){
+    if(playerName == "help"){
+      initialPrompt = true;
+    }
+    else if(!validatePlayerName(playerName)){
       std::cout << ERR_NAME_FORMAT << std::endl;
       std::cout << "> " << std::flush;
       std::getline(std::cin, playerName);
