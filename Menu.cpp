@@ -17,8 +17,8 @@
 #define NUMBER_OF_TILES_TOTAL 72
 #define LINE_INF_ABOUT_PLAYER 6
 
-#define INVALID "Invalid input."
 #define GOODBYE "\nGoodbye\n"
+#define ERR_MENU_OPTION "Invalid input, please enter numbers 1-4 to select one of the menu options."
 #define ERR_FILE_FORMAT "ERROR: Your file name entered has wrong format, cannot load file."
 #define ERR_NAME_FORMAT "Your name must contain uppercase characters only. Please try again."
 #define ERR_FILE_NOT_EXIST "ERROR: Your file does not exist, please try again."
@@ -44,7 +44,7 @@ void Menu::runProgram()
      // Validate userInput
      if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 4) or (!std::cin)) ){
        std::cin.clear();
-       std::cout << INVALID << std::endl;
+       std::cout << ERR_MENU_OPTION << std::endl;
      }
      else{
          if (userInput == 1){
