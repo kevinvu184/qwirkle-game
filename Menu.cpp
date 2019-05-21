@@ -241,6 +241,10 @@ void Menu::loadGame() {
   do{
    std::cout<<"\nEnter the filename of the game you would like to load" << std::endl;
    std::cout<<"> " << std::flush;
+   
+   //to consume whitespace before using std::getline()
+   std::cin.ignore();
+      
    std::getline(std::cin, fileName);
 
    while(!checkFileExist(fileName))
