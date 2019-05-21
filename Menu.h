@@ -13,13 +13,9 @@ class Menu {
     void loadGame();
 
     void printMenu();
+    void showHighScore();
     void showStudentInformation();
-
-    // accept player names from user
-    std::string inputPlayerNames(int player);
-
-    //check player name is all uppercase characters
-    bool validatePlayerName(std::string playerName);
+    bool checkForNameInput(std::string name);
 
     bool checkFileExist(std::string& fileName);
     bool validateFormat(std::string& fileName);
