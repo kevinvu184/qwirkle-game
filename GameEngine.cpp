@@ -32,12 +32,12 @@ GameEngine::GameEngine() {
 }
 
 GameEngine::~GameEngine() {
- 
+
 }
 
 void GameEngine::getState(Player *p) {
 
-  std::cout << "\n" << p->getPlayerName() << ", it's your turn" << std::endl;
+  std::cout << "\n" << p->getPlayerName() << ", it's your turn." << std::endl;
   printScore();
   std::cout << std::endl;
 
@@ -45,7 +45,7 @@ void GameEngine::getState(Player *p) {
   std::cout << "\nYour hand is " << std::endl;
   p->displayTileInHand();
 
-  std::cout << "\n> ";
+  std::cout << "\n> " << std::flush;
 }
 
 int GameEngine::countToken(std::string input) {
@@ -574,6 +574,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
                 keepRecords(inputFromUser);
               }
             }
+            delete newTile;
           }
         } else {
           printState = false;

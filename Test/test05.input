@@ -1,0 +1,10 @@
+1
+TED
+KEVIN
+PLACE R1 at A0
+place R2 at A0
+place R1 at A0
+replace B2
+place R5 at B1
+place R5 at C1
+pass
