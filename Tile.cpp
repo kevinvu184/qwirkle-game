@@ -51,23 +51,28 @@ bool Tile::isSameShape(const Tile &t) {
 }
 
 std::ostream &operator<<(std::ostream &out, const Tile &t) {
-  std::string setColour = "";
-  if (t.colour == RED)
-    setColour = SET_RED;
-  if (t.colour == ORANGE)
-    setColour = SET_ORANGE;
-  if (t.colour == YELLOW)
-    setColour = SET_YELLOW;
-  if (t.colour == GREEN)
-    setColour = SET_GREEN;
-  if (t.colour == BLUE)
-    setColour = SET_BLUE;
-  if (t.colour == PURPLE)
-    setColour = SET_PURPLE;
-
-  out << setColour << t.colour << std::to_string(t.shape) << RESET_COLOUR;
+  out << t.colour << std::to_string(t.shape);
   return out;
 }
+
+//std::ostream &operator<<(std::ostream &out, const Tile &t) {
+//  std::string setColour = "";
+//  if (t.colour == RED)
+//    setColour = SET_RED;
+//  if (t.colour == ORANGE)
+//   setColour = SET_ORANGE;
+//  if (t.colour == YELLOW)
+//    setColour = SET_YELLOW;
+//  if (t.colour == GREEN)
+//    setColour = SET_GREEN;
+//  if (t.colour == BLUE)
+//    setColour = SET_BLUE;
+// if (t.colour == PURPLE)
+//    setColour = SET_PURPLE;
+
+//  out << setColour << t.colour << std::to_string(t.shape) << RESET_COLOUR;
+//  return out;
+//}
 
 // std::ostream &operator<<(std::ostream &out, const Tile &t) {
 // 	std::string setColour = "";
