@@ -18,10 +18,11 @@
 #define LINE_INF_ABOUT_PLAYER 6
 
 #define GOODBYE "\nGoodbye\n"
-#define ERR_MENU_OPTION "Invalid input, please enter numbers 1-4 to select one of the menu options."
+#define ERR_MENU_OPTION "Invalid input, please enter numbers 1-5 to select one of the menu options."
 #define ERR_FILE_FORMAT "ERROR: Your file name entered has wrong format, cannot load file."
 #define ERR_NAME_FORMAT "Your name must contain uppercase characters only. Please try again."
 #define ERR_FILE_NOT_EXIST "ERROR: Your file does not exist, please try again."
+#define HELP_MENU_OPTION "\nPlease enter a number between 1 and 5 to select one of the menu options.\n"
 #define NUMPLAYERS  2
 
 Menu::Menu()
@@ -31,7 +32,7 @@ Menu::Menu()
 
 void Menu::runProgram()
 {
-   int userInput = 0;
+   std::string userInput = "";
    std::string line;
 
    std::cout << "\n\nWelcome to Qwirkle!"
@@ -42,19 +43,22 @@ void Menu::runProgram()
      std::cin >> userInput;
 
      // Validate userInput
-     if( !(std::cin.eof()) and ((userInput < 1) or (userInput > 4) or (!std::cin)) ){
+     if(userInput == "help"){
+       std::cout << HELP_MENU_OPTION << std::endl;
+     }
+     else if( !(std::cin.eof()) and ((std::stoi(userInput) < 1) or (std::stoi(userInput) > 4) or (!std::cin)) ){
        std::cin.clear();
        std::cout << ERR_MENU_OPTION << std::endl;
      }
      else{
-         if (userInput == 1){
+         if (std::stoi(userInput) == 1){
            remove("records.txt");
            playGame();
          }
-         else if(userInput == 2){
+         else if(std::stoi(userInput) == 2){
            loadGame();
          }
-         else if(userInput == 3){
+         else if(std::stoi(userInput) == 3){
            showStudentInformation();
          }
          else
@@ -62,7 +66,7 @@ void Menu::runProgram()
            std::cout << GOODBYE << std::flush;
          }
        }
-     } while ( (std::getline(std::cin, line)) && (userInput != 4) );
+     } while ( (std::getline(std::cin, line)) && (userInput != "4") );
 }
 
 void Menu::playGame()
