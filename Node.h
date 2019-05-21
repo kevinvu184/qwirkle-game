@@ -10,7 +10,7 @@ class Node {
     Node(Node& other);
     ~Node();
 
-    //declared as public but is this being public good or bad
+    
     Tile* tile;
     Node* next;
 };

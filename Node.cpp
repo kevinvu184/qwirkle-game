@@ -11,7 +11,7 @@ Node::~Node() {
 }
 
 Node::Node(Node& other) {
-  //this is to implement a DEEP COPY case study with character
+  //this is to implement a DEEP COPY 
   this->tile = new Tile(*(other.tile));
 
   this->next = other.next;

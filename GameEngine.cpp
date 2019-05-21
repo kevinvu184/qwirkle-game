@@ -1,7 +1,6 @@
 #include "GameEngine.h"
 #include "TileCodes.h"
 
-#include <iostream>
 #include <array>
 #include <bits/stdc++.h>
 #include <iostream>
@@ -17,12 +16,19 @@
 #define COMMAND_SIZE_WHEN_REPLACE_TILE 2
 #define COMMAND_SIZE_WHEN_SAVING_GAME 2
 #define ASCII_FOR_0 48
+#define ID_OF_FIRST_PLAYER 1
+#define ID_OF_SECOND_PLAYER 2
+#define PLAY_GAME_SELECTION 1
+#define LOAD_GAME_SELECTION 2
 
+#include <iostream>
 
 GameEngine::GameEngine() {
   this->playerCount = 0;
+  for (unsigned int i = 0; i < highScoreplayer.size(); i++){
+    highScoreplayer[i] = new Player("player");
+  }
   tileBagStr = "";
-
 }
 
 GameEngine::~GameEngine() {
@@ -68,7 +74,11 @@ void GameEngine::printScore() {
   }
 }
 
-//validate format only return true if the command input match the following format:
+Player* GameEngine::getHighScorePlayer(int i){
+    return highScoreplayer[i];
+}
+
+//validate format only return true if the command input matches the following format:
 //format for placing: place <tile> at <location>
 //format for replacing: replace <tile>
 //format for passing turn: pass
@@ -120,7 +130,8 @@ std::string GameEngine::getTileFromUserInput(std::string input) {
   return tile;
 }
 
-//location in any command is at the second position
+//location in placing command is at the fourth position so we loop
+//to tokenize three words to get to the fourth position
 std::string GameEngine::getLocationFromUserInput(std::string input) {
   std::string location = "";
 
@@ -182,6 +193,8 @@ void GameEngine::printMessageWhenSaveGame(std::string& inputFromUser,
     //saveGame or quitGame(first time input) goes into here
     std::getline(std::cin, inputFromUser);
     if (std::cin.eof() == true) {
+      addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+      keepHighestRecords();
       std::cout << "\n\nGoodbye\n";
       quitGame = true;
 
@@ -209,6 +222,8 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser,
 
       std::getline(std::cin, inputFromUser);
       if (std::cin.eof() == true) {
+        addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+        keepHighestRecords();
         std::cout << "\n\nGoodbye\n";
         quitGame = true;
 
@@ -222,6 +237,8 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser,
         ableToAdd = true;
         std::getline(std::cin, inputFromUser);
         if (std::cin.eof() == true) {
+          addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+          keepHighestRecords();
           std::cout << "\n\nGoodbye\n";
           quitGame = true;
         }
@@ -239,10 +256,21 @@ void GameEngine::printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame,
 
     std::getline(std::cin, inputFromUser);
     if (std::cin.eof() == true) {
+      addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+      keepHighestRecords();
       std::cout << "\n\nGoodbye\n";
       quitGame = true;
     }
   }
+}
+
+void GameEngine::keepHighestRecords(){
+  std::ofstream outFile;
+  outFile.open("hrecords.txt");
+  for (unsigned int i = 0; i < highScoreplayer.size(); i++){
+    outFile << highScoreplayer[i]->getPlayerName() << ":" << highScoreplayer[i]->getPlayerScore() << std::endl;
+  }
+  outFile.close();
 }
 
 //keeping all the moves in file "records.txt"
@@ -280,7 +308,7 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
   std::string tmp = "";
   std::istringstream inputPlayerHand_1(firstPlayerHand);
 
-  Player* firstPlayer = new Player(1, firstPlayerName);
+  Player* firstPlayer = new Player(ID_OF_FIRST_PLAYER, firstPlayerName);
   while (std::getline(inputPlayerHand_1, tmp, ',')) {
     char cTileArray[3];
     strcpy(cTileArray, tmp.c_str());
@@ -290,7 +318,7 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
   }
 
   std::istringstream inputPlayerHand_2(secondPlayerHand);
-  Player* secondPlayer = new Player(2, secondPlayerName);
+  Player* secondPlayer = new Player(ID_OF_SECOND_PLAYER, secondPlayerName);
   while (std::getline(inputPlayerHand_2, tmp, ',')) {
     char cTileArray[3];
     strcpy(cTileArray, tmp.c_str());
@@ -428,7 +456,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
     if (inputFromUser == "pass") {
       ableToAddTile = true;
       repromptPlayer = false;
-      if (player->getPlayerId() == 1) {
+      if (player->getPlayerId() == ID_OF_FIRST_PLAYER) {
         firstPlayerTurn = false;
       } else {
         firstPlayerTurn = true;
@@ -436,6 +464,8 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
       keepRecords(inputFromUser);
       passTurn = true;
     } else if (std::cin.eof() == true) {
+      addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+      keepHighestRecords();
       std::cout << "\n\nGoodbye\n";
       passTurn = true;
       quitGame = true;
@@ -464,7 +494,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
           std::cout << "> ";
           std::getline(std::cin, inputFromUser);
         } else if (ableToAddTile == false) {
-          std::cout << "Invalid Input, please check your move board\n";
+          std::cout << "Invalid Input, please check your move on the board\n";
           std::cout << "> ";
           std::getline(std::cin, inputFromUser);
           ableToAddTile = true;
@@ -547,7 +577,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
           }
         } else {
           printState = false;
-          std::cout << "\nInvalid Input, you can only continue place tile\n\n";
+          std::cout << "\nInvalid Input, you can only continue placing tiles\n\n";
           std::cout << ">";
           std::getline(std::cin, inputFromUser);
         }
@@ -591,10 +621,12 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
   std::string gridLocation = "";
 
   int turn = 0;
-  if (selection == 1) {
+
+  //if players play a new game we will construct the state of the game this way
+  if (selection == PLAY_GAME_SELECTION) {
     tileBag = new LinkedList();
-    firstPlayer = new Player(1, p1, firstPlayerHand);
-    secondPlayer = new Player(2, p2, secondPlayerHand);
+    firstPlayer = new Player(ID_OF_FIRST_PLAYER, p1, firstPlayerHand);
+    secondPlayer = new Player(ID_OF_SECOND_PLAYER, p2, secondPlayerHand);
 
     addPlayer(firstPlayer);
     addPlayer(secondPlayer);
@@ -607,7 +639,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
     setUpTilesInitially(firstPlayer, tileBag);
     setUpTilesInitially(secondPlayer, tileBag);
-  } else if (selection == 2) {
+    //if player choose to load game we will construct the state of the game this way
+  } else if (selection == LOAD_GAME_SELECTION) {
 
     tileBag = this->constructTileBag(tileBagStr);
 
@@ -629,6 +662,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
       this->getState(firstPlayer);
       std::getline(std::cin, inputFromUser);
       if (std::cin.eof() == true) {
+        addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+        keepHighestRecords();
         std::cout << "\n\nGoodbye\n";
         quitGame = true;
       }
@@ -644,7 +679,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
           if (validateFormat(inputFromUser) == false
               || validateTileExistInHand(getTileFromUserInput(inputFromUser),
                   firstPlayer) == false) {
-            //suppose player saves game many times
+            //suppose player saves game many times using while loop in this method
             printMessageWhenSaveGame(inputFromUser, firstPlayer, tileBag,
                 quitGame);
             printMessageWhenInvalidFormat(inputFromUser, firstPlayer, tileBag,
@@ -660,6 +695,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
               tileInput = getTileFromUserInput(inputFromUser);
               gridLocation = getLocationFromUserInput(inputFromUser);
 
+              //passing the validateFormat and tileExistInHand, proceed to board validation
               if (validateFormat(inputFromUser) == true
                   && validateTileExistInHand(tileInput, firstPlayer) == true) {
                 firstPlayerTurn = false;
@@ -894,6 +930,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
           std::getline(std::cin, inputFromUser);
           if (std::cin.eof()) {
+            addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+            keepHighestRecords();
             std::cout << "\n\nGoodbye\n";
             quitGame = true;
 
@@ -1047,6 +1085,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
     } else {
       std::cout << "Player " << secondPlayer->getPlayerScore() << " won!\n";
     }
+    addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
+    keepHighestRecords();
     std::cout << "\n\nGoodbye";
   }
 
@@ -1054,15 +1094,65 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
   delete secondPlayerHand;
   delete tileBag;
 
-  if (selection == 2) {
+  if (selection == LOAD_GAME_SELECTION) {
     delete firstPlayer;
     delete secondPlayer;
   }
 }
 
+Player* GameEngine::getPlayerWithHighestScoreWhenEnd(){
+    int max = 0;
+    int index = 0;
+
+    for (int i = 0; i < this->playerCount; i++){
+      if (max < playerList[i]->getPlayerScore()){
+        max = playerList[i]->getPlayerScore();
+        index = i;
+      }
+    }
+
+    return playerList[index];
+}
+
+void GameEngine::addHighestPlayer(Player* p){
+  std::vector<std::string> tokens;
+  std::string filename = "hrecords.txt";
+  std::ifstream iffile(filename.c_str());
+  // return (bool)iffile;
+  if ((bool)iffile) {
+    for (Player* i : highScoreplayer){
+      if (i->getPlayerScore() < p->getPlayerScore()){
+        i->setPlayerName(p->getPlayerName());
+        i->setPlayerScore(p->getPlayerScore());
+      }
+    }
+  } else {
+    std::string line = "";
+    std::string tempStr = "";
+    std::ifstream input(filename);
+    while (std::getline(input,line)){
+      std::istringstream stringInput(line);
+      while(std::getline(stringInput, tempStr, ':'))
+      {
+        tokens.push_back(tempStr);
+      }
+    }
+  }
+  for (unsigned int i = 0, k = 0; i < tokens.size() && k < highScoreplayer.size(); i+=2, k++){
+    highScoreplayer[k]->setPlayerName(tokens[i]);
+    highScoreplayer[k]->setPlayerScore(std::stoi(tokens[i+1]));
+  }
+  for (Player* i : highScoreplayer){
+    if (i->getPlayerScore() < p->getPlayerScore()){
+      i->setPlayerName(p->getPlayerName());
+      i->setPlayerScore(p->getPlayerScore());
+    }
+  }
+}
+
 //forward the call to playGame
 void GameEngine::loadGame(std::string& playerTurn, int selection) {
-  this->playGame(playerTurn, playerTurn, 2);
+  this->playGame(playerTurn, playerTurn, LOAD_GAME_SELECTION);
 }
 
 void GameEngine::setUpTilesInitially(Player *player, LinkedList *tileBag) {

@@ -15,6 +15,10 @@ class GameEngine {
     void playGame(std::string p1, std::string p2, int selection);
 
     void addPlayer(Player *p);
+    Player* getHighScorePlayer(int i);
+    void addHighestPlayer(Player* p);
+    Player* getPlayerWithHighestScoreWhenEnd();
+    void keepHighestRecords();
 
     void setUpTilesInitially(Player *player, LinkedList *tileBag);
     void shuffleAndCreateTileBag(LinkedList *tileBag);
@@ -31,7 +35,7 @@ class GameEngine {
         std::string inputFromUser, Player *player);
 
     void printScore();
-    
+
 
     void getState(Player *p);
 
@@ -72,6 +76,7 @@ class GameEngine {
     Player *playerList[2];
     int playerCount;
     std::string tileBagStr;
+    std::array<Player*,1> highScoreplayer;
 
 };
 
