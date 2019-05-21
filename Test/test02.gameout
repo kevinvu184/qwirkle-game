@@ -1,0 +1,137 @@
+
+
+Welcome to Qwirkle!
+-------------------
+Menu
+1. New Game
+2. Load Game
+3. Show student information
+4. Show High Score
+5. Quit
+> 
+Starting a New Game
+
+Enter a name for player 1 (uppercase characters only)
+> 
+Enter a name for player 2 (uppercase characters only)
+> 
+
+Let's Play!
+
+
+KEVIN, it's your turn.
+Score for KEVIN: 0
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |  |  |  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R1,P3,B2,R5,P6,G4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 0
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |  |R5|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R1,P3,B2,P6,G4
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 0
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |R1|  |  |
+C |  |  |R5|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+P3,B2,P6,G4
+
+> 
+TED, it's your turn.
+Score for KEVIN: 2
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |R1|  |  |
+C |  |  |R5|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+P1,R4,P1,G1,G5,B6
+
+> 
+TED, it's your turn.
+Score for KEVIN: 2
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |P1|R1|  |  |
+C |  |  |R5|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G1,G5,B6
+
+> 
+TED, it's your turn.
+Score for KEVIN: 2
+Score for TED: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |G1|  |  |  |
+C |  |P1|R1|  |  |
+D |  |  |R5|  |  |
+E |  |  |  |  |  |
+F |  |  |  |  |  |
+
+Your hand is 
+R4,P1,G5,B6
+
+> 
+KEVIN, it's your turn.
+Score for KEVIN: 2
+Score for TED: 4
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |G1|  |  |  |
+C |  |P1|R1|  |  |
+D |  |  |R5|  |  |
+E |  |  |  |  |  |
+F |  |  |  |  |  |
+
+Your hand is 
+P3,B2,P6,G4,Y4,R4
+
+> 
+
+Goodbye

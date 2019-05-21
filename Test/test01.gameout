@@ -1,0 +1,71 @@
+
+
+Welcome to Qwirkle!
+-------------------
+Menu
+1. New Game
+2. Load Game
+3. Show student information
+4. Show High Score
+5. Quit
+> 
+Starting a New Game
+
+Enter a name for player 1 (uppercase characters only)
+> 
+Enter a name for player 2 (uppercase characters only)
+> 
+
+Let's Play!
+
+
+TED, it's your turn.
+Score for TED: 0
+Score for KEVIN: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |  |  |  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+R1,P3,B2,R5,P6,G4
+
+> 
+TED, it's your turn.
+Score for TED: 0
+Score for KEVIN: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |  |R1|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+P3,B2,R5,P6,G4
+
+> 
+TED, it's your turn.
+Score for TED: 0
+Score for KEVIN: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |R5|  |  |
+C |  |  |R1|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+P3,B2,P6,G4
+
+> 
+
+Goodbye
