@@ -22,7 +22,7 @@ Player::Player(std::string name)
 
 
 Player::~Player() {
-  delete hand;
+  //  delete hand;
 }
 
 std::string Player::getPlayerName() {
