@@ -1,13 +1,13 @@
 #include "Menu.h"
 #include "TileCodes.h"
-#include<regex>
-#include<iostream>
-#include<fstream>
-#include<array>
-#include<sstream>
-#include<string>
+#include <regex>
+#include <iostream>
+#include <fstream>
+#include <array>
+#include <sstream>
+#include <string>
 #include <bits/stdc++.h>
-#include<algorithm>
+#include <algorithm>
 
 #define NUMBER_OF_PLAYERS 2
 #define NUMBER_OF_COLOR 6
@@ -19,6 +19,9 @@
 
 #define INVALID "Invalid input."
 #define GOODBYE "\nGoodbye\n"
+#define ERR_FILE_FORMAT "ERROR: Your file name entered has wrong format, cannot load file."
+#define ERR_NAME_FORMAT "Your name must contain uppercase characters only. Please try again."
+#define ERR_FILE_NOT_EXIST "ERROR: Your file does not exist, please try again."
 #define NUMPLAYERS  2
 
 Menu::Menu()
@@ -71,37 +74,11 @@ void Menu::playGame()
 
     std::cout<<"\nStarting a New Game" << std::endl;
 
-    // for(int i = 0; i < NUMPLAYERS; i++){
-    //   playerNames[i] = inputPlayerNames(i+1);
-    // }
     playerNames[0] = inputPlayerNames(1);
     playerNames[1] = inputPlayerNames(2);
 
     std::cout << "Let's Play!" << std::endl;
-    gameEngine.playGame(playerNames[0], playerNames[1]); //Need to adjust this for multiplayers
-}
-
-std::string Menu::inputPlayerNames(int player){
-  bool validatePlayerName(std::string playerName);
-  bool initialPrompt = true;
-
-  std::string playerName = "";
-
-  do{
-    if(initialPrompt){
-      std::cout << "Please enter a name for player " << player << " (uppercase characters only)" << std::endl;
-      std::cout << "> " << std::flush;
-      std::getline(std::cin, playerName);
-      initialPrompt = false;
-    }
-
-    if(!validatePlayerName(playerName)){
-      std::cout << "\nYour name must contain uppercase characters only. Please try again." << std::endl;
-      std::cout << "> " << std::flush;
-      std::getline(std::cin, playerName);
-    }
-  } while(!validatePlayerName(playerName));
-  return playerName;
+    gameEngine.playGame(playerNames[0], playerNames[1], 1); //Need to adjust this for multiplayers
 }
 
 bool Menu::validatePlayerName(std::string playerName){
@@ -115,6 +92,28 @@ bool Menu::validatePlayerName(std::string playerName){
   return result;
 }
 
+std::string Menu::inputPlayerNames(int player){
+  bool initialPrompt = true;
+
+  std::string playerName = "";
+
+  do{
+    if(initialPrompt){
+      std::cout << "Please enter a name for player " << player << " (uppercase characters only)" << std::endl;
+      std::cout << "> " << std::flush;
+      std::getline(std::cin, playerName);
+      initialPrompt = false;
+    }
+
+    if(!validatePlayerName(playerName)){
+      std::cout << ERR_NAME_FORMAT << std::endl;
+      std::cout << "> " << std::flush;
+      std::getline(std::cin, playerName);
+    }
+  } while(!validatePlayerName(playerName));
+  return playerName;
+}
+
 bool Menu::checkFileExist(std::string& fileName)
 {
   std::ifstream iffile(fileName.c_str());
@@ -123,15 +122,11 @@ bool Menu::checkFileExist(std::string& fileName)
 
 bool Menu::checkFormatForPlayerHand(std::string& playerHand)
 {
-
   bool result = true;
   std::vector<std::string> tokens;
   std::string tmp = "";
   std::istringstream input(playerHand);
-
   std::regex tileFormat("([ROYGBP][1-6])");
-
-
 
   while(std::getline(input, tmp, ','))
   {
@@ -146,11 +141,7 @@ bool Menu::checkFormatForPlayerHand(std::string& playerHand)
       result = false;
     }
   }
-
-
   return result;
-
-
 }
 
 bool Menu::validateFormat(std::string& fileName)
@@ -162,10 +153,7 @@ bool Menu::validateFormat(std::string& fileName)
   int playerScore = 0;
   std::string playerHand = "";
   std::string tileBag = "";
-
-
   std::regex tileFormat("([ROYGBP][1-6])");
-
 
   for(int i = 0; i < NUMBER_OF_PLAYERS && result == true; ++i)
   {
@@ -180,7 +168,7 @@ bool Menu::validateFormat(std::string& fileName)
     {
 
       std::getline(input, playerHand);
-      if(checkForNameInput(playerName[i]) == false || checkFormatForPlayerHand(playerHand) == false)
+      if(validatePlayerName(playerName[i]) == false || validatePlayerName(playerHand) == false)
       {
        result = false;
 
@@ -205,15 +193,12 @@ bool Menu::validateFormat(std::string& fileName)
         result = false;
       }
     }
-
-
   }
 
   if(result == true)
   {
 
    std::string tmp = "";
-
 
     while(std::getline(input, tmp) && result == true)
     {
@@ -231,21 +216,20 @@ bool Menu::validateFormat(std::string& fileName)
 
 void Menu::loadGame()
 {
-
   std::string fileName = "";
   std::vector<std::string> constructPlayerState;
 
   bool load = false;
 
   do{
-   std::cout<<"\nEnter the filename from which load a game\n";
+   std::cout<<"\nEnter the filename from which load a game" << std::endl;
    std::cout<<"> ";
    std::cin.ignore();
    std::getline(std::cin, fileName);
 
    while(!checkFileExist(fileName))
    {
-     std::cout<<"\nFile does not exist please reenter:\n";
+     std::cout << ERR_FILE_NOT_EXIST << std::endl;
      std::cout<<"> ";
      std::getline(std::cin, fileName);
    }
@@ -287,9 +271,7 @@ void Menu::loadGame()
           continueLoop = false;
           playerTurn = tmp;
         }
-
       }
-
 
       try
       {
@@ -299,12 +281,10 @@ void Menu::loadGame()
       {
         loadGame();
       }
-
    }
    else
    {
-
-      std::cout<<"ERROR: Your file name entered has wrong format, cannot load file\n";
+      std::cout << ERR_FILE_FORMAT << std::endl;
    }
   }while(load == false);
 
