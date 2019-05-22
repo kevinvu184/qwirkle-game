@@ -112,6 +112,7 @@ P3,B2,P6,G4,Y4,R4
 > 
 Invalid Input, Please check your move on the board
 > 
+
 A, it's your turn.
 Score for A: 2
 Score for B: 2
@@ -148,5 +149,6 @@ P1,P1,G1,G5,B6,G5
 > 
 Invalid Input, Please check your format again
 > 
+
 
 Goodbye
