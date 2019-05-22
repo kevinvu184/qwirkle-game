@@ -36,7 +36,6 @@ class GameEngine {
 
     void printScore();
 
-
     void getState(Player *p);
 
     int countToken(std::string);
@@ -50,7 +49,6 @@ class GameEngine {
         Player* player, LinkedList* tileBag, bool& quitGame, bool& ableToAdd);
     void printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame,
         std::string& inputFromUser);
-
 
     void constructPlayerState(std::string& firstPlayerName,
         std::string& scoreFirstPlayer, std::string& firstPlayerHand,
@@ -76,7 +74,7 @@ class GameEngine {
     Player *playerList[2];
     int playerCount;
     std::string tileBagStr;
-    std::array<Player*,1> highScoreplayer;
+    std::array<Player*, 1> highScoreplayer;
 
 };
 

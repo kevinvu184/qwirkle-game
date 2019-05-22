@@ -15,7 +15,7 @@
 #define NUMBER_OF_COMMAS 5
 #define NUMBER_OF_TILES_TOTAL 72
 #define LINE_INF_ABOUT_PLAYER 6
-#define HIGH_SCORE_LIST	1
+#define HIGH_SCORE_LIST 1
 
 #define GOODBYE_OPTION  5
 #define GOODBYE "\nGoodbye\n"
@@ -26,101 +26,94 @@
 #define HELP_MENU_OPTION "\nPlease enter a number between 1 and 5 to select one of the menu options.\n"
 #define NUMPLAYERS  2
 
-Menu::Menu()
-{
-    gameEngine = GameEngine();
+Menu::Menu() {
+  gameEngine = GameEngine();
 }
 
-void Menu::runProgram()
-{
-   std::string userInput = "";
-   std::string line;
+void Menu::runProgram() {
+  std::string userInput = "";
+  std::string line;
 
-   std::cout << "\n\nWelcome to Qwirkle!"
-    "\n-------------------"<< std::endl;
+  std::cout << "\n\nWelcome to Qwirkle!"
+      "\n-------------------" << std::endl;
 
-    do {
-     printMenu();
-     std::cin >> userInput;
+  do {
+    printMenu();
+    std::cin >> userInput;
 
-     // Validate userInput
-     if(userInput == "help"){
-       std::cout << HELP_MENU_OPTION << std::endl;
-     }
-     else if( !(std::cin.eof()) and ((std::stoi(userInput) < 1) or (std::stoi(userInput) > GOODBYE_OPTION) or (!std::cin)) ){
-       std::cin.clear();
-       std::cout << ERR_MENU_OPTION << std::endl;
-     }
-     else{
-         if (std::stoi(userInput) == 1){
-           remove("records.txt");
-           playGame();
-         }
-         else if(std::stoi(userInput) == 2){
-           loadGame();
-         }
-         else if(std::stoi(userInput) == 3){
-           showStudentInformation();
-         }
-         else if(std::stoi(userInput) == 4){
-           showHighScore();
-         }
-         else
-         {
-           std::cout << GOODBYE << std::flush;
-         }
-       }
-     } while ( (std::getline(std::cin, line)) && (std::stoi(userInput) != GOODBYE_OPTION) );
+    // Validate userInput
+    if (userInput == "help") {
+      std::cout << HELP_MENU_OPTION << std::endl;
+    } else if (!(std::cin.eof())
+        and ((std::stoi(userInput) < 1)
+            or (std::stoi(userInput) > GOODBYE_OPTION) or (!std::cin))) {
+      std::cin.clear();
+      std::cout << ERR_MENU_OPTION << std::endl;
+    } else {
+      if (std::stoi(userInput) == 1) {
+        remove("records.txt");
+        playGame();
+      } else if (std::stoi(userInput) == 2) {
+        loadGame();
+      } else if (std::stoi(userInput) == 3) {
+        showStudentInformation();
+      } else if (std::stoi(userInput) == 4) {
+        showHighScore();
+      } else {
+        std::cout << GOODBYE << std::flush;
+      }
+    }
+  } while ((std::getline(std::cin, line))
+      && (std::stoi(userInput) != GOODBYE_OPTION));
 }
 
-void Menu::playGame()
-{
-    //clear whitespace from previous input before use getline()
-    std::cin.ignore();
+void Menu::playGame() {
+  //clear whitespace from previous input before use getline()
+  std::cin.ignore();
 
-    std::string playerNames[NUMPLAYERS];
+  std::string playerNames[NUMPLAYERS];
 
-    std::cout<<"\nStarting a New Game" << std::endl;
+  std::cout << "\nStarting a New Game" << std::endl;
 
-    playerNames[0] = inputPlayerNames(1);
-    playerNames[1] = inputPlayerNames(2);
+  playerNames[0] = inputPlayerNames(1);
+  playerNames[1] = inputPlayerNames(2);
 
-    std::cout << "Let's Play!" << std::endl;
-    gameEngine.playGame(playerNames[0], playerNames[1], 1); //Need to adjust this for multiplayers
+  std::cout << "Let's Play!" << std::endl;
+  gameEngine.playGame(playerNames[0], playerNames[1], 1); //Need to adjust this for multiplayers
 }
 
-bool Menu::validatePlayerName(std::string playerName){
+bool Menu::validatePlayerName(std::string playerName) {
   bool result = false;
 
   // Only accept UPPERCASE CHARACTERS 1-25 inclusive in length
   std::regex name("[A-Z]{1,25}");
-  if(std::regex_match(playerName, name)){
+  if (std::regex_match(playerName, name)) {
     result = true;
   }
   return result;
 }
 
-std::string Menu::inputPlayerNames(int player){
+std::string Menu::inputPlayerNames(int player) {
   bool initialPrompt = true;
   std::string playerName = "";
 
-  do{
-    if(initialPrompt){
-      std::cout << "Please enter a name for player " << player << " (uppercase characters only)" << std::endl;
+  do {
+    if (initialPrompt) {
+      std::cout << "Please enter a name for player " << player
+          << " (uppercase characters only)" << std::endl;
       std::cout << "> " << std::flush;
       std::getline(std::cin, playerName);
       initialPrompt = false;
     }
 
-    if(playerName == "help"){
+    if (playerName == "help") {
       initialPrompt = true;
-    }
-    else if(!validatePlayerName(playerName)){
+    } else if (!validatePlayerName(playerName)) {
       std::cout << ERR_NAME_FORMAT << std::endl;
       std::cout << "> " << std::flush;
       std::getline(std::cin, playerName);
     }
-  } while(!validatePlayerName(playerName));
+  } while (!validatePlayerName(playerName));
   return playerName;
 }
 
@@ -160,8 +153,7 @@ bool Menu::validateFormat(std::string& fileName) {
   std::string tileBag = "";
   std::regex tileFormat("([ROYGBP][1-6])");
 
-  for(int i = 0; i < NUMBER_OF_PLAYERS && result == true; ++i)
-  {
+  for (int i = 0; i < NUMBER_OF_PLAYERS && result == true; ++i) {
     std::getline(input, playerName[i]);
 
     input >> playerScore;
@@ -197,12 +189,9 @@ bool Menu::validateFormat(std::string& fileName) {
 
   if (result == true) {
     std::string tmp = "";
-    while(std::getline(input, tmp) && result == true)
-    {
-      if(gameEngine.validateFormat(tmp) == false)
-      {
-        if(tmp != playerName[0] && tmp != playerName[1])
-        {
+    while (std::getline(input, tmp) && result == true) {
+      if (gameEngine.validateFormat(tmp) == false) {
+        if (tmp != playerName[0] && tmp != playerName[1]) {
           result = false;
         }
       }
@@ -239,23 +228,23 @@ void Menu::loadGame() {
   bool load = false;
   bool constructBoardSuccessful = true;
 
-  do{
-   std::cout<<"\nEnter the filename of the game you would like to load" << std::endl;
-   std::cout<<"> " << std::flush;
-   
-   //to consume whitespace before using std::getline()
-   std::cin.ignore();
-      
-   std::getline(std::cin, fileName);
+  do {
+    std::cout << "\nEnter the filename of the game you would like to load"
+        << std::endl;
+    std::cout << "> " << std::flush;
 
-   while(!checkFileExist(fileName))
-   {
-     std::cout << ERR_FILE_NOT_EXIST << std::endl;
-     std::cout<<"> " << std::flush;
-     std::getline(std::cin, fileName);
-   }
+    //to consume whitespace before using std::getline()
+    std::cin.ignore();
 
-    if(validateFormat(fileName)) {
+    std::getline(std::cin, fileName);
+
+    while (!checkFileExist(fileName)) {
+      std::cout << ERR_FILE_NOT_EXIST << std::endl;
+      std::cout << "> " << std::flush;
+      std::getline(std::cin, fileName);
+    }
+
+    if (validateFormat(fileName)) {
       load = true;
       std::string tmp = "";
       std::string moves = "";
@@ -288,8 +277,7 @@ void Menu::loadGame() {
         }
       }
 
-      try
-      {
+      try {
         gameEngine.constructBoard(moves);
         constructBoardSuccessful = true;
       } catch (const std::exception& e) {
@@ -303,12 +291,10 @@ void Menu::loadGame() {
         gameEngine.loadGame(playerTurn, 2);
 
       }
-   }
-   else
-   {
+    } else {
       std::cout << ERR_FILE_FORMAT << std::endl;
-   }
-  }while(load == false);
+    }
+  } while (load == false);
 
 }
 
@@ -343,33 +329,25 @@ void Menu::showStudentInformation() {
   std::cout << "---------------------------------------------\n" << std::endl;
 }
 
-void Menu::showHighScore(){
+void Menu::showHighScore() {
   std::cout << "\nHighest Score--------------------------------" << std::endl;
   std::vector<std::string> tokens;
   std::string filename = "hrecords.txt";
   if (!checkFileExist(filename)) {
-    std::cout<< ERR_FILE_NOT_EXIST << std::endl;
+    std::cout << ERR_FILE_NOT_EXIST << std::endl;
   } else {
     std::string line = "";
     std::string tempStr = "";
     std::ifstream input(filename);
-    while (std::getline(input,line)){
+    while (std::getline(input, line)) {
       std::istringstream stringInput(line);
-      while(std::getline(stringInput, tempStr, ':'))
-      {
+      while (std::getline(stringInput, tempStr, ':')) {
         tokens.push_back(tempStr);
       }
     }
   }
-  //for (unsigned int i = 0, k = 0; i < tokens.size() && k < HIGH_SCORE_LIST; i+=2, k++){
-    //gameEngine.getHighScorePlayer(k)->setPlayerName(tokens[i]);
-    //gameEngine.getHighScorePlayer(k)->setUpPlayerScore(std::stoi(tokens[i+1]));
-  //}
-  //for (int i = 0; i < HIGH_SCORE_LIST; i++){
-    //std::cout<< i+1 << ". " << gameEngine.getHighScorePlayer(i)->getPlayerName() << ": " << gameEngine.getHighScorePlayer(i)->getPlayerScore() << std::endl;
-  //}
   for (int i = 0; i < HIGH_SCORE_LIST; ++i) {
-    std::cout << tokens[i] << ": " << tokens[i+1] <<std::endl;
+    std::cout << tokens[i] << ": " << tokens[i + 1] << std::endl;
   }
   std::cout << "---------------------------------------------\n" << std::endl;
 

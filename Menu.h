@@ -18,7 +18,6 @@ class Menu {
     std::string inputPlayerNames(int player);
     bool validatePlayerName(std::string playerName);
 
-
     bool checkFileExist(std::string& fileName);
     bool validateFormat(std::string& fileName);
     bool checkFormatForPlayerHand(std::string& playerHand);
