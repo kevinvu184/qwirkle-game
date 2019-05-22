@@ -6,6 +6,12 @@
 #include <string>
 
 class Player {
+  private:
+    int id;
+    std::string name;
+    int score;
+    LinkedList* hand;
+  
   public:
     Player(int id, std::string name);
     Player(int id, std::string name, LinkedList* newHand);
@@ -23,12 +29,7 @@ class Player {
     void setUpPlayerScore(int score);
 
     void displayTileInHand();
-    void clearPlayerHand();    
- 
-    int id;
-    std::string name;
-    int score;
-    LinkedList* hand;
+    void clearPlayerHand(); 
 };
 
 #endif //ASSIGN2_PLAYER_H
