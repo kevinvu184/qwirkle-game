@@ -360,12 +360,15 @@ void Menu::showHighScore(){
       }
     }
   }
-  for (unsigned int i = 0, k = 0; i < tokens.size() && k < HIGH_SCORE_LIST; i+=2, k++){
-    gameEngine.getHighScorePlayer(k)->setPlayerName(tokens[i]);
-    gameEngine.getHighScorePlayer(k)->setUpPlayerScore(std::stoi(tokens[i+1]));
-  }
-  for (int i = 0; i < HIGH_SCORE_LIST; i++){
-    std::cout<< i+1 << ". " << gameEngine.getHighScorePlayer(i)->getPlayerName() << ": " << gameEngine.getHighScorePlayer(i)->getPlayerScore() << std::endl;
+  //for (unsigned int i = 0, k = 0; i < tokens.size() && k < HIGH_SCORE_LIST; i+=2, k++){
+    //gameEngine.getHighScorePlayer(k)->setPlayerName(tokens[i]);
+    //gameEngine.getHighScorePlayer(k)->setUpPlayerScore(std::stoi(tokens[i+1]));
+  //}
+  //for (int i = 0; i < HIGH_SCORE_LIST; i++){
+    //std::cout<< i+1 << ". " << gameEngine.getHighScorePlayer(i)->getPlayerName() << ": " << gameEngine.getHighScorePlayer(i)->getPlayerScore() << std::endl;
+  //}
+  for (int i = 0; i < HIGH_SCORE_LIST; ++i) {
+    std::cout << tokens[i] << ": " << tokens[i+1] <<std::endl;
   }
   std::cout << "---------------------------------------------\n" << std::endl;
 
