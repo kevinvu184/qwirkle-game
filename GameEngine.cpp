@@ -25,9 +25,6 @@
 
 GameEngine::GameEngine() {
   this->playerCount = 0;
-  for (unsigned int i = 0; i < highScoreplayer.size(); i++){
-    highScoreplayer[i] = new Player("player");
-  }
   tileBagStr = "";
 }
 
@@ -269,6 +266,7 @@ void GameEngine::keepHighestRecords(){
   outFile.open("hrecords.txt");
   for (unsigned int i = 0; i < highScoreplayer.size(); i++){
     outFile << highScoreplayer[i]->getPlayerName() << ":" << highScoreplayer[i]->getPlayerScore() << std::endl;
+    delete highScoreplayer[i];
   }
   outFile.close();
 }
@@ -1131,6 +1129,9 @@ void GameEngine::addHighestPlayer(Player* p){
   std::string filename = "hrecords.txt";
   std::ifstream iffile(filename.c_str());
   // return (bool)iffile;
+  for (unsigned int i = 0; i < highScoreplayer.size();i++) {
+    highScoreplayer[i] = new Player("player");
+  }
   if ((bool)iffile) {
     for (Player* i : highScoreplayer){
       if (i->getPlayerScore() < p->getPlayerScore()){
