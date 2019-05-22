@@ -1,0 +1,12 @@
+1
+A
+B
+place R1 at A0
+replace R5
+pass
+place R4 at C3
+pass
+place G4 at B3
+replace Y4
+pass
+
