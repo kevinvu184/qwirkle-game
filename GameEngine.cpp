@@ -214,7 +214,7 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser,
             << "\nInvalid Input, tile input does not exist in your hand\n" << std::flush;
       }
 
-      std::cout << "> ";
+      std::cout << "> " << std::endl;
       ableToAdd = true;
 
       std::getline(std::cin, inputFromUser);
@@ -230,7 +230,7 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser,
         //call saveGame() here
         saveGame(getNameOfFileFromUserInput(inputFromUser), player, tileBag);
         std::cout << "\nGame successfully saved\n\n" << std::endl;
-        std::cout << "> ";
+        std::cout << "> " << std::endl;
         ableToAdd = true;
         std::getline(std::cin, inputFromUser);
         if (std::cin.eof() == true) {
@@ -248,7 +248,7 @@ void GameEngine::printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame,
     std::string& inputFromUser) {
   if (ableToAdd == false) {
     std::cout << "\nInvalid Input, Please check your move on the board" << std::endl;
-    std::cout << "> ";
+    std::cout << "> " << std::endl;
 
     std::getline(std::cin, inputFromUser);
     if (std::cin.eof() == true) {
@@ -302,7 +302,7 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
     std::string& secondPlayerHand) {
   int score_1 = 0;
   int score_2 = 0;
-  
+
   LinkedList* firstPlayerHandLL = new LinkedList();
   LinkedList* secondPlayerHandLL = new LinkedList();
 
@@ -472,7 +472,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
     } else if (std::cin.eof() == true) {
       addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
       keepHighestRecords();
-      std::cout << "\n\nGoodbye\n";
+      std::cout << "\n\nGoodbye" << std::endl;
       passTurn = true;
       quitGame = true;
     } else {
@@ -486,22 +486,22 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
             std::cout << "\nGame successfully saved" << std::endl;
             std::string filename = getNameOfFileFromUserInput(inputFromUser);
             saveGame(filename, player, tileBag);
-            std::cout << "> ";
+            std::cout << "> " << std::flush;
 
             std::getline(std::cin, inputFromUser);
           } else {
             std::cout << "Invalid Input, please check your format" << std::endl;
-            std::cout << "> ";
+            std::cout << "> " << std::flush;
             std::getline(std::cin, inputFromUser);
           }
         } else if (validateTileExistInHand(getTileFromUserInput(inputFromUser),
             player) == false) {
           std::cout << "Invalid Input, tile input does not exist in hand" << std::endl;
-          std::cout << "> ";
+          std::cout << "> " << std::flush;
           std::getline(std::cin, inputFromUser);
         } else if (ableToAddTile == false) {
           std::cout << "Invalid Input, please check your move on the board" << std::endl;
-          std::cout << "> ";
+          std::cout << "> " << std::flush;
           std::getline(std::cin, inputFromUser);
           ableToAddTile = true;
         }
@@ -588,7 +588,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
           printState = false;
           std::cout
               << "\nInvalid Input, you can only continue placing tiles\n" << std::endl;
-          std::cout << ">";
+          std::cout << ">" << std::flush;
           std::getline(std::cin, inputFromUser);
         }
 
@@ -946,7 +946,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
           if (std::cin.eof()) {
             addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
             keepHighestRecords();
-            std::cout << "\n\nGoodbye\n";
+            std::cout << "\n\nGoodbye" << std::endl;
             quitGame = true;
 
           }
