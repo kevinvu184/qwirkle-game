@@ -17,7 +17,7 @@
 #define LINE_INF_ABOUT_PLAYER 6
 #define HIGH_SCORE_LIST 1
 
-#define GOODBYE_OPTION  5
+#define GOODBYE_OPTION  "5"
 #define GOODBYE "\nGoodbye\n"
 #define ERR_MENU_OPTION "Invalid input, please enter numbers 1-5 to select one of the menu options."
 #define ERR_FILE_FORMAT "ERROR: Your file name entered has wrong format, cannot load file."
@@ -46,7 +46,7 @@ void Menu::runProgram() {
       std::cout << HELP_MENU_OPTION << std::endl;
     } else if (!(std::cin.eof())
         and ((std::stoi(userInput) < 1)
-            or (std::stoi(userInput) > GOODBYE_OPTION) or (!std::cin))) {
+            or (std::stoi(userInput) > std::stoi(GOODBYE_OPTION)) or (!std::cin))) {
       std::cin.clear();
       std::cout << ERR_MENU_OPTION << std::endl;
     } else {
@@ -64,7 +64,7 @@ void Menu::runProgram() {
       }
     }
   } while ((std::getline(std::cin, line))
-      && (std::stoi(userInput) != GOODBYE_OPTION));
+      && (userInput != "5"));
 }
 
 void Menu::playGame() {
