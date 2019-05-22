@@ -10,14 +10,9 @@ Menu
 5. Quit
 > 
 Starting a New Game
-
-Enter a name for player 1 (uppercase characters only)
-> 
-Enter a name for player 2 (uppercase characters only)
-> 
-
-Let's Play!
-
+Please enter a name for player 1 (uppercase characters only)
+> Please enter a name for player 2 (uppercase characters only)
+> Let's Play!
 
 TED, it's your turn.
 Score for TED: 0
@@ -35,6 +30,10 @@ Your hand is
 R1,P3,B2,R5,P6,G4
 
 > 
+Invalid Input, Please check your format again
+> 
+Invalid Input, tile input does not exist in your hand
+> 
 TED, it's your turn.
 Score for TED: 0
 Score for KEVIN: 0
@@ -51,6 +50,10 @@ Your hand is
 P3,B2,R5,P6,G4
 
 > 
+Invalid Input, you can only continue placing tiles
+
+>Invalid Input, please check your move on the board
+> 
 TED, it's your turn.
 Score for TED: 0
 Score for KEVIN: 0
@@ -58,13 +61,29 @@ Score for KEVIN: 0
    0  1  2  3  4 
   ----------------
 A |  |  |  |  |  |
-B |  |  |R5|  |  |
-C |  |  |R1|  |  |
+B |  |  |  |  |  |
+C |  |R5|R1|  |  |
 D |  |  |  |  |  |
 E |  |  |  |  |  |
 
 Your hand is 
 P3,B2,P6,G4
+
+> 
+KEVIN, it's your turn.
+Score for TED: 2
+Score for KEVIN: 0
+
+   0  1  2  3  4 
+  ----------------
+A |  |  |  |  |  |
+B |  |  |  |  |  |
+C |  |R5|R1|  |  |
+D |  |  |  |  |  |
+E |  |  |  |  |  |
+
+Your hand is 
+P1,R4,P1,G1,G5,B6
 
 > 
 

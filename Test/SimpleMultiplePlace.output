@@ -10,14 +10,9 @@ Menu
 5. Quit
 > 
 Starting a New Game
-
-Enter a name for player 1 (uppercase characters only)
-> 
-Enter a name for player 2 (uppercase characters only)
-> 
-
-Let's Play!
-
+Please enter a name for player 1 (uppercase characters only)
+> Please enter a name for player 2 (uppercase characters only)
+> Let's Play!
 
 KEVIN, it's your turn.
 Score for KEVIN: 0
