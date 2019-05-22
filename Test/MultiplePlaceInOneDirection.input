@@ -1,0 +1,16 @@
+1
+A
+B
+place P6 at A0
+place P3 at C3
+pass
+place P1 at C4
+pass
+replace R4
+replace G5
+replace Y5
+replace O1
+place P2 at C5
+pass
+replace P1
+replace Y3

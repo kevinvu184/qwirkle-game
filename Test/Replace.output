@@ -62,59 +62,5 @@ Your hand is
 P3,B2,R5,P6,G4,Y4
 
 > 
-B, it's your turn.
-Score for A: 0
-Score for B: 0
-
-   0  1  2  3  4 
-  ----------------
-A |  |  |  |  |  |
-B |  |  |  |  |  |
-C |  |  |  |  |  |
-D |  |  |  |  |  |
-E |  |  |  |  |  |
-
-Your hand is 
-P1,P1,G1,G5,B6,R4
-
-> 
-A, it's your turn.
-Score for A: 0
-Score for B: 0
-
-   0  1  2  3  4 
-  ----------------
-A |  |  |  |  |  |
-B |  |  |  |  |  |
-C |  |  |  |  |  |
-D |  |  |  |  |  |
-E |  |  |  |  |  |
-
-Your hand is 
-P3,B2,P6,G4,Y4,G5
-
-> 
-Invalid Input, Please check your format again
-> 
-
-
-Goodbye
-
-B, it's your turn.
-Score for A: 0
-Score for B: 0
-
-   0  1  2  3  4 
-  ----------------
-A |  |  |  |  |  |
-B |  |  |  |  |  |
-C |  |  |  |  |  |
-D |  |  |  |  |  |
-E |  |  |  |  |  |
-
-Your hand is 
-P1,P1,G5,B6,R4,Y5
-
-> 
 
 Goodbye
