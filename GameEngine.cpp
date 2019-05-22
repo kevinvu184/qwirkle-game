@@ -1141,11 +1141,11 @@ void GameEngine::addHighestPlayer(Player* p) {
   for (unsigned int i = 0; i < highScoreplayer.size(); i++) {
     highScoreplayer[i] = new Player("player");
   }
-  if ((bool) iffile) {
+  if (!(bool) iffile) {
     for (Player* i : highScoreplayer) {
       if (i->getPlayerScore() < p->getPlayerScore()) {
         i->setPlayerName(p->getPlayerName());
-        i->setPlayerScore(p->getPlayerScore());
+        i->setUpPlayerScore(p->getPlayerScore());
       }
     }
   } else {
@@ -1162,12 +1162,12 @@ void GameEngine::addHighestPlayer(Player* p) {
   for (unsigned int i = 0, k = 0;
       i < tokens.size() && k < highScoreplayer.size(); i += 2, k++) {
     highScoreplayer[k]->setPlayerName(tokens[i]);
-    highScoreplayer[k]->setPlayerScore(std::stoi(tokens[i + 1]));
+    highScoreplayer[k]->setUpPlayerScore(std::stoi(tokens[i + 1]));
   }
   for (Player* i : highScoreplayer) {
     if (i->getPlayerScore() < p->getPlayerScore()) {
       i->setPlayerName(p->getPlayerName());
-      i->setPlayerScore(p->getPlayerScore());
+      i->setUpPlayerScore(p->getPlayerScore());
     }
   }
 }
