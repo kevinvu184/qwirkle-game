@@ -15,6 +15,7 @@ class Tile {
   public:
     // Constructors
     Tile(Colour c, Shape s);
+    Tile(const Tile &t);
     Tile();
 
     // Getters
@@ -28,10 +29,9 @@ class Tile {
     // compare 2 tiles
     bool compareTile(Tile *t);
 
-    // Khoa's works:
-    Tile(const Tile &t);
     bool isSameColour(const Tile &t);
     bool isSameShape(const Tile &t);
+
     friend std::ostream &operator<<(std::ostream &out, const Tile &t);
     Tile &operator=(const Tile &t);
     friend bool operator==(const Tile &t1, const Tile &t2);

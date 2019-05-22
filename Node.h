@@ -5,12 +5,10 @@
 
 class Node {
   public:
-
     Node(Tile* tile, Node* next);
     Node(Node& other);
     ~Node();
 
-    
     Tile* tile;
     Node* next;
 };
