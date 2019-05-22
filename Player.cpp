@@ -18,11 +18,12 @@ Player::Player(std::string name)
 {
   this->name = name;
   this->score = 0;
+  this->hand = nullptr;
 }
 
 
 Player::~Player() {
-  delete hand;
+  // delete hand;
 }
 
 std::string Player::getPlayerName() {

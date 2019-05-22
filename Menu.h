@@ -15,7 +15,9 @@ class Menu {
     void printMenu();
     void showHighScore();
     void showStudentInformation();
-    bool checkForNameInput(std::string name);
+    std::string inputPlayerNames(int player);
+    bool validatePlayerName(std::string playerName);
+
 
     bool checkFileExist(std::string& fileName);
     bool validateFormat(std::string& fileName);

@@ -25,19 +25,16 @@
 
 GameEngine::GameEngine() {
   this->playerCount = 0;
-  for (unsigned int i = 0; i < highScoreplayer.size(); i++){
-    highScoreplayer[i] = new Player("player");
-  }
   tileBagStr = "";
 }
 
 GameEngine::~GameEngine() {
- 
+
 }
 
 void GameEngine::getState(Player *p) {
 
-  std::cout << "\n" << p->getPlayerName() << ", it's your turn" << std::endl;
+  std::cout << "\n" << p->getPlayerName() << ", it's your turn." << std::endl;
   printScore();
   std::cout << std::endl;
 
@@ -45,7 +42,7 @@ void GameEngine::getState(Player *p) {
   std::cout << "\nYour hand is " << std::endl;
   p->displayTileInHand();
 
-  std::cout << "\n> ";
+  std::cout << "\n> " << std::flush;
 }
 
 int GameEngine::countToken(std::string input) {
@@ -63,7 +60,7 @@ int GameEngine::countToken(std::string input) {
 }
 
 void GameEngine::addPlayer(Player *p) {
-  playerList[playerCount] = p;
+  playerList[playerCount] = new Player(p->getPlayerId(), p->getPlayerName(), p->getPlayerHand());
   playerCount++;
 }
 
@@ -269,6 +266,7 @@ void GameEngine::keepHighestRecords(){
   outFile.open("hrecords.txt");
   for (unsigned int i = 0; i < highScoreplayer.size(); i++){
     outFile << highScoreplayer[i]->getPlayerName() << ":" << highScoreplayer[i]->getPlayerScore() << std::endl;
+    delete highScoreplayer[i];
   }
   outFile.close();
 }
@@ -332,11 +330,17 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
   std::istringstream input_2(scoreSecondPlayer);
   input_2 >> score_2;
 
-  firstPlayer->setPlayerScore(score_1);
-  secondPlayer->setPlayerScore(score_2);
+  // firstPlayer->setPlayerScore(score_1);
+  // secondPlayer->setPlayerScore(score_2);
+
 
   addPlayer(firstPlayer);
   addPlayer(secondPlayer);
+  playerList[0]->setPlayerScore(score_1);
+  playerList[1]->setPlayerScore(score_2);
+
+  delete firstPlayer;
+  delete secondPlayer;
 
 }
 
@@ -574,6 +578,7 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
                 keepRecords(inputFromUser);
               }
             }
+            delete newTile;
           }
         } else {
           printState = false;
@@ -613,8 +618,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
   bool ableToAddTileForPlayer2 = true;
   bool quitGame = false;
 
-  Player* firstPlayer = nullptr;
-  Player* secondPlayer = nullptr;
+
 
   std::string inputFromUser = "";
   std::string tileInput = "";
@@ -625,6 +629,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
   //if players play a new game we will construct the state of the game this way
   if (selection == PLAY_GAME_SELECTION) {
     tileBag = new LinkedList();
+    Player* firstPlayer = nullptr;
+    Player* secondPlayer = nullptr;
     firstPlayer = new Player(ID_OF_FIRST_PLAYER, p1, firstPlayerHand);
     secondPlayer = new Player(ID_OF_SECOND_PLAYER, p2, secondPlayerHand);
 
@@ -639,6 +645,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
     setUpTilesInitially(firstPlayer, tileBag);
     setUpTilesInitially(secondPlayer, tileBag);
+    delete firstPlayer;
+    delete secondPlayer;
     //if player choose to load game we will construct the state of the game this way
   } else if (selection == LOAD_GAME_SELECTION) {
 
@@ -650,16 +658,16 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
       firstPlayerTurn = false;
     }
     turn++;
-    firstPlayer = playerList[0];
-    secondPlayer = playerList[1];
+    // firstPlayer = playerList[0];
+    // secondPlayer = playerList[1];
 
   }
 
   //game starts here
   do {
     if (firstPlayerTurn == true
-        && firstPlayer->getPlayerHand()->getSize() == 6) {
-      this->getState(firstPlayer);
+        && playerList[0]->getPlayerHand()->getSize() == 6) {
+      this->getState(playerList[0]);
       std::getline(std::cin, inputFromUser);
       if (std::cin.eof() == true) {
         addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
@@ -678,11 +686,11 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
           //saveGame and invalid input (include invalidformat, invalidtileexistinhand and invalidmove ) goes into here
           if (validateFormat(inputFromUser) == false
               || validateTileExistInHand(getTileFromUserInput(inputFromUser),
-                  firstPlayer) == false) {
+                  playerList[0]) == false) {
             //suppose player saves game many times using while loop in this method
-            printMessageWhenSaveGame(inputFromUser, firstPlayer, tileBag,
+            printMessageWhenSaveGame(inputFromUser, playerList[0], tileBag,
                 quitGame);
-            printMessageWhenInvalidFormat(inputFromUser, firstPlayer, tileBag,
+            printMessageWhenInvalidFormat(inputFromUser,  playerList[0], tileBag,
                 quitGame, ableToAddTileForPlayer1);
           }
 
@@ -697,7 +705,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
               //passing the validateFormat and tileExistInHand, proceed to board validation
               if (validateFormat(inputFromUser) == true
-                  && validateTileExistInHand(tileInput, firstPlayer) == true) {
+                  && validateTileExistInHand(tileInput, playerList[0]) == true) {
                 firstPlayerTurn = false;
 
                 //turn to c-style string for comparison
@@ -719,11 +727,11 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                       *newTile);
                   board.addTileAt(c);
                   ableToAddTileForPlayer1 = true;
-                  firstPlayer->getPlayerHand()->deleteTile(newTile);
+                  playerList[0]->getPlayerHand()->deleteTile(newTile);
                   keepRecords(inputFromUser);
                   askingForPlacingMultipleTiles(ableToAddTileForPlayer1,
                       firstPlayerTurn, repromtFirstPlayer, quitGame,
-                      firstPlayer, tileBag);
+                      playerList[0], tileBag);
 
                 } else {
                   int sizeLocation = gridLocation.size();
@@ -737,12 +745,12 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                   Coordinate c = Coordinate(cSizeInput[0], x, *newTile);
                   board.addTileAt(c);
 
-                  firstPlayer->getPlayerHand()->deleteTile(newTile);
+                  playerList[0]->getPlayerHand()->deleteTile(newTile);
                   ableToAddTileForPlayer1 = true;
                   keepRecords(inputFromUser);
                   askingForPlacingMultipleTiles(ableToAddTileForPlayer1,
                       firstPlayerTurn, repromtFirstPlayer, quitGame,
-                      firstPlayer, tileBag);
+                      playerList[0], tileBag);
                 }
 
                 delete newTile;
@@ -753,7 +761,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                 inputFromUser) == COMMAND_SIZE_WHEN_REPLACE_TILE) {
               tileInput = getTileFromUserInput(inputFromUser);
               if (validateFormat(inputFromUser)
-                  && validateTileExistInHand(tileInput, firstPlayer)) {
+                  && validateTileExistInHand(tileInput, playerList[0])) {
 
 
                 firstPlayerTurn = false;
@@ -765,8 +773,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                 Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - ASCII_FOR_0);
 
                 tileBag->addBack(newTile);
-                firstPlayer->getPlayerHand()->deleteTile(newTile);
-                firstPlayer->getPlayerHand()->addBack(tileBag->getFront());
+                playerList[0]->getPlayerHand()->deleteTile(newTile);
+                playerList[0]->getPlayerHand()->addBack(tileBag->getFront());
                 tileBag->deleteFront();
 
                 delete newTile;
@@ -781,7 +789,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
         } while ((validateFormat(inputFromUser) == false
             || validateTileExistInHand(getTileFromUserInput(inputFromUser),
-                firstPlayer) == false) && quitGame != true
+                playerList[0]) == false) && quitGame != true
             && repromtFirstPlayer == true && ableToAddTileForPlayer1 == false);
       }
     //not the initial turn
@@ -792,19 +800,19 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
         //deciding whether it is the first turn of that player or player has already made one move and
         //can pass or continue placing tiles
         if (firstPlayerTurn == true
-            && firstPlayer->getPlayerHand()->getSize() == MAXIMUM_PLAYER_HAND) {
+            && playerList[0]->getPlayerHand()->getSize() == MAXIMUM_PLAYER_HAND) {
 
           //start prompting player 1 here
           do {
             //saveGame goes into this thread
             if (validateFormat(inputFromUser) == false
                 || validateTileExistInHand(getTileFromUserInput(inputFromUser),
-                    firstPlayer) == false || ableToAddTileForPlayer1 == false) {
+                    playerList[0]) == false || ableToAddTileForPlayer1 == false) {
               //suppose player saves game many times
 
-              printMessageWhenSaveGame(inputFromUser, firstPlayer, tileBag,
+              printMessageWhenSaveGame(inputFromUser, playerList[0], tileBag,
                   quitGame);
-              printMessageWhenInvalidFormat(inputFromUser, firstPlayer, tileBag,
+              printMessageWhenInvalidFormat(inputFromUser,  playerList[0], tileBag,
                   quitGame, ableToAddTileForPlayer1);
               printInvalidWhenIllegalMove(ableToAddTileForPlayer1, quitGame,
                   inputFromUser);
@@ -819,7 +827,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                 gridLocation = getLocationFromUserInput(inputFromUser);
 
                 if (validateFormat(inputFromUser) == true
-                    && validateTileExistInHand(tileInput, firstPlayer)
+                    && validateTileExistInHand(tileInput, playerList[0])
                         == true) {
 
                   int size = tileInput.size();
@@ -843,7 +851,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                       repromtFirstPlayer = true;
                     } else {
 
-                      firstPlayer->getPlayerHand()->deleteTile(newTile);
+                      playerList[0]->getPlayerHand()->deleteTile(newTile);
                       keepRecords(inputFromUser);
 
                       ableToAddTileForPlayer1 = true;
@@ -851,7 +859,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                       repromtFirstPlayer = false;
                       askingForPlacingMultipleTiles(ableToAddTileForPlayer1,
                           firstPlayerTurn, repromtFirstPlayer, quitGame,
-                          firstPlayer, tileBag);
+                          playerList[0], tileBag);
 
                     }
                   } else {
@@ -870,14 +878,14 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                       repromtFirstPlayer = true;
                     } else {
 
-                      firstPlayer->getPlayerHand()->deleteTile(newTile);
+                      playerList[0]->getPlayerHand()->deleteTile(newTile);
                       ableToAddTileForPlayer1 = true;
                       firstPlayerTurn = false;
                       repromtFirstPlayer = false;
                       keepRecords(inputFromUser);
                       askingForPlacingMultipleTiles(ableToAddTileForPlayer1,
                           firstPlayerTurn, repromtFirstPlayer, quitGame,
-                          firstPlayer, tileBag);
+                          playerList[0], tileBag);
 
                     }
                   }
@@ -888,7 +896,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                   inputFromUser) == COMMAND_SIZE_WHEN_REPLACE_TILE) {
                 tileInput = getTileFromUserInput(inputFromUser);
                 if (validateFormat(inputFromUser)
-                    && validateTileExistInHand(tileInput, firstPlayer)) {
+                    && validateTileExistInHand(tileInput, playerList[0])) {
 
                   firstPlayerTurn = false;
 
@@ -899,8 +907,8 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                   Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - ASCII_FOR_0);
 
                   tileBag->addBack(newTile);
-                  firstPlayer->getPlayerHand()->deleteTile(newTile);
-                  firstPlayer->getPlayerHand()->addBack(tileBag->getFront());
+                  playerList[0]->getPlayerHand()->deleteTile(newTile);
+                  playerList[0]->getPlayerHand()->addBack(tileBag->getFront());
                   tileBag->deleteFront();
                   delete newTile;
 
@@ -913,20 +921,20 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
             }
           } while ((validateFormat(inputFromUser) == false
               || validateTileExistInHand(getTileFromUserInput(inputFromUser),
-                  firstPlayer) == false || ableToAddTileForPlayer1 == false)
+                  playerList[0]) == false || ableToAddTileForPlayer1 == false)
               && quitGame != true && repromtFirstPlayer == true);
-        } else if (firstPlayer->getPlayerHand()->getSize() != MAXIMUM_PLAYER_HAND) {
+        } else if (playerList[0]->getPlayerHand()->getSize() != MAXIMUM_PLAYER_HAND) {
 
           askingForPlacingMultipleTiles(ableToAddTileForPlayer1,
-              firstPlayerTurn, repromtFirstPlayer, quitGame, firstPlayer,
+              firstPlayerTurn, repromtFirstPlayer, quitGame, playerList[0],
               tileBag);
         }
 
         //player 2 turn- start prompting player 2 here
         if (quitGame != true && firstPlayerTurn == false
-            && secondPlayer->getPlayerHand()->getSize() == MAXIMUM_PLAYER_HAND) {
+            && playerList[1]->getPlayerHand()->getSize() == MAXIMUM_PLAYER_HAND) {
 
-          this->getState(secondPlayer);
+          this->getState(playerList[1]);
 
           std::getline(std::cin, inputFromUser);
           if (std::cin.eof()) {
@@ -942,11 +950,11 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
             do {
               if (validateFormat(inputFromUser) == false
                   || validateTileExistInHand(
-                      getTileFromUserInput(inputFromUser), secondPlayer)
+                      getTileFromUserInput(inputFromUser), playerList[1])
                       == false || ableToAddTileForPlayer2 == false) {
-                printMessageWhenSaveGame(inputFromUser, secondPlayer, tileBag,
+                printMessageWhenSaveGame(inputFromUser, playerList[1], tileBag,
                     quitGame);
-                printMessageWhenInvalidFormat(inputFromUser, secondPlayer,
+                printMessageWhenInvalidFormat(inputFromUser, playerList[1],
                     tileBag, quitGame, ableToAddTileForPlayer2);
                 printInvalidWhenIllegalMove(ableToAddTileForPlayer2, quitGame,
                     inputFromUser);
@@ -959,7 +967,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                   gridLocation = getLocationFromUserInput(inputFromUser);
 
                   if (validateFormat(inputFromUser) == true
-                      && validateTileExistInHand(tileInput, secondPlayer)) {
+                      && validateTileExistInHand(tileInput, playerList[1])) {
 
                     int size = tileInput.size();
                     char cTileInput[size + 1];
@@ -983,7 +991,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                         firstPlayerTurn = false;
                       } else {
 
-                        secondPlayer->getPlayerHand()->deleteTile(newTile);
+                        playerList[1]->getPlayerHand()->deleteTile(newTile);
 
                         repromptSecondPlayer = false;
                         firstPlayerTurn = true;
@@ -991,7 +999,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                         keepRecords(inputFromUser);
                         askingForPlacingMultipleTiles(ableToAddTileForPlayer2,
                             firstPlayerTurn, repromptSecondPlayer, quitGame,
-                            secondPlayer, tileBag);
+                            playerList[1], tileBag);
 
                       }
                     }
@@ -1012,7 +1020,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                         repromptSecondPlayer = true;
                       } else {
 
-                        secondPlayer->getPlayerHand()->deleteTile(newTile);
+                        playerList[1]->getPlayerHand()->deleteTile(newTile);
 
                         firstPlayerTurn = true;
                         repromptSecondPlayer = false;
@@ -1020,7 +1028,7 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
                         keepRecords(inputFromUser);
                         askingForPlacingMultipleTiles(ableToAddTileForPlayer2,
                             firstPlayerTurn, repromptSecondPlayer, quitGame,
-                            secondPlayer, tileBag);
+                            playerList[1], tileBag);
 
                       }
                     }
@@ -1032,16 +1040,16 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
                   tileInput = getTileFromUserInput(inputFromUser);
                   if (validateFormat(inputFromUser)
-                      && validateTileExistInHand(tileInput, secondPlayer)) {
+                      && validateTileExistInHand(tileInput, playerList[1])) {
 
                     int size = tileInput.size();
                     char cTileInput[size + 1];
                     strcpy(cTileInput, tileInput.c_str());
 
                     Tile *newTile = new Tile(cTileInput[0], cTileInput[1] - ASCII_FOR_0);
-                    secondPlayer->getPlayerHand()->deleteTile(newTile);
+                    playerList[1]->getPlayerHand()->deleteTile(newTile);
                     tileBag->addBack(newTile);
-                    secondPlayer->getPlayerHand()->addBack(tileBag->getFront());
+                    playerList[1]->getPlayerHand()->addBack(tileBag->getFront());
                     tileBag->deleteFront();
                     delete newTile;
 
@@ -1055,13 +1063,13 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
             } while ((validateFormat(inputFromUser) == false
                 || validateTileExistInHand(getTileFromUserInput(inputFromUser),
-                    secondPlayer) == false || ableToAddTileForPlayer2 == false)
+                    playerList[1]) == false || ableToAddTileForPlayer2 == false)
                 && quitGame != true && repromptSecondPlayer == true);
           }
 
         } else {
           askingForPlacingMultipleTiles(ableToAddTileForPlayer2,
-              firstPlayerTurn, repromptSecondPlayer, quitGame, secondPlayer,
+              firstPlayerTurn, repromptSecondPlayer, quitGame, playerList[1],
               tileBag);
         }
 
@@ -1069,21 +1077,21 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
     }
 
   } while ((tileBag->getSize() != 0
-      || ((firstPlayer->getPlayerHand()->getSize() != 0)
-          && secondPlayer->getPlayerHand()->getSize() != 0)) && quitGame != true);
+      || ((playerList[0]->getPlayerHand()->getSize() != 0)
+          && playerList[1]->getPlayerHand()->getSize() != 0)) && quitGame != true);
 
   //only display when the game ends not quitGame
   if (quitGame == false) {
     std::cout << "Game over\n";
-    std::cout << "Score for " << firstPlayer->getPlayerName() << ": "
-        << firstPlayer->getPlayerScore() << std::endl;
-    std::cout << "Score for " << secondPlayer->getPlayerName() << ": "
-        << secondPlayer->getPlayerScore() << std::endl;
+    std::cout << "Score for " << playerList[0]->getPlayerName() << ": "
+        << playerList[0]->getPlayerScore() << std::endl;
+    std::cout << "Score for " << playerList[1]->getPlayerName() << ": "
+        << playerList[1]->getPlayerScore() << std::endl;
 
-    if (firstPlayer->getPlayerScore() > secondPlayer->getPlayerScore()) {
-      std::cout << "Player " << firstPlayer->getPlayerScore() << " won!\n";
+    if (playerList[0]->getPlayerScore() > playerList[1]->getPlayerScore()) {
+      std::cout << "Player " << playerList[0]->getPlayerScore() << " won!\n";
     } else {
-      std::cout << "Player " << secondPlayer->getPlayerScore() << " won!\n";
+      std::cout << "Player " << playerList[1]->getPlayerScore() << " won!\n";
     }
     addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
     keepHighestRecords();
@@ -1092,12 +1100,14 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
   delete firstPlayerHand;
   delete secondPlayerHand;
+  delete playerList[0];
+  delete playerList[1];
   delete tileBag;
 
-  if (selection == LOAD_GAME_SELECTION) {
-    delete firstPlayer;
-    delete secondPlayer;
-  }
+  // if (selection == LOAD_GAME_SELECTION) {
+  //   delete firstPlayer;
+  //   delete secondPlayer;
+  // }
 }
 
 Player* GameEngine::getPlayerWithHighestScoreWhenEnd(){
@@ -1119,11 +1129,14 @@ void GameEngine::addHighestPlayer(Player* p){
   std::string filename = "hrecords.txt";
   std::ifstream iffile(filename.c_str());
   // return (bool)iffile;
-  if ((bool)iffile) {
+  for (unsigned int i = 0; i < highScoreplayer.size();i++) {
+    highScoreplayer[i] = new Player("player");
+  }
+  if (!(bool)iffile) {
     for (Player* i : highScoreplayer){
       if (i->getPlayerScore() < p->getPlayerScore()){
         i->setPlayerName(p->getPlayerName());
-        i->setPlayerScore(p->getPlayerScore());
+        i->setUpPlayerScore(p->getPlayerScore());
       }
     }
   } else {
@@ -1140,12 +1153,12 @@ void GameEngine::addHighestPlayer(Player* p){
   }
   for (unsigned int i = 0, k = 0; i < tokens.size() && k < highScoreplayer.size(); i+=2, k++){
     highScoreplayer[k]->setPlayerName(tokens[i]);
-    highScoreplayer[k]->setPlayerScore(std::stoi(tokens[i+1]));
+    highScoreplayer[k]->setUpPlayerScore(std::stoi(tokens[i+1]));
   }
   for (Player* i : highScoreplayer){
     if (i->getPlayerScore() < p->getPlayerScore()){
       i->setPlayerName(p->getPlayerName());
-      i->setPlayerScore(p->getPlayerScore());
+      i->setUpPlayerScore(p->getPlayerScore());
     }
   }
 }
