@@ -4,7 +4,7 @@ Player::Player(int id, std::string name) {
   this->id = id;
   this->name = name;
   this->score = 0;
-  this->hand = new LinkedList();
+  this->hand = nullptr;
 }
 
 Player::Player(int id, std::string name, LinkedList *newHand) {
@@ -59,4 +59,8 @@ void Player::setPlayerId(int id) {
 
 int Player::getPlayerId() {
   return this->id;
+}
+
+void Player::clearPlayerHand() {
+  delete this->hand;
 }

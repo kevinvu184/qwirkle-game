@@ -302,11 +302,14 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
     std::string& secondPlayerHand) {
   int score_1 = 0;
   int score_2 = 0;
+  
+  LinkedList* firstPlayerHandLL = new LinkedList();
+  LinkedList* secondPlayerHandLL = new LinkedList();
 
   std::string tmp = "";
   std::istringstream inputPlayerHand_1(firstPlayerHand);
 
-  Player* firstPlayer = new Player(ID_OF_FIRST_PLAYER, firstPlayerName);
+  Player* firstPlayer = new Player(ID_OF_FIRST_PLAYER, firstPlayerName, firstPlayerHandLL);
   while (std::getline(inputPlayerHand_1, tmp, ',')) {
     char cTileArray[3];
     strcpy(cTileArray, tmp.c_str());
@@ -316,7 +319,7 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
   }
 
   std::istringstream inputPlayerHand_2(secondPlayerHand);
-  Player* secondPlayer = new Player(ID_OF_SECOND_PLAYER, secondPlayerName);
+  Player* secondPlayer = new Player(ID_OF_SECOND_PLAYER, secondPlayerName, secondPlayerHandLL);
   while (std::getline(inputPlayerHand_2, tmp, ',')) {
     char cTileArray[3];
     strcpy(cTileArray, tmp.c_str());
@@ -1108,6 +1111,10 @@ void GameEngine::playGame(std::string p1, std::string p2, int selection) {
 
   delete firstPlayerHand;
   delete secondPlayerHand;
+  if(selection == LOAD_GAME_SELECTION) {
+    playerList[0]->clearPlayerHand();
+    playerList[1]->clearPlayerHand();
+  }
   delete playerList[0];
   delete playerList[1];
   delete tileBag;

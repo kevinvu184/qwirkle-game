@@ -23,7 +23,8 @@ class Player {
     void setUpPlayerScore(int score);
 
     void displayTileInHand();
-
+    void clearPlayerHand();    
+ 
     int id;
     std::string name;
     int score;
