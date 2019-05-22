@@ -87,7 +87,7 @@ bool GameEngine::validateFormat(std::string input) {
   std::regex pass("pass");
   std::regex help("help");
   if (std::regex_match(input, place) || std::regex_match(input, replace)
-      || std::regex_match(input, pass)) {
+      || std::regex_match(input, pass) || std::regex_match(input, help)) {
     result = true;
   }
 
@@ -209,12 +209,15 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser,
       if (validateFormat(inputFromUser) == false) {
         std::cout << "\nInvalid Input, Please check your format again\n" << std::flush;
 
-      } else if (validateTileExistInHand(inputFromUser, player) == false) {
-        std::cout
-            << "\nInvalid Input, tile input does not exist in your hand\n" << std::flush;
+      } else if(inputFromUser == "help"){
+        std::cout << "To place a tile, use the following syntax: 'place <tile> at <location'"
+          "\nTo replace a tile, use the following syntax: 'replace <tile>'" << std::endl;
+      }
+      else if (validateTileExistInHand(inputFromUser, player) == false) {
+        std::cout << "\nInvalid Input, tile input does not exist in your hand\n" << std::flush;
       }
 
-      std::cout << "> " << std::endl;
+      std::cout << "> " << std::flush;
       ableToAdd = true;
 
       std::getline(std::cin, inputFromUser);
@@ -230,7 +233,7 @@ void GameEngine::printMessageWhenInvalidFormat(std::string& inputFromUser,
         //call saveGame() here
         saveGame(getNameOfFileFromUserInput(inputFromUser), player, tileBag);
         std::cout << "\nGame successfully saved\n\n" << std::endl;
-        std::cout << "> " << std::endl;
+        std::cout << "> " << std::flush;
         ableToAdd = true;
         std::getline(std::cin, inputFromUser);
         if (std::cin.eof() == true) {
@@ -248,7 +251,7 @@ void GameEngine::printInvalidWhenIllegalMove(bool& ableToAdd, bool& quitGame,
     std::string& inputFromUser) {
   if (ableToAdd == false) {
     std::cout << "\nInvalid Input, Please check your move on the board" << std::endl;
-    std::cout << "> " << std::endl;
+    std::cout << "> " << std::flush;
 
     std::getline(std::cin, inputFromUser);
     if (std::cin.eof() == true) {
@@ -333,9 +336,6 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
   std::istringstream input_2(scoreSecondPlayer);
   input_2 >> score_2;
 
-  // firstPlayer->setPlayerScore(score_1);
-  // secondPlayer->setPlayerScore(score_2);
-
   addPlayer(firstPlayer);
   addPlayer(secondPlayer);
   playerList[0]->setPlayerScore(score_1);
@@ -343,7 +343,6 @@ void GameEngine::constructPlayerState(std::string& firstPlayerName,
 
   delete firstPlayer;
   delete secondPlayer;
-
 }
 
 void GameEngine::forwardTileBag(std::string& tileBagStr) {
@@ -469,14 +468,17 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
       }
       keepRecords(inputFromUser);
       passTurn = true;
-    } else if (std::cin.eof() == true) {
+    }
+
+    else if (std::cin.eof() == true) {
       addHighestPlayer(getPlayerWithHighestScoreWhenEnd());
       keepHighestRecords();
       std::cout << "\n\nGoodbye" << std::endl;
       passTurn = true;
       quitGame = true;
-    } else {
+    }
 
+    else {
       if (validateFormat(inputFromUser) == false
           || validateTileExistInHand(getTileFromUserInput(inputFromUser),
               player) == false || ableToAddTile == false) {
@@ -489,16 +491,25 @@ void GameEngine::askingForPlacingMultipleTiles(bool& ableToAddTile,
             std::cout << "> " << std::flush;
 
             std::getline(std::cin, inputFromUser);
-          } else {
+          }
+           else {
             std::cout << "Invalid Input, please check your format" << std::endl;
             std::cout << "> " << std::flush;
             std::getline(std::cin, inputFromUser);
           }
         } else if (validateTileExistInHand(getTileFromUserInput(inputFromUser),
             player) == false) {
-          std::cout << "Invalid Input, tile input does not exist in hand" << std::endl;
-          std::cout << "> " << std::flush;
-          std::getline(std::cin, inputFromUser);
+              if(inputFromUser == "help"){
+               std::cout << "To place a tile, use the following syntax: 'place <tile> at <location'"
+                 "\nTo replace a tile, use the following syntax: 'replace <tile>'" << std::endl;
+                 std::cout << "> " << std::flush;
+                 std::getline(std::cin, inputFromUser);
+               }
+               else{
+                 std::cout << "Invalid Input, tile input does not exist in hand" << std::endl;
+                 std::cout << "> " << std::flush;
+                 std::getline(std::cin, inputFromUser);
+               }
         } else if (ableToAddTile == false) {
           std::cout << "Invalid Input, please check your move on the board" << std::endl;
           std::cout << "> " << std::flush;
