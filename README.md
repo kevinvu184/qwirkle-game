@@ -7,4 +7,4 @@ RMIT - APT Semester 1 2019
 - Jessica Cruz (Functional Lead)
 - Ted Vu (Scrum Master)
 - Kevin Vu (Tech Lead)
-- Khoi Nguyen
+- Khoi Nguyen (Tech Support)
